@@ -1,4 +1,5 @@
-puphpet/config-custom.yaml
+# Vagrant
+.vagrant
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
