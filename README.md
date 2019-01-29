@@ -2,6 +2,10 @@
 
 This is a web-application which hosts a Badge-system, where users can create their own events and badges. 
 
+Dependency:
+  - Vagrant 2.2.3
+  - Virtualbox 6.0.4
+
 To run this project
   1. Open up a new powershell
   2. Go to project directory
