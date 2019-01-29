@@ -2,7 +2,7 @@
 
 This is a web-application which hosts a Badge-system, where users can create their own events and badges. 
 
-Dependency:
+Dependencies:
   - Vagrant 2.2.3
   - Virtualbox 6.0.4
 
