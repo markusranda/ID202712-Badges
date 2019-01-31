@@ -23,9 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 's9^qae!sg*-bp4@tyu)cg3lgnwy-$tbt3zka)!n$xkue^7$6a0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['192.168.50.50']
+
+DEFAULT_FROM_EMAIL = ['randamarkus.95@gmail.com']
 
 
 # Application definition

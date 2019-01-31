@@ -1,5 +1,6 @@
 # Vagrant
 .vagrant
+ubuntu-bionic-18.04-cloudimg-console.log
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

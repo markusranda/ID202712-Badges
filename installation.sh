@@ -40,11 +40,6 @@ echo "Installing Requirements"
 		echo "Installing Django"
 		sudo pip install django >> $LOGFILE 2>&1
 
-		echo "Starting django server"
-		cd /var/webserver/badge_project/ >> $LOGFILE 2>&1
-		python3 manage.py runserver 192.168.50.50:8080 >> $LOGFILE 2>&1
-
-
 # Configuring the server
 echo "Configure server"
 sudo sed -i 's/bind-address/# bind-address/g' /etc/mysql/mysql.conf.d/mysqld.cnf >> $LOGFILE 2>&1
