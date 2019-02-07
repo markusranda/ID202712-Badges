@@ -35,7 +35,7 @@ DEFAULT_FROM_EMAIL = ['randamarkus.95@gmail.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'polls.apps.PollsConfig',
+    'badges.apps.BadgesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -81,8 +81,17 @@ WSGI_APPLICATION = 'badge_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'NAME': 'badgesdb',
+        'USER': 'dbuser',
+        'PASSWORD': 'password',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'isolation_level': 'read committed',
+            'init_command': 'SET default_storage_engine=INNODB',
+        },
     }
 }
 

@@ -1,0 +1,13 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'badges/style.css' %}">
+
+
+{% if all_users_list %}
+    <ul>
+    {% for user in all_users_list %}
+        <li><a href="/badges/{{ user.id }}/">{{ user.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No users are available.</p>
+{% endif %}
