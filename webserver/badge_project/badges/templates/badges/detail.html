@@ -1,1 +1,20 @@
 {% extends "badges/nav/nav.html"%}
+
+{% block content %}
+
+{% if all_users_list %}
+
+{% for user in all_users_list %}
+
+    <div>
+        <h3> Hello: {{ user.e_mail }}</h3>
+    </div>
+
+{% endfor %}
+
+{% else %}
+    <p>No e_mail available.</p>
+
+{% endif %}
+
+{% endblock %}

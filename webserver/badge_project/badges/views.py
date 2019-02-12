@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
 from .models import Users
@@ -11,16 +11,14 @@ def index(request):
 
 
 class DetailView(generic.DetailView):
-    model = Users
     template_name = 'badges/detail.html'
+    context_object_name = 'user'
 
-    '''
     def get_queryset(self):
         """
         Excludes any questions that aren't published yet.
         """
-        return Users.objects.all()
-    '''
+        return Users.objects.filter()
 
 
 class IndexView(generic.ListView):
@@ -32,4 +30,9 @@ class IndexView(generic.ListView):
         Return the last five published questions (not including those set to be
         published in the future).
         """
-        return Users.objects.all
+        return Users.objects.all()
+
+
+def detail(request, user_id):
+    user = get_object_or_404(Users, pk=user_id)
+    return render(request, 'polls/detail.html', {'user': user})
