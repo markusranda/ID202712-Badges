@@ -39,12 +39,6 @@ class IndexView(generic.ListView):
         return Users.objects.all()
 
 
-def login(request):
-    template_name = 'badges/login.html'
-    return render(request, template_name)
-
-
-
 
 
 
