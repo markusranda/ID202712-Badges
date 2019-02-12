@@ -36,12 +36,14 @@ DEFAULT_FROM_EMAIL = ['randamarkus.95@gmail.com']
 
 INSTALLED_APPS = [
     'badges.apps.BadgesConfig',
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 
 ]
 
@@ -118,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'nb-no'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'Europe/Oslo'
 
@@ -133,3 +135,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'

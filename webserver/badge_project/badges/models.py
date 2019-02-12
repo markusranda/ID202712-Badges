@@ -1,10 +1,5 @@
 from django.db import models
-
-
-class Users(models.Model):
-    name = models.CharField(max_length=25)
-    e_mail = models.EmailField(max_length=100)
-    password = models.CharField(max_length=25)
+from django.contrib.auth.models import User
 
 
 class Events(models.Model):
@@ -21,30 +16,30 @@ class Badges(models.Model):
 
 
 class Attendees(models.Model):
-    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
-    event_id = models.ForeignKey(Events, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey(Events, on_delete=models.CASCADE)
 
     class Meta(object):
         unique_together = [
-            ("user_id", "event_id"),
+            ("user", "event"),
         ]
 
 
 class EventBadges(models.Model):
-    badge_id = models.ForeignKey(Badges, on_delete=models.CASCADE)
-    event_id = models.ForeignKey(Events, on_delete=models.CASCADE)
+    badge = models.ForeignKey(Badges, on_delete=models.CASCADE)
+    event = models.ForeignKey(Events, on_delete=models.CASCADE)
 
     class Meta(object):
         unique_together = [
-            ("badge_id", "event_id"),
+            ("badge", "event"),
         ]
 
 
 class UserBadges(models.Model):
-    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
-    badge_id = models.ForeignKey(Badges, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    badge = models.ForeignKey(Badges, on_delete=models.CASCADE)
 
     class Meta(object):
         unique_together = [
-            ("user_id", "badge_id"),
+            ("user", "badge"),
         ]
