@@ -1,13 +1,16 @@
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'badges/style.css' %}">
+{% extends "badges/nav/nav.html"%}
 
+{% block content %}
 
 {% if all_users_list %}
-    <ul>
+    <ul class="list-group">
     {% for user in all_users_list %}
-        <li><a href="/badges/{{ user.id }}/">{{ user.name }}</a></li>
+        <li class="list-group-item"><a href="{% url 'badges:detail' user.id %}">{{ user.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No users are available.</p>
 {% endif %}
+
+
+{% endblock %}
