@@ -3,6 +3,8 @@
 ubuntu-bionic-18.04-cloudimg-console.log
 workspace.xml
 
+.idea
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
