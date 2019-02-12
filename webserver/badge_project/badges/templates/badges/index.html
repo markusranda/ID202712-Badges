@@ -1,0 +1,18 @@
+{% extends "nav/nav.html"%}
+
+
+{% block content %}
+
+
+{% if all_users_list %}
+    <ul class="list-group">
+    {% for user in all_users_list %}
+        <li class="list-group-item"><a href="{% url 'badges:detail' user.id %}">{{ user.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No users are available.</p>
+{% endif %}
+
+
+{% endblock %}
