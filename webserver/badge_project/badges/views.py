@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
@@ -21,6 +22,11 @@ class DetailView(generic.DetailView):
         return Users.objects.filter()
 
 
+def detail(request, user_id):
+    user = get_object_or_404(Users, pk=user_id)
+    return render(request, 'polls/detail.html', {'user': user})
+
+
 class IndexView(generic.ListView):
     template_name = 'badges/index.html'
     context_object_name = 'all_users_list'
@@ -33,6 +39,31 @@ class IndexView(generic.ListView):
         return Users.objects.all()
 
 
-def detail(request, user_id):
-    user = get_object_or_404(Users, pk=user_id)
-    return render(request, 'polls/detail.html', {'user': user})
+def login(request):
+    template_name = 'badges/login.html'
+    return render(request, template_name)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
