@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 export DEBIAN_FRONTEND=noninteractive
 export LC_ALL=C
 
@@ -31,6 +32,7 @@ echo "Installing Requirements"
 
 	# Installing Django
 		echo "Installing pip"
+		echo "This will take a long time . . . zZZZ ZZZz "
 		sudo apt install python3-pip -y >> $LOGFILE 2>&1
 
 		# Create link for pip
@@ -39,6 +41,19 @@ echo "Installing Requirements"
 
 		echo "Installing Django"
 		sudo pip install django >> $LOGFILE 2>&1
+
+		echo "Installing MySQL-client"
+		sudo apt-get install libmysqlclient-dev -y >> $LOGFILE 2>&1
+		sudo pip install mysqlclient >> $LOGFILE 2>&1
+		# sudo apt-get install python3-dev >> $LOGFILE 2>&1
+		pip3 install django mysqlclient >> $LOGFILE 2>&1
+
+		echo "Installing MySQL-connector"
+		pip install mysql-connector >> $LOGFILE 2>&1
+
+		echo "Installing Pillow"
+		pip install Pillow >> $LOGFILE 2>&1
+
 
 # Configuring the server
 echo "Configure server"
