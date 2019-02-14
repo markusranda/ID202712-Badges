@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 
 class Events(models.Model):
@@ -16,7 +15,7 @@ class Badges(models.Model):
 
 
 class Attendees(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
     event = models.ForeignKey(Events, on_delete=models.CASCADE)
 
     class Meta(object):
@@ -36,7 +35,7 @@ class EventBadges(models.Model):
 
 
 class UserBadges(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
     badge = models.ForeignKey(Badges, on_delete=models.CASCADE)
 
     class Meta(object):
