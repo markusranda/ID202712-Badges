@@ -36,7 +36,6 @@ DEFAULT_FROM_EMAIL = ['randamarkus.95@gmail.com']
 
 INSTALLED_APPS = [
     'badges.apps.BadgesConfig',
-    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
