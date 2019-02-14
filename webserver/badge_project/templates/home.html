@@ -1,0 +1,15 @@
+<!-- templates/home.html-->
+{% extends 'nav/nav.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <h2>Welcome to the website</h2>
+{% else %}
+<p>You are not logged in</p>
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'signup' %}">Sign Up</a>
+    <a href="{% url 'password_reset' %}">Forgot your password?</a>
+{% endif %}
+{% endblock %}

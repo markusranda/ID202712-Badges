@@ -1,0 +1,54 @@
+
+{% load static %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'badges/style.css' %}">
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Badges för töffa killar</title>
+    <link rel="shortcut icon" href="">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Badges</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  {% if user.is_authenticated %}
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav" style="width: 100%">
+      <li class="nav-item">
+        <a class="nav-link" href="/events">Events</a>
+      </li>
+      <li class="nav-item"style="margin-left: auto;">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+      <li class="nav-link">
+        <p style="float: left; margin: 0;">Logged in as: </p><a class="nav-link" href="#" style="float: left">{{user.username}}</a>
+      </li>
+
+    </ul>
+  </div>
+  {% else %}
+
+  {% endif %}
+
+</nav>
+<<<<<<< HEAD:webserver/badge_project/badges/templates/badges/nav/nav.html
+=======
+
+>>>>>>> development:webserver/badge_project/templates/nav/nav.html
+
+{% block content %}
+
+{% endblock %}
+
+</body>
+</html>
+
+</body>
+</html>
