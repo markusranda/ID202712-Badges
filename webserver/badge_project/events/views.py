@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-from badges.models import Events
+from django.shortcuts import get_object_or_404
 from django.views import generic
 from django.views.generic import ListView
+
+from badges.models import Events
 
 
 class EventView(LoginRequiredMixin, generic.ListView):
@@ -11,8 +12,8 @@ class EventView(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        context['event_historic_list'] = Events.objects.all()
-        context['event_active_list'] = Events.objects.all().filter(active=1)
+        context['event_historic_list'] = Events.objects.filter(created_by=self.request.user)
+        context['event_active_list'] = Events.objects.all().filter(active=1).filter(created_by=self.request.user)
         return context
 
 
