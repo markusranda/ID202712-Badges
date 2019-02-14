@@ -3,7 +3,6 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.http import HttpResponseRedirect
 
-from .models import Users
 from .forms import CreateBadgeForm
 
 def index(request):
@@ -58,5 +57,5 @@ def get_badge_name(request):
     else:
         form = CreateBadgeForm()
 
-    return render(request, 'badges/create_badge.html', {'form': form})
+    return render(request, 'badges/../templates/create_badge.html', {'form': form})
 
