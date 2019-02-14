@@ -2,8 +2,7 @@
 
 {% block content %}
 
-
-<div class="container" style="text-align: center;">
+<div class="container" style="text-align: center; margin-top: 100px">
     <div class="row">
         <h2 class="col-sm" style="">All Events</h2>
         <h2 class="col-sm">Active Events</h2>
@@ -11,15 +10,21 @@
 
     <div class="row">
 
-    {% if event_historic_list %}
+    {% if event_historic_list  %}
 
-        <ul class="col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+        <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+            <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Event Name</th>
+                </tr>
+            </thead>
 
-        {% for event in event_historic_list %}
-            <li>{{ event.name }}</li>
+        {% for event in event_historic_list  %}
+            <tr>
+                <td>{{ event.name }}</td>
+            </tr>
         {% endfor %}
-
-        </ul>
+        </table>
 
     {% else %}
 
@@ -28,15 +33,22 @@
     {% endif %}
 
 
-    {% if event_active_list%}
+    {% if event_active_list %}
 
-        <ul class="col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+        <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+            <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Event Name</th>
+                </tr>
+            </thead>
 
-        {% for event in event_active_list %}
-            <li>{{ event.name }}</li>
+        {% for event in event_active_list  %}
+            <tr>
+                <td>{{ event.name }}</td>
+            </tr>
         {% endfor %}
 
-        </ul>
+        </table>
 
     {% else %}
 

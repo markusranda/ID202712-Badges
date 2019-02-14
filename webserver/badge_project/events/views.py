@@ -17,6 +17,9 @@ class EventView(generic.ListView):
         context = super().get_context_data(**kwargs)
         return context
 
+    def get_name(self):
+        return self.object.name()
+
 
 def events(request):
     event_historic_list = Events.objects.all()
