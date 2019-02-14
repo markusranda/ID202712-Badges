@@ -1,32 +1,18 @@
-# Create your views here.
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.template import loader
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from badges.models import Events
 from django.views import generic
+from django.views.generic import ListView
 
 
-class EventView(generic.ListView):
+class EventView(LoginRequiredMixin, generic.ListView):
     model = Events
     template_name = 'events/my_events.html'
-    event_historic_list = Events.objects.all()
-    event_active_list = Events.objects.filter(active=1)
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(ListView, self).get_context_data(**kwargs)
+        context['event_historic_list'] = Events.objects.all()
+        context['event_active_list'] = Events.objects.all().filter(active=1)
         return context
 
-    def get_name(self):
-        return self.object.name()
-
-
-def events(request):
-    event_historic_list = Events.objects.all()
-    event_active_list = Events.objects.filter(active=1)
-    context = {
-        'event_historic_list': event_historic_list,
-        'event_active_list': event_active_list,
-    }
-    return render(request, 'events/my_events.html', context)
 
