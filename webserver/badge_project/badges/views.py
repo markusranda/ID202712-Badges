@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
+from django.http import HttpResponseRedirect
 
 from .models import Users
+from .forms import CreateBadgeForm
 
 
 def index(request):
@@ -35,4 +37,21 @@ class IndexView(generic.ListView):
 
 def detail(request, user_id):
     user = get_object_or_404(Users, pk=user_id)
-    return render(request, 'polls/detail.html', {'user': user})
+    return render(request, 'badges/detail.html', {'user': user})
+
+
+def get_badge_name(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = CreateBadgeForm(request.POST)
+        # check if it's valid:
+        if form.is_valid():
+            return HttpResponseRedirect('/badges/')
+
+    # if a GET (or any other method we'll create a blank form
+    else:
+        form = CreateBadgeForm()
+
+    return render(request, 'badges/create_badge.html', {'form': form})
+
