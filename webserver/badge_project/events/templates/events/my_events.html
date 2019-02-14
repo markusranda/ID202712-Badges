@@ -3,6 +3,49 @@
 {% block content %}
 
 
+<div class="container" style="text-align: center;">
+    <div class="row">
+        <h2 class="col-sm" style="">All Events</h2>
+        <h2 class="col-sm">Active Events</h2>
+    </div>
+
+    <div class="row">
+
+    {% if event_historic_list %}
+
+        <ul class="col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+
+        {% for event in event_historic_list %}
+            <li>{{ event.name }}</li>
+        {% endfor %}
+
+        </ul>
+
+    {% else %}
+
+        <p>No events are available.</p>
+
+    {% endif %}
+
+
+    {% if event_active_list%}
+
+        <ul class="col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+
+        {% for event in event_active_list %}
+            <li>{{ event.name }}</li>
+        {% endfor %}
+
+        </ul>
+
+    {% else %}
+
+        <p>No events are available.</p>
+
+    {% endif %}
+
+    </div>
+</div>
 
 
 {% endblock %}
