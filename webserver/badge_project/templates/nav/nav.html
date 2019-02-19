@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md navbar-light bg-white sticky-top"> <!--sticky top follows the top of browser-->
+<nav class="navbar navbar-expand-md navbar-light bg-primary sticky-top"> <!--sticky top follows the top of browser-->
 
   <section>
     <a class="navbar-brand" href="/"><img src="{% static 'badges/badger.png' %}" style="max-width: 50px;"> </a>
@@ -26,17 +26,19 @@
   {% if user.is_authenticated %}
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <div class="container-fluid" style="margin:5px;">
+        <form class="form-inline">
     <ul class="nav justify-content-center" style="width: 100%">
         <li class="nav-item ">
-            <button class="btn btn-success navbar-btn" style="margin:10px;" href="/events"><a class="nav-link" href="/events">Events</a></button>
+            <button class="btn btn-outline-success navbar-btn" style="margin:10px; background-color: #23bdd1;" type="button" href="/events"><a class="nav-link" href="/events">Events</a></button>
         </li>
         <li class="nav-item"style="margin-left: auto;">
-          <a class="nav-link" style="margin-top:5px;" href="{% url 'logout' %}"><font color="yellow">Logout</font></a>
+          <a class="nav-link" style="margin-top:5px;" href="{% url 'logout' %}">Logout</a>
         </li>
         <li class="nav-link">
           <a class="nav-link" href="#" style="float: left"><span class="badge badge-pill badge-info">{{user.username}}</a></span>
         </li>
     </ul>
+        </form>
     </div>
   </div>
   {% else %}
@@ -53,3 +55,4 @@
 
 </body>
 </html>
+<nav class="navbar navbar-expand-md sticky-top navbar-light bg-light"> <!--sticky top follows the top of browser-->
