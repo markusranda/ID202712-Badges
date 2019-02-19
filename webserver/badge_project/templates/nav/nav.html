@@ -7,31 +7,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Badges för töffa killar</title>
+    <title>Jordbærmus</title>
     <link rel="shortcut icon" href="">
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Badges</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-md navbar-light bg-primary sticky-top"> <!--sticky top follows the top of browser-->
+
+  <section>
+    <a class="navbar-brand" href="/"><img src="{% static 'badges/badger.png' %}" style="max-width: 50px;"> </a>
+    <span class="navbar-brand"><h6>The HoneyBadgers</h6></span>
+  </section>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   {% if user.is_authenticated %}
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav" style="width: 100%">
-      <li class="nav-item">
-        <a class="nav-link" href="/">Events</a>
-      </li>
-      <li class="nav-item"style="margin-left: auto;">
-        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-      </li>
-      <li class="nav-link">
-        <p style="float: left; margin: 0;">Logged in as: </p><a class="nav-link" href="#" style="float: left">{{user.username}}</a>
-      </li>
-
+    <div class="container-fluid" style="margin:5px;">
+    <ul class="nav justify-content-center" style="width: 100%">
+        <li class="nav-item ">
+            <button class="btn btn-success navbar-btn" style="margin:10px;" href="/events"><a class="nav-link" href="/events">Events</a></button>
+        </li>
+        <li class="nav-item"style="margin-left: auto;">
+          <a class="nav-link" style="margin-top:5px;" href="{% url 'logout' %}"><font color="yellow">Logout</font></a>
+        </li>
+        <li class="nav-link">
+          <a class="nav-link" href="#" style="float: left"><span class="badge badge-pill badge-info">{{user.username}}</a></span>
+        </li>
     </ul>
+    </div>
   </div>
   {% else %}
 
