@@ -50,7 +50,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/registration/login.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="425">
@@ -59,14 +59,19 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/nav/nav.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
               <caret line="13" column="57" selection-start-line="13" selection-start-column="57" selection-end-line="13" selection-end-column="57" />
               <folding>
-                <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#a#0;n#section#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#ul#0;n#form#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#li#0;n#ul#0;n#form#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#1;n#ul#0;n#form#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#form#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#li#2;n#ul#0;n#form#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -115,9 +120,9 @@
         <option value="$PROJECT_DIR$/badge_project/urls.py" />
         <option value="$PROJECT_DIR$/badge_project/settings.py" />
         <option value="$PROJECT_DIR$/templates/registration/login.css" />
-        <option value="$PROJECT_DIR$/templates/nav/nav.html" />
         <option value="$PROJECT_DIR$/badges/static/badges/style.css" />
         <option value="$PROJECT_DIR$/templates/registration/login.html" />
+        <option value="$PROJECT_DIR$/templates/nav/nav.html" />
       </list>
     </option>
   </component>
@@ -285,7 +290,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24216000" />
+    <option name="totallyTimeSpent" value="24223000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -294,7 +299,6 @@
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10607676" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Database Console" sideWeight="0.49946696" weight="0.32936078" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -308,6 +312,7 @@
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="bottom" id="Database Console" order="13" sideWeight="0.49946696" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -380,17 +385,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/nav/nav.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="57" selection-start-line="13" selection-start-column="57" selection-end-line="13" selection-end-column="57" />
-          <folding>
-            <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/badges/static/badges/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -402,6 +396,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/nav/nav.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="57" selection-start-line="13" selection-start-column="57" selection-end-line="13" selection-end-column="57" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#a#0;n#section#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ul#0;n#form#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#li#0;n#ul#0;n#form#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#1;n#ul#0;n#form#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#form#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#2;n#ul#0;n#form#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
