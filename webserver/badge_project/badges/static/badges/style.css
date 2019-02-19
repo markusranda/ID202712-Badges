@@ -15,3 +15,18 @@ li {
     color: rgb(0, 0, 0);
 }
 
+.loginBtn {
+    background-color: #23bdd1;
+    font-size: 20px;
+    width: 100%;
+}
+
+.loginBtn:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+body {
+    background-color: #f7f7f7;
+}
