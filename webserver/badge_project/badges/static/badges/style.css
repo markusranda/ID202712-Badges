@@ -27,6 +27,13 @@ li {
   transform: translateY(4px);
 }
 
+#loginContent {
+  margin-top: 2%;
+}
+#loginTitle {
+  margin-top: 10%;
+}
+
 body {
     background-color: #f7f7f7;
 }
