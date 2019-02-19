@@ -35,7 +35,7 @@
           <a class="nav-link" style="margin-top:5px;" href="{% url 'logout' %}"><font color="yellow">Logout</font></a>
         </li>
         <li class="nav-link">
-          <a class="nav-link" href="#" style="float: left"><span class="badge badge-pill badge-info">{{user.username}}</a></span>
+          <a class="nav-link" href="{% url 'profile_page' user.username %}" style="float: left"><span class="badge badge-pill badge-info">{{user.username}}</span></a>
         </li>
     </ul>
     </div>
