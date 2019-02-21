@@ -12,7 +12,8 @@ class Events(models.Model):
 class Badges(models.Model):
     name = models.CharField(max_length=25)
     description = models.CharField(max_length=255)
-    image = models.ImageField()
+    image = models.ImageField('/images/badges/%Y/%m/%d/')
+    user = models.ManyToManyField('users.CustomUser', blank=True)
 
 
 class Attendees(models.Model):
@@ -37,7 +38,8 @@ class EventBadges(models.Model):
 
 class UserBadges(models.Model):
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
-    badge = models.ForeignKey(Badges, on_delete=models.CASCADE)
+    badge = models.ForeignKey(Badges, related_name='owned_by', on_delete=models.CASCADE)
+    date_earned = models.DateTimeField(auto_now=True)
 
     class Meta(object):
         unique_together = [

@@ -30,7 +30,31 @@
     </div>
     <div class="row">
         <div class="col-9">
-            <div id="recentBadges" class="row"><h2>Recently earned badges</h2></div>
+            <div id="recentBadges" class="row"><h2>Recently earned badges</h2>
+
+                {% if badges_list %}
+
+                <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Badge Name</th>
+                    </tr>
+                    </thead>
+
+                    {% for badge in badges_list %}
+                    <tr>
+                        <td>{{ badge.name }}</td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+
+                {% else %}
+
+                <p>No badges are available.</p>
+
+                {% endif %}
+            </div>
         </div>
         <div class="col">
             <div id="activeEvents" class="row"><h2>Active events</h2>
