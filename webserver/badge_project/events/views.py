@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.views.generic import ListView
 
-from badges.models import Events
+from .models import Events
 
 
 class EventView(LoginRequiredMixin, generic.ListView):

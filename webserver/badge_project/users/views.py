@@ -6,7 +6,7 @@ from .forms import CustomUserCreationForm
 from django.db import connection
 
 from badges.models import Badges
-from badges.models import Events
+from events.models import Events
 
 
 class SignUp(generic.CreateView):
