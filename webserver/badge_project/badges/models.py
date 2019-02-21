@@ -7,6 +7,7 @@ class Events(models.Model):
     active = models.BooleanField()
     pin = models.IntegerField(unique=True)
     created_by = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
+    user = models.ManyToManyField('users.CustomUser', related_name='attendant', blank=True)
 
 
 class Badges(models.Model):
@@ -14,34 +15,5 @@ class Badges(models.Model):
     description = models.CharField(max_length=255)
     image = models.ImageField('/images/badges/%Y/%m/%d/')
     user = models.ManyToManyField('users.CustomUser', blank=True)
+    event = models.ManyToManyField(Events, blank=True)
 
-
-class Attendees(models.Model):
-    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
-    event = models.ForeignKey(Events, on_delete=models.CASCADE)
-
-    class Meta(object):
-        unique_together = [
-            ("user", "event"),
-        ]
-
-
-class EventBadges(models.Model):
-    badge = models.ForeignKey(Badges, on_delete=models.CASCADE)
-    event = models.ForeignKey(Events, on_delete=models.CASCADE)
-
-    class Meta(object):
-        unique_together = [
-            ("badge", "event"),
-        ]
-
-
-class UserBadges(models.Model):
-    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
-    badge = models.ForeignKey(Badges, related_name='owned_by', on_delete=models.CASCADE)
-    date_earned = models.DateTimeField(auto_now=True)
-
-    class Meta(object):
-        unique_together = [
-            ("user", "badge"),
-        ]
