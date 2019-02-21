@@ -3,6 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.contrib.auth.models import User
 
+from badges.models import Events
+
 
 def index(request):
     all_users_list = User.objects.all()
