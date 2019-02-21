@@ -44,6 +44,7 @@
                     {% for badge in badges_list %}
                     <tr>
                         <td>{{ badge.name }}</td>
+                        <td><img src={{ badge.image.url }} width="150"></td>
                     </tr>
                     {% endfor %}
 
