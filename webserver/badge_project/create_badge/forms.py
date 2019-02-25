@@ -1,7 +1,7 @@
 from django.forms import ModelForm, Textarea
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, ButtonHolder, Submit, Row, Column
-from .models import Badges
+from badges.models import Badges
 
 
 class CreateBadgeForm(ModelForm):
@@ -13,7 +13,7 @@ class CreateBadgeForm(ModelForm):
                 'name',
                 'description',
                 Submit('submit', 'Create'),
-                css_class='col-lg-6 '
+                css_class='col-lg-6 mx-auto',
             )
         )
 
