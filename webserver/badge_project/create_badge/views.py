@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 
 from create_badge.forms import CreateBadgeForm
-from badges.models import Badges
 
 
 # Create your views here.
