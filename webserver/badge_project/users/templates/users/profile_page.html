@@ -26,6 +26,21 @@
         </div>
         <div class="col">
             <div id="stats"><h2>STATISTICS</h2></div>
+
+            <table class="table col-sm" style="border-color: black; border-style: solid;">
+                <thread class="thead-dark">
+                    <tr>
+                        <th scope="col"> Bagdes Earned: {{ badge_count }} </th>
+                    </tr>
+                    <tr>
+                        <th scope="col"> Events Finished: {{ event_count }} </th>
+                    </tr>
+                    <tr>
+                        <th scope="col"> Date Joined: {{ request.user.date_joined }} </th> <!-- month,day,year,clock this applies for user signed in!!!! -->
+                    </tr>
+                </thread>
+            </table>
+
         </div>
     </div>
     <div class="row">
