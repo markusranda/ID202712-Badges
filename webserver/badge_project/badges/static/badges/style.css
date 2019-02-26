@@ -20,6 +20,9 @@ li {
     font-size: 20px;
     width: 100%;
 }
+.c-badge-form {
+    width: 50%;
+}
 
 .signUpBtn {
         background-color: #23bdd1;
@@ -49,6 +52,9 @@ li {
 
 body {
     background-color: #f7f7f7;
+}
+.asteriskField {
+    display: none;
 }
 
 
