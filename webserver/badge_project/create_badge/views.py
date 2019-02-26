@@ -1,21 +1,15 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
 
 from create_badge.forms import CreateBadgeForm
 from badges.models import Badges
 
 
-# Create your views here.
+# Generic class based view
+class BadgeCreate(LoginRequiredMixin, CreateView):
+    model = Badges
+    form_class = CreateBadgeForm
+    success_url = reverse_lazy('home')
+    template_name = 'create_badge.html'
 
-def create_badge(request):
-    if request.method == "POST":
-        form = CreateBadgeForm(request.POST)
-        if form.is_valid():
-            try:
-                form.save()
-                return HttpResponseRedirect('')
-            except:
-                pass
-    else:
-        form = CreateBadgeForm()
-    return render(request, 'create_badge.html', {'form': form})
