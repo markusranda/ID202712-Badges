@@ -139,6 +139,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+#
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images/')
+
 # Redirect location
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
@@ -149,5 +154,3 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 
 AUTH_USER_MODEL = 'users.CustomUser'
-
-
