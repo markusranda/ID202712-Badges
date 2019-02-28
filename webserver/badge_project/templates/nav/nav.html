@@ -15,34 +15,31 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md sticky-top navbar-light"> <!--sticky top follows the top of browser-->
-
-    <section>
-        <a class="navbar-brand" href="/"><img src="{% static 'badges/badger.png' %}" style="max-width: 50px;"> </a>
-        <span class="navbar-brand"><h6>The HoneyBadgers</h6></span>
-    </section>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    {% if user.is_authenticated %}
+<nav class="navbar navbar-expand-md sticky-top navbar-light" style="margin-bottom: 25px;"> <!--sticky top follows the top of browser-->
     <div class="collapse navbar-collapse" id="navbarToggler">
         <div class="container-fluid" style="margin:5px;">
-            <form class="form-inline">
+            <form class="form-inline" style="margin: 0;">
                 <ul class="navbar-nav mr-auto mt-2 mt-md-0" style="width: 100%">
-                    <a class="nav-link">
-                        <button class="btn btn-outline-success my-sm-2"
-                                style="margin:10px;" type="submit" href="/events">Events
-                        </button>
-                    </a>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="/"><img src="{% static 'badges/badger.png' %}"
+                                                              style="max-width: 50px;"> </a>
                     </li>
-                    <li class="nav-item active" style="margin-left: auto;">
-                        <a class="nav-link" style="margin-top:5px;" href="{% url 'logout' %}">Logout</a>
+                    <li class="nav-item align-middle">
+                        <div class="navbar-brand" style="margin-right: 50px;">Badges</div>
                     </li>
-                    <li class="nav-link active">
-                        <a class="nav-link" href="{% url 'profile_page' user.username %}" style="float: left"><span class="badge badge-pill badge-info">{{user.username}}</span></a>
+                    {% if user.is_authenticated %}
+
+                    <li class="nav-item align-middle">
+                        <a href="events/" class="nav-link active" role="button"
+                           aria-pressed="true">Events</a>
+                    </li>
+                    <li class="nav-item align-middle" style="margin-left: auto;">
+                        <a href="{% url 'logout' %}" class="nav-link active" role="button"
+                           aria-pressed="true">Logout</a>
+                    </li>
+                    <li class="nav-item align-middle">
+                        <a class="nav-link" href="{% url 'profile_page' user.username %}" style="float: left"><span
+                                class="badge badge-pill badge-info" style="font-size: 20px">{{user.username}}</span></a>
                     </li>
                 </ul>
             </form>
