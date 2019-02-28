@@ -32,6 +32,7 @@ class ProfilePage(generic.ListView):
         context['badges_list'] = current_user.badge.all()
         context['showcase_list'] = Badges.objects.filter(is_showcase_of_id=self.request.user)
         context['event_active_list'] = Events.objects.all().filter(active=1).filter(created_by=self.request.user)
+        context['about_me'] = current_user.about_me
 
         # User stats
         context['badge_count'] = Badges.objects.filter(user=self.request.user).count()
@@ -43,7 +44,7 @@ class ProfilePage(generic.ListView):
 class ProfileUpdate(generic.UpdateView):
     form_class = ChangeProfilePageForm
     template_name = 'users/profile_update_form.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('profile_page')
 
     def get_object(self, **kwargs):
         return get_object_or_404(CustomUser, pk=self.request.user.id)
