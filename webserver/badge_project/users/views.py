@@ -44,7 +44,11 @@ class ProfilePage(generic.ListView):
 class ProfileUpdate(generic.UpdateView):
     form_class = ChangeProfilePageForm
     template_name = 'users/profile_update_form.html'
-    success_url = reverse_lazy('profile_page')
+
+    def get_success_url(self):
+        user_id = self.request.user.id
+        username = CustomUser.objects.filter(id=user_id)
+        return reverse_lazy('profile_page', kwargs={'username': username})
 
     def get_object(self, **kwargs):
         return get_object_or_404(CustomUser, pk=self.request.user.id)
