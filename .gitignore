@@ -118,6 +118,6 @@ webserver/badge_project/users/migrations/0001_initial\.py
 
 *.xml
 
-webserver/badge_project/badges/migrations/
-
 webserver/badge_project/events/migrations/
+
+webserver/badge_project/badges/migrations/
