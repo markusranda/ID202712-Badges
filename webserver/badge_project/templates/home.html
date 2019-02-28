@@ -5,7 +5,15 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-  <h2>Welcome to the website</h2>
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col"></div>
+            <div class="col">
+                <h2 class="mx-auto">Welcome to the website</h2>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
 {% else %}
 <p>You are not logged in</p>
     <a href="{% url 'login' %}">Login</a>
