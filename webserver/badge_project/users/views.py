@@ -28,7 +28,8 @@ class ProfilePage(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        context['badges_list'] = Badges.objects.filter(user=self.request.user)
+        current_user = self.request.user
+        context['badges_list'] = current_user.badge.all()
         context['showcase_list'] = Badges.objects.filter(is_showcase_of_id=self.request.user)
         context['event_active_list'] = Events.objects.all().filter(active=1).filter(created_by=self.request.user)
 
