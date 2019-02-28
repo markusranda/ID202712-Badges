@@ -1,7 +1,9 @@
-from django.shortcuts import get_object_or_404
-from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 from django.views.generic import ListView
+from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormMixin
 
 from badges.models import Badges
@@ -17,9 +19,11 @@ class SignUp(generic.CreateView):
     template_name = 'signup.html'
 
 
-class ProfilePage(FormMixin, generic.ListView):
+class ProfilePage(generic.ListView, FormMixin):
+    form_class = ChangeProfilePageForm
     model = Badges
     template_name = 'users/profile_page.html'
+    success_url = reverse_lazy('home')
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
@@ -31,7 +35,6 @@ class ProfilePage(FormMixin, generic.ListView):
 
 class ProfileUpdate(generic.UpdateView):
     form_class = ChangeProfilePageForm
-    model = CustomUser
     template_name = 'users/profile_update_form.html'
     success_url = reverse_lazy('home')
 
