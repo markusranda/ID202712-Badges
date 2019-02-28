@@ -3,6 +3,7 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy
 
 from create_badge.forms import CreateBadgeForm
+from badges.models import Badges
 
 
 # Generic class based view
