@@ -1,9 +1,7 @@
-from django.db.models import Prefetch
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import ListView
 from .forms import CustomUserCreationForm
-from django.db import connection
 
 from badges.models import Badges
 from events.models import Events
