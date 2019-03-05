@@ -15,7 +15,6 @@ from users.models import CustomUser
 from .forms import CustomUserCreationForm, ChangeProfilePageForm
 from users.models import CustomUser
 
-
 class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
@@ -42,11 +41,19 @@ class ProfilePage(generic.ListView):
         return context
 
 
-class ProfileUpdate(generic.UpdateView):
+class ProfileUpdate(generic.UpdateView, SingleObjectMixin):
     form_class = ChangeProfilePageForm
     template_name = 'users/profile_update_form.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_user = self.request.user
+        context['all_badges'] = Badges.objects.all()
+
+        return context
+
     def get_success_url(self):
+        import pdb; pdb.set_trace()
         user_id = self.request.user.id
         username = CustomUser.objects.filter(id=user_id)
         return reverse_lazy('profile_page', kwargs={'username': username})
