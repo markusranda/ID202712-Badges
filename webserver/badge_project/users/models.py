@@ -5,6 +5,7 @@ from django.urls import reverse
 
 class CustomUser(AbstractUser):
     badge = models.ManyToManyField('badges.Badges', blank=True)
+    showcase_badge = models.ManyToManyField('badges.Badges', blank=True, null=True, on_delete=models.CASCADE)
     about_me = models.CharField(max_length=255)
     email = models.CharField(max_length=254)
 
