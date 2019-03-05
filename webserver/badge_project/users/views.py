@@ -9,7 +9,6 @@ from django.views.generic.edit import FormMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import CustomUser
 from django.shortcuts import get_object_or_404
-import request
 
 from .forms import CustomUserCreationForm
 
@@ -65,3 +64,18 @@ class ProfileUpdate(generic.UpdateView, SingleObjectMixin):
 
     def get_object(self, **kwargs):
         return get_object_or_404(CustomUser, pk=self.request.user.id)
+
+
+class DeleteUser(DeleteView):
+    model = CustomUser
+    template_name = 'users/profile_delete_form.html'
+
+    def get_success_url(self):
+        user_id = self.request.user.id
+        user = CustomUser.objects.filter(id=user_id)
+        user.delete()
+        return reverse_lazy('login')
+    #
+    # def get_object(self, **kwargs):
+    #     return get_object_or_404(CustomUser, pk=self.request.user.id)
+

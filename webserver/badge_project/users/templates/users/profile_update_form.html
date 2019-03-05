@@ -4,6 +4,11 @@
 
 {% block content %}
 
-    {% crispy form %}
+{% crispy form %}
+<form method="get" action="{% url 'delete_profile' user.id %}">
+<button type="submit" class="deleteBtn" ><i><strong>Delete my account</strong></i></button>
+</form>
+
+
 
 {% endblock %}
