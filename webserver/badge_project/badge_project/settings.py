@@ -36,15 +36,14 @@ DEFAULT_FROM_EMAIL = ['randamarkus.95@gmail.com']
 
 INSTALLED_APPS = [
     'badges.apps.BadgesConfig',
-    'accounts.apps.AccountsConfig',
+    'events.apps.EventsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -136,6 +135,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
+# Redirect location
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+# Email configuration
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
+
+MEDIA_URL = '/media/'
