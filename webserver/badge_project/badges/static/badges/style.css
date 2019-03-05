@@ -6,13 +6,9 @@ li {
     background-color: #204c77!important;
 }
 
-.navbar-light .navbar-brand {
-    color: rgba(0, 0, 0, 0.9);
-    font-size: 25px;
-}
-
-.navbar-light .navbar-nav .nav-link {
-    color: rgb(0, 0, 0);
+.nav-barlink :hover{
+    background-color: #23bdd1;
+    opacity: 0.5;
 }
 
 .loginBtn {
