@@ -16,7 +16,6 @@ from .forms import CustomUserCreationForm, ChangeProfilePageForm
 from users.models import CustomUser
 
 
-'''Sign up'''
 class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
@@ -31,7 +30,8 @@ class ProfilePage(generic.ListView):
         context = super(ListView, self).get_context_data(**kwargs)
         current_user = self.request.user
         context['badges_list'] = current_user.badge.all()
-        context['showcase_list'] = Badges.objects.filter(is_showcase_of_id=self.request.user)
+        '''context['showcase_list'] = CustomUser.objects.filter(is_showcase_badge=current_user)'''
+        context['showcase_list'] = current_user.showcase_badge.all()
         context['event_active_list'] = Events.objects.all().filter(active=1).filter(created_by=self.request.user)
         context['about_me'] = current_user.about_me
 
