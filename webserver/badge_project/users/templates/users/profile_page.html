@@ -1,0 +1,165 @@
+{% extends "nav/nav.html"%}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div style="padding: 0;" class="col-9">
+            <h2>{{user.username}}</h2>
+        </div>
+        <a class="btn btn-primary" href="{% url 'edit_profile' user.username %}">EDIT PROFILE</a>
+        <!--
+        <div class="col">
+            <a href="" id="editBtn" class="row"><h2>Edit Profile</h2></a>
+        </div>
+        -->
+    </div>
+    <div class="row">
+        <div class="col-9">
+            <div id="showCase" class="row"><h2>SHOWCASE</h2>
+                {% if showcase_list %}
+
+                <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Badge Name</th>
+                    </tr>
+                    </thead>
+                    <tr>
+                        {% for badge in showcase_list %}
+                        <td><img src={{ badge.image.url }} width="150"></td>
+                        {% endfor %}
+                    </tr>
+                </table>
+
+                {% else %}
+
+                <p>No badges are available.</p>
+
+                {% endif %}
+            </div>
+            <div id="aboutMe" class="row">
+
+                <div class="row col-9">
+                    <h2>About me</h2>
+                </div>
+
+                <div class="row col-9">
+                    <p style="font-size: 22px">
+                    {{about_me}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div id="stats"><h2>STATISTICS</h2></div>
+
+            <table class="table col-sm" style="border-color: black; border-style: solid;">
+                <thread class="thead-dark">
+                    <tr>
+                        <th scope="col"> Bagdes Earned: {{ badge_count }}</th>
+                    </tr>
+                    <tr>
+                        <th scope="col"> Events Finished: {{ event_count }}</th>
+                    </tr>
+                    <tr>
+                        <th scope="col"> Date Joined: {{ request.user.date_joined }}</th>
+                        <!-- month,day,year,clock this applies for user signed in!!!! -->
+                    </tr>
+                </thread>
+            </table>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-9">
+            <div id="recentBadges" class="row">
+
+                <div class="row col-9">
+                    <h2>Recently earned badges</h2>
+                </div>
+                <div class="row col-9">
+                    {% if badges_list %}
+
+                    <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Badge Name</th>
+                        </tr>
+                        </thead>
+
+                        {% for badge in badges_list %}
+                        <tr>
+                            <td>{{ badge.name }}</td>
+                            <td><img src={{ badge.image.url }} width="150"></td>
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+
+                    {% else %}
+
+                    <p>No badges are available.</p>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div id="activeEvents" class="row"><h2>Active events</h2>
+                {% if event_active_list %}
+
+                <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Event Name</th>
+                    </tr>
+                    </thead>
+
+                    {% for event in event_active_list %}
+                    <tr>
+                        <td>{{ event.name }}</td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+
+                {% else %}
+
+                <p>No events are available.</p>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<form method="post">
+    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    {% csrf_token %}
+                    {{ form }}
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" value="Update" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+{% endblock %}
