@@ -1,9 +1,13 @@
-from django.db.models import Prefetch
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from .models import CustomUser
+from django.shortcuts import get_object_or_404
+import request
+
 from .forms import CustomUserCreationForm
-from django.db import connection
+
+
 
 from badges.models import Badges
 from events.models import Events
@@ -24,3 +28,6 @@ class ProfilePage(generic.ListView):
         context['badges_list'] = Badges.objects.filter(user=self.request.user)
         context['event_active_list'] = Events.objects.all().filter(active=1).filter(created_by=self.request.user)
         return context
+
+
+

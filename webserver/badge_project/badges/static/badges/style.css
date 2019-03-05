@@ -47,6 +47,14 @@ li {
   margin-top: 10%;
 }
 
+.deleteBtn {
+    background-color: #FF0000;
+    font-size: 20px;
+    width: 10%;
+    height: 5%;
+    color: white;
+}
+
 body {
     background-color: #f7f7f7;
 }
