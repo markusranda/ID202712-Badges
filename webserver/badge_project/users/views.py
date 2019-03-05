@@ -16,6 +16,7 @@ from .forms import CustomUserCreationForm, ChangeProfilePageForm
 from users.models import CustomUser
 
 
+'''Sign up'''
 class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
