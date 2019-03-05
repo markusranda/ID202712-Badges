@@ -7,44 +7,45 @@
 {% load static %}
 
 
-
 <html lang="en">
-    <link rel="stylesheet" type="text/css" href="{% static 'badges/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'badges/style.css' %}">
 <head>
     <meta charset="UTF-8">
     <title>Sign up page</title>
     <link rel="shortcut icon" href="">
-<script>
- function disableSubmit() {
-  document.getElementById("submit").disabled = true;
- }
+    <script>
+        function disableSubmit() {
+            document.getElementById("submit").disabled = true;
+        }
 
-  function activateButton(element) {
+        function activateButton(element) {
 
-      if(element.checked) {
-        document.getElementById("submit").disabled = false;
-       }
-       else  {
-        document.getElementById("submit").disabled = true;
-      }
+            if (element.checked) {
+                document.getElementById("submit").disabled = false;
+            } else {
+                document.getElementById("submit").disabled = true;
+            }
 
-  }
-</script>
+        }
+    </script>
 </head>
 
 <body onload="disableSubmit()">
-    <h2 class="row justify-content-center" id="signUpTitle">Create Account</h2>
-    <div class="row justify-content-center" id="signUpContent">
+<h2 class="row justify-content-center" id="signUpTitle">Create Account</h2>
+<div class="row justify-content-center" id="signUpContent">
     <div class="col-6 col-sm-3">
-        <form method="post" action="#" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy'); return false; }">
+        <form method="post" action="#"
+              onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy'); return false; }">
             {% csrf_token %}
             {{ form.as_p }}
             <h4>Read conditions before continue</h4>
-            <input type="checkbox" name="terms" id="agree" onchange="activateButton(this)"/> We need to store your email address to restore your password Please make sure to <i>Check</i> the checkbox before continue...
+            <input type="checkbox" name="terms" id="agree" onchange="activateButton(this)"/> We need to store your email
+            address to restore your password Please make sure to <i>Check</i> the checkbox before continue...
             <button type="submit" name="submit" class="signUpBtn">Sign up</button>
         </form>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
 
 </body>
 </html>
