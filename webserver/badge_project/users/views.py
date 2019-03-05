@@ -6,11 +6,10 @@ from django.views.generic import ListView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormMixin
 from .forms import CustomUserCreationForm
-from datetime import datetime
 
 from badges.models import Badges
 from events.models import Events
-from users.models import CustomUser
+# from users.models import CustomUser
 
 from .forms import CustomUserCreationForm, ChangeProfilePageForm
 from users.models import CustomUser
