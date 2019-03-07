@@ -6,7 +6,6 @@ from django.urls import reverse
 class CustomUser(AbstractUser):
     badge = models.ManyToManyField('badges.Badges', blank=True)
     about_me = models.CharField(max_length=255)
-    last_login = models.DateField(max_length=6)
     email = models.CharField(max_length=254)
     date_joined = models.DateTimeField(auto_now_add=True, max_length=6, blank=False)
 
