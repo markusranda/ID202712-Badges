@@ -17,6 +17,13 @@ li {
     width: 100%;
 }
 
+#deleteBtn {
+    background-color: #FF0000;
+    font-size: 20px;
+    width: 50%;
+    color: white;
+}
+
 #confirmBtn {
     background-color: #FF0000;
     font-size: 20px;
@@ -63,13 +70,6 @@ li {
   margin-top: 10%;
 }
 
-.deleteBtn {
-    background-color: #FF0000;
-    font-size: 20px;
-    width: 10%;
-    height: 5%;
-    color: white;
-}
 
 body {
     background-color: #f7f7f7;
