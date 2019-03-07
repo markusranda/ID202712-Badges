@@ -15,20 +15,20 @@
         -->
     </div>
     <div class="row">
-        <div class="col-9">
+        <div class="col-7">
             <div id="showCase" class="row"><h2>SHOWCASE</h2>
                 {% if showcase_list %}
 
                 <table class="table" id="badge_showcase">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col" width="500px">Badge Name</th>
+                        <th scope="col">Badge Name</th>
                     </tr>
                     </thead>
 
                     <tr>
                         {% for badge in showcase_list %}
-                        <td><img src={{ badge.image.url }} ></td>
+                        <td><img width="125px" height="125px" src={{ badge.image.url }} ></td>
                         {% endfor %}
                     </tr>
 
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col-3">
             <div id="stats"><h2>STATISTICS</h2></div>
 
             <table class="table col-sm u" style="border-color: black; border-style: solid;">

@@ -56,7 +56,7 @@ li {
 }
 
 .signUpBtn {
-        background-color: #23bdd1;
+    background-color: #23bdd1;
     font-size: 20px;
     width: 100%;
     height: 5%;
@@ -100,14 +100,14 @@ li {
 
 
 #badge_showcase {
-    display: block;
     border-color: black;
     border-style: solid;
     margin: 25px;
-    max-width: 400px;
     min-width: 50px;
+    max-width: 760px;
     max-height: 300px;
     min-height: 50px;
+    width: 100%;
 }
 
 /* These are currently for user statistics and badge showcase, should work for recently earned badges as well :) */
@@ -126,6 +126,10 @@ body {
 }
 .asteriskField {
     display: none;
+}
+
+th {
+    width: 900px;
 }
 
 
