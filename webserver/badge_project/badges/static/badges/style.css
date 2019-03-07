@@ -17,6 +17,18 @@ li {
     width: 100%;
 }
 
+.signUp {
+    background-color: #A0a0a0;
+    font-size: 20px;
+    width: 100%;
+}
+
+.resetPswBtn {
+    background-color: #98FB98;
+    font-size: 20px;
+    width: 100%;
+}
+
 #deleteBtn {
     background-color: #FF0000;
     font-size: 20px;
@@ -65,8 +77,25 @@ li {
 #loginContent {
   margin-top: 2%;
 }
+
+#underLoginContent {
+    margin-top: 3%;
+}
+
+#underLoginContent1 {
+    margin-top: 3%;
+}
+
 #loginTitle {
   margin-top: 10%;
+}
+
+#center {
+    text-align: center;
+}
+
+#center1 {
+    text-align: center;
 }
 
 
