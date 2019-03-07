@@ -31,7 +31,6 @@ li {
     height: 50px;
 }
 
-
 #goBackBtn {
     background-color: #00FF00;
     font-size: 20px;
@@ -68,6 +67,28 @@ li {
 }
 #loginTitle {
   margin-top: 10%;
+}
+
+
+#badge_showcase {
+    display: block;
+    border-color: black;
+    border-style: solid;
+    margin: 25px;
+    max-width: 400px;
+    min-width: 50px;
+    max-height: 300px;
+    min-height: 50px;
+}
+
+/* These are currently for user statistics and badge showcase, should work for recently earned badges as well :) */
+thead, tbody {
+    display: block;
+}
+
+tbody{
+    overflow-y: hidden; /* Do not allow vertical scolling */
+    overflow-x: auto; /* Allows for horisontal scolling */
 }
 
 
