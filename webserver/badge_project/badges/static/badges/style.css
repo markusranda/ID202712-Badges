@@ -23,6 +23,12 @@ li {
     width: 100%;
 }
 
+.resetPswBtn {
+    background-color: #98FB98;
+    font-size: 20px;
+    width: 100%;
+}
+
 #deleteBtn {
     background-color: #FF0000;
     font-size: 20px;
@@ -83,6 +89,14 @@ li {
 
 #loginTitle {
   margin-top: 10%;
+}
+
+#center {
+    text-align: center;
+}
+
+#center1 {
+    text-align: center;
 }
 
 
