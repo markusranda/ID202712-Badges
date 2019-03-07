@@ -19,17 +19,19 @@
             <div id="showCase" class="row"><h2>SHOWCASE</h2>
                 {% if showcase_list %}
 
-                <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+                <table class="table" id="badge_showcase">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Badge Name</th>
+                        <th scope="col" width="500px">Badge Name</th>
                     </tr>
                     </thead>
+
                     <tr>
                         {% for badge in showcase_list %}
-                        <td><img src={{ badge.image.url }} width="150"></td>
+                        <td><img src={{ badge.image.url }} ></td>
                         {% endfor %}
                     </tr>
+
                 </table>
 
                 {% else %}
@@ -54,7 +56,7 @@
         <div class="col">
             <div id="stats"><h2>STATISTICS</h2></div>
 
-            <table class="table col-sm" style="border-color: black; border-style: solid;">
+            <table class="table col-sm u" style="border-color: black; border-style: solid;">
                 <thread class="thead-dark">
                     <tr>
                         <th scope="col"> Bagdes Earned: {{ badge_count }}</th>
