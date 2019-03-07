@@ -1,7 +1,5 @@
 {% extends "nav/nav.html"%}
 
-{% load crispy_forms_tags %}
-
 {% block content %}
 
 <div class="container">
@@ -12,9 +10,7 @@
         <a class="btn btn-primary" href="{% url 'edit_profile' user.username %}">EDIT PROFILE</a>
         <!--
         <div class="col">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProfileModal">
-                Edit Profile
-            </button>
+            <a href="" id="editBtn" class="row"><h2>Edit Profile</h2></a>
         </div>
         -->
     </div>
@@ -164,5 +160,6 @@
         </div>
     </div>
 </form>
+
 
 {% endblock %}

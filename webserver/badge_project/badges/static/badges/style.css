@@ -6,13 +6,9 @@ li {
     background-color: #204c77!important;
 }
 
-.navbar-light .navbar-brand {
-    color: rgba(0, 0, 0, 0.9);
-    font-size: 25px;
-}
-
-.navbar-light .navbar-nav .nav-link {
-    color: rgb(0, 0, 0);
+.nav-barlink :hover{
+    background-color: #23bdd1;
+    opacity: 0.5;
 }
 
 .loginBtn {
@@ -20,6 +16,23 @@ li {
     font-size: 20px;
     width: 100%;
 }
+
+#confirmBtn {
+    background-color: #FF0000;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+}
+
+
+#goBackBtn {
+    background-color: #00FF00;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    margin-left: 2%;
+}
+
 .c-badge-form {
     width: 50%;
 }
@@ -48,6 +61,14 @@ li {
 }
 #loginTitle {
   margin-top: 10%;
+}
+
+.deleteBtn {
+    background-color: #FF0000;
+    font-size: 20px;
+    width: 10%;
+    height: 5%;
+    color: white;
 }
 
 body {

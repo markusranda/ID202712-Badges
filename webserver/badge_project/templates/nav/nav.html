@@ -9,6 +9,10 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="">
 
+    <meta name="description" content="School Project for class ID202712 NTNU Aalesund Bachelor of Computer Engineering.
+                Badge collection similar to achievements in games.">
+    <meta name="author" content="Espen Vad, Pernille Skytterholm, Jahn-Willy Nøstdahl and Markus Randa.">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -19,7 +23,7 @@
 
     <section>
         <a class="navbar-brand" href="/"><img src="{% static 'badges/badger.png' %}" style="max-width: 50px;"> </a>
-        <span class="navbar-brand"><h6>The HoneyBadgers</h6></span>
+        <span class="navbar-brand"><h3>The HoneyBadgers</h3></span>
     </section>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
@@ -30,22 +34,19 @@
     {% if user.is_authenticated %}
     <div class="collapse navbar-collapse" id="navbarToggler">
         <div class="container-fluid" style="margin:5px;">
-            <form class="form-inline">
-                <ul class="navbar-nav mr-auto mt-2 mt-md-0" style="width: 100%">
-                    <a class="nav-link">
-                        <button class="btn btn-outline-success my-sm-2"
-                                style="margin:10px;" type="submit" href="/events">Events
-                        </button>
-                    </a>
+                <ul class="navbar-nav bd-navbar-nav  flex-row" style="width: 100%">
+                        <li class="nav-item active nav-barlink">
+                            <a class="nav-link" href="/events"><h5>Events</h5></a>
+                        </li>
                     </li>
-                    <li class="nav-item active" style="margin-left: auto;">
+                    <li class="nav-item active nav-barlink" style="margin-left: auto;">
                         <a class="nav-link" style="margin-top:5px;" href="{% url 'logout' %}">Logout</a>
                     </li>
-                    <li class="nav-link active">
-                        <a class="nav-link" href="{% url 'profile_page' user.username %}" style="float: left"><span class="badge badge-pill badge-info">{{user.username}}</span></a>
+                    <li class="nav-link active nav-barlink">
+                        <a class="nav-link" href="{% url 'profile_page' user.username %}"><span
+                                class="badge badge-pill badge-info">{{user.username}}</span></a>
                     </li>
                 </ul>
-            </form>
         </div>
     </div>
     {% else %}
