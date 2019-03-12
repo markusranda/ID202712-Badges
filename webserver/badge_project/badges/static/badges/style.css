@@ -122,7 +122,6 @@ li {
     text-align: center;
 }
 
-
 #badge_showcase {
     border-color: black;
     border-style: solid;
@@ -148,6 +147,7 @@ tbody{
 body {
     background-color: #f7f7f7;
 }
+
 .asteriskField {
     display: none;
 }
@@ -155,12 +155,6 @@ body {
 th {
     width: 900px;
 }
-
-
-
-
-
-
 
 .modal-backdrop {
   display: none;
