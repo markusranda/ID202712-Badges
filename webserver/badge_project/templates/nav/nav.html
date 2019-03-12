@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md sticky-top navbar-light"> <!--sticky top follows the top of browser-->
+<nav class="navbar navbar-expand-md sticky-top navbar-light" style="height: 90px" style="margin-top: 18px"> <!--sticky top follows the top of browser-->
 
     <section>
         <a class="navbar-brand" href="/"><img src="{% static 'badges/badger.png' %}" style="max-width: 50px;"> </a>
@@ -36,15 +36,16 @@
         <div class="container-fluid" style="margin:5px;">
             <ul class="navbar-nav bd-navbar-nav  flex-row" style="width: 100%">
                 <li class="nav-item active nav-barlink">
-                    <a class="nav-link" href="/events"><h5>Events</h5></a>
+                    <a class="nav-link" href="/events"><h4>Events</h4></a>
                 </li>
-                </li>
+
                 <li class="nav-item active nav-barlink" style="margin-left: auto;">
-                    <a class="nav-link" style="margin-top:5px;" href="{% url 'logout' %}">Logout</a>
+                    <a class="nav-link" style="margin-top:5px;" <span style="font-size: 5px" href="{% url 'logout' %}">Logout</span></a>
                 </li>
+
                 <li class="nav-link active nav-barlink">
                     <a class="nav-link" href="{% url 'profile_page' user.username %}"><span
-                            class="badge badge-pill badge-info">{{user.username}}</span></a>
+                            class="badge badge-pill badge-info" style="font-size: 20px">{{user.username}}</span></a>
                 </li>
             </ul>
         </div>

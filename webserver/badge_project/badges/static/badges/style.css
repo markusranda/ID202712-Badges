@@ -7,8 +7,10 @@ li {
 }
 
 .nav-barlink :hover{
-    background-color: #23bdd1;
-    opacity: 0.5;
+    background-color: #abecf4;
+    opacity: 1;
+    font-weight: bolder;
+    color: #000000;
 }
 
 .loginBtn {
@@ -86,7 +88,15 @@ li {
     margin-top: 3%;
 }
 
+#goToProfilePageBtn {
+    margin-top: 3%;
+}
+
 #loginTitle {
+  margin-top: 10%;
+}
+
+#welcomeMsg {
   margin-top: 10%;
 }
 

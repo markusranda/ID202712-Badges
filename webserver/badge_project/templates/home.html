@@ -6,8 +6,8 @@
 {% block content %}
 {% if user.is_authenticated %}
 
-<h1 class="row justify-content-center">Welcome to the HoneyBadgers</h1>
-<div class="row justify-content-center">
+<h1 class="row justify-content-center" id="welcomeMsg">Welcome to the HoneyBadgers</h1>
+<div class="row justify-content-center" id="goToProfilePageBtn">
     <form method="get" action="{% url 'profile_page' user.id %}">
         <button type="submit" class="btn signUpBtn"><strong>Go to profile page</strong></button>
     </form>
