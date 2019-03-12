@@ -92,6 +92,20 @@ li {
     margin-top: 3%;
 }
 
+#badgerWave {
+    float: right;
+    margin-top: 250px;
+    margin-right: 350px;
+  
+}
+
+#badgerWave1 {
+    float: left;
+    margin-top: 250px;
+    margin-left: 350px;
+
+}
+
 #loginTitle {
   margin-top: 10%;
 }
