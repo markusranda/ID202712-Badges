@@ -112,7 +112,7 @@
                 <h2>Recently earned badges</h2>
                 {% if badges_list %}
 
-                    <table class="table table-bordered">
+                    <table class="table table-borderless">
                         <thead>
                         <tr>
                             <th scope="col">Badge Name</th>
@@ -121,8 +121,8 @@
 
                         {% for badge in badges_list %}
                             <tr>
-                                <td>{{ badge.name }}</td>
                                 <td><img src={{ badge.image.url }} width="150"></td>
+                                <td>{{ badge.name }}</td>
                             </tr>
                         {% endfor %}
 
