@@ -26,14 +26,9 @@
                         {% if showcase_list %}
                             <div class="table-responsive">
                                 <table class="table table-borderless">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">Badge Name</th>
-                                    </tr>
-                                    </thead>
                                     <tr>
                                         {% for badge in showcase_list %}
-                                            <td><img src={{ badge.image.url }} width="150"></td>
+                                            <td style="border-top-width: 0;"><img src={{ badge.image.url }} width="150"></td>
                                         {% endfor %}
                                     </tr>
                                 </table>
@@ -59,19 +54,13 @@
                 <div class="col">
                     <div class="bg-white text-dark p-4">
                         <h2>Recently earned badges</h2>
+                    <div class="table-responsive">
                         {% if badges_list %}
-
                             <table class="table table-borderless">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Badge Name</th>
-                                </tr>
-                                </thead>
-
                                 {% for badge in badges_list %}
                                     <tr>
-                                        <td><img src={{ badge.image.url }} width="150"></td>
-                                        <td>{{ badge.name }}</td>
+                                        <td style="border-top-width: 0; vertical-align: baseline;"><img src={{ badge.image.url }} width="100"></td>
+                                        <td style="border-top-width: 0; vertical-align: baseline;">{{ badge.name }}</td>
                                     </tr>
                                 {% endfor %}
 
@@ -80,6 +69,7 @@
                         {% else %}
                             <p>No badges are available.</p>
                         {% endif %}
+                    </div>
                     </div>
                 </div>
                 </div>
