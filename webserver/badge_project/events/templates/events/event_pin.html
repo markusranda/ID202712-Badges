@@ -1,0 +1,10 @@
+{% extends 'nav/nav.html' %}
+
+{% block content %}
+
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form }}
+    <input type="submit" value="Save">
+    </form>
+
+{% endblock %}
