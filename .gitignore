@@ -121,3 +121,9 @@ webserver/badge_project/users/migrations/0001_initial\.py
 webserver/badge_project/events/migrations/
 
 webserver/badge_project/badges/migrations/
+
+webserver/badge_project/users/migrations/0003_customuser_showcase_badge\.py
+
+webserver/badge_project/users/migrations/0002_auto_20190305_1017\.py
+
+dummydata2/
