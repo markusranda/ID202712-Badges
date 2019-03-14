@@ -31,3 +31,4 @@ class CreateEventForm(ModelForm):
         widgets = {
             'description': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the event here...'})
         }
+

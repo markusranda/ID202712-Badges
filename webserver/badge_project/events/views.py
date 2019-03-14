@@ -24,3 +24,8 @@ class CreateEvent(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('events')
     template_name = 'events/create_event_form.html'
 
+    def get_form(self, request, **kwargs):
+        form = super(CreateEvent, self).get_form(request, **kwargs)
+        form.current_user = request.user
+        return form
+
