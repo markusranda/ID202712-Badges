@@ -31,12 +31,12 @@ class ProfilePage(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        current_user = self.request.user
-        context['badges_list'] = Badges.objects.filter()
-        '''context['showcase_list'] = CustomUser.objects.filter(is_showcase_badge=current_user)'''
-        context['showcase_list'] = current_user.showcase_badge.all()
-        context['event_active_list'] = Events.objects.all().filter(active=1).filter(created_by=self.request.user)
-        context['about_me'] = current_user.about_me
+        parameter_username = self.kwargs['username']
+        object_user = CustomUser.objects.filter(username=parameter_username).get()
+        context['showcase_list'] = object_user.showcase_badge.all()
+        context['badges_list'] = object_user.badge.all()
+        context['event_active_list'] = object_user.event.filter(active=1)
+        context['about_me'] = object_user.about_me
 
         # User stats
         context['badge_count'] = Badges.objects.filter(user=self.request.user).count()
