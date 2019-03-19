@@ -14,5 +14,3 @@ class Events(models.Model):
     pin = models.IntegerField(unique=True, default=random)
     created_by = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
 
-
-
