@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
@@ -11,10 +12,11 @@ from .models import CustomUser
 from django.shortcuts import get_object_or_404
 
 from .forms import CustomUserCreationForm
-
+from create_badge.forms import CreateBadgeForm
 from badges.models import Badges
 from events.models import Events
 # from users.models import CustomUser
+
 
 from .forms import CustomUserCreationForm, ChangeProfilePageForm
 from users.models import CustomUser
@@ -23,6 +25,13 @@ class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
+
+
+class CreateBadge(LoginRequiredMixin, CreateView):
+    model = Badges
+    form_class = CreateBadgeForm
+    success_url = reverse_lazy('home')
+    template_name = 'create_badge.html'
 
 
 class ProfilePage(generic.ListView):
@@ -79,4 +88,10 @@ class DeleteUser(DeleteView):
     #
     # def get_object(self, **kwargs):
     #     return get_object_or_404(CustomUser, pk=self.request.user.id)
+
+
+class CreateNewBadge:
+    form_class = ChangeProfilePageForm
+    template_name = 'users/profile_update_form.html'
+
 
