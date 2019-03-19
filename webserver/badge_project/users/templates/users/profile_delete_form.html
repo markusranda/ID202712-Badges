@@ -1,0 +1,28 @@
+{% extends "nav/nav.html"%}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+<h2 class="row justify-content-center" id="loginTitle">Deleting profile menu</h2>
+<div>
+    <h2 class="row justify-content-center">Are you sure you want to delete "{{ object }}"?</h2>
+    <div class="row justify-content-center">
+        <form method="post">{% csrf_token %}
+            <button type="submit" value="Confirm" id="confirmBtn"><b>Confirm</b></button>
+        </form>
+        <button type="submit" value="Go back" onclick="goBack()" id="goBackBtn" class="col-auto"><b>Go back</b></button>
+
+    </div>
+</div>
+
+
+{% endblock %}
+

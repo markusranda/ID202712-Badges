@@ -5,11 +5,31 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-  <h2>Welcome to the website</h2>
-{% else %}
-<p>You are not logged in</p>
-    <a href="{% url 'login' %}">Login</a>
-    <a href="{% url 'signup' %}">Sign Up</a>
-    <a href="{% url 'password_reset' %}">Forgot your password?</a>
+
+        <h1 class="row justify-content-center" id="welcomeMsg">Welcome to the site {{ user.username|capfirst }}</h1>
+        <a style="text-align: center; display: block;" href="{% url 'events:event_pin' %}">Enter a new event</a>
+    {% else %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Front page</title>
+    <link rel="shortcut icon" href="">
+</head>
+<body>
+
+
+<h2 class="row justify-content-center" id="loginTitle">You are not logged in</h2>
+<div class="row justify-content-center" id="loginContent">
+    <form method="get" action="{% url 'login' %}">
+            <button type="submit" class="btn loginBtn">Go to login page</button>
+    </form>
+</div>
+
+
+<div class="row justify-content-center" id="underLoginContent">
+    <form method="get" action="{% url 'signup' %}">
+            <button type="submit" class="btn signUp">Create new account</button>
+    </form>
+</div>
 {% endif %}
 {% endblock %}

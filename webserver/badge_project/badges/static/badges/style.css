@@ -6,13 +6,11 @@ li {
     background-color: #204c77!important;
 }
 
-.navbar-light .navbar-brand {
-    color: rgba(0, 0, 0, 0.9);
-    font-size: 25px;
-}
-
-.navbar-light .navbar-nav .nav-link {
-    color: rgb(0, 0, 0);
+.nav-barlink :hover{
+    background-color: #abecf4;
+    opacity: 1;
+    font-weight: bolder;
+    color: #000000;
 }
 
 .loginBtn {
@@ -21,8 +19,46 @@ li {
     width: 100%;
 }
 
+.signUp {
+    background-color: #A0a0a0;
+    font-size: 20px;
+    width: 100%;
+}
+
+.resetPswBtn {
+    background-color: #98FB98;
+    font-size: 20px;
+    width: 100%;
+}
+
+#deleteBtn {
+    background-color: #FF0000;
+    font-size: 20px;
+    width: 50%;
+    color: white;
+}
+
+#confirmBtn {
+    background-color: #FF0000;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+}
+
+#goBackBtn {
+    background-color: #00FF00;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    margin-left: 2%;
+}
+
+.c-badge-form {
+    width: 50%;
+}
+
 .signUpBtn {
-        background-color: #23bdd1;
+    background-color: #23bdd1;
     font-size: 20px;
     width: 100%;
     height: 5%;
@@ -43,10 +79,130 @@ li {
 #loginContent {
   margin-top: 2%;
 }
+
+#underLoginContent {
+    margin-top: 3%;
+}
+
+#underLoginContent1 {
+    margin-top: 3%;
+}
+
+#goToProfilePageBtn {
+    margin-top: 3%;
+}
+
+#badgerWave {
+    float: right;
+    margin-top: 250px;
+    margin-right: 350px;
+  
+}
+
+#badgerWave1 {
+    float: left;
+    margin-top: 250px;
+    margin-left: 350px;
+
+}
+
 #loginTitle {
   margin-top: 10%;
 }
 
+#welcomeMsg {
+  margin-top: 10%;
+}
+
+#center {
+    text-align: center;
+}
+
+#center1 {
+    text-align: center;
+}
+
+#badge_showcase {
+    border-color: black;
+    border-style: solid;
+    margin: 25px;
+    min-width: 50px;
+    max-width: 760px;
+    max-height: 300px;
+    min-height: 50px;
+    width: 100%;
+}
+
+/* These are currently for user statistics and badge showcase, should work for recently earned badges as well :) */
+thead, tbody {
+    display: block;
+}
+
+tbody{
+    overflow-y: hidden; /* Do not allow vertical scolling */
+    overflow-x: auto; /* Allows for horisontal scolling */
+}
+
+
 body {
     background-color: #f7f7f7;
+}
+
+.asteriskField {
+    display: none;
+}
+
+th {
+    width: 900px;
+}
+
+.modal-backdrop {
+  display: none;
+}
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.formTextStyling {
+    color: #000;
+    font-size: 25px;
+    font-family: "Do Hyeon", serif;
+    font-weight: bold;
+    text-align: center;
 }

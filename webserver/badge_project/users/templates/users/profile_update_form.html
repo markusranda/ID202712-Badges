@@ -1,0 +1,17 @@
+{% extends "nav/nav.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% crispy form %}
+
+<form method="get" action="{% url 'delete_profile' user.id %}">
+    <div class="row justify-content-end">
+        <div class="col-4">
+            <button type="submit" id="deleteBtn" ><i><strong>Delete my account</strong></i></button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

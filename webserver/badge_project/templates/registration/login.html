@@ -17,14 +17,34 @@
     <title>Login page</title>
     <link rel="shortcut icon" href="">
 </head>
-
 <body>
+
+
+<div id="badgerWave">
+     <a href="/"><img src="{% static 'badges/hey.gif' %}" style="max-width: 350px;"> </a>
+</div>
+<div id="badgerWave1">
+     <a href="/"><img src="{% static 'badges/hey.gif' %}" style="max-width: 350px;"> </a>
+</div>
+
 
 <h2 class="row justify-content-center" id="loginTitle">Login</h2>
 <div class="row justify-content-center" id="loginContent">
     <form method="post">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn loginBtn">Login</button>
+    </form>
+</div>
+
+<div class="row justify-content-center" id="underLoginContent1">
+    <form method="get" action="{% url 'password_reset' %}">
+        <a href="{% url 'password_reset' %}"><strong>Forgot your password?</strong></a>
+    </form>
+</div>
+
+<div class="row justify-content-center" id="underLoginContent">
+    <form method="get" action="{% url 'signup' %}">
+            <button type="submit" class="btn signUp">Create new account</button>
     </form>
 </div>
 
