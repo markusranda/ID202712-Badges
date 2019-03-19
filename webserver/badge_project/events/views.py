@@ -24,9 +24,6 @@ class EventView(LoginRequiredMixin, generic.ListView):
 
 class EventPin(LoginRequiredMixin, View):
     template_name = "events/event_pin.html"
-class CreateBadge(generic.ListView):
-    model = Events
-    template_name = 'events/create_badge.html'
 
     def get_form(self, request, **kwargs):
          form = super(EventPin, self).get_form(request, **kwargs)
@@ -48,11 +45,4 @@ class CreateBadge(generic.ListView):
             current_user = request.user
             current_user.event.add(current_event)
             return render(request, "events/event_profile.html", context)
-        else:
-            print("----------------------------------- Triggered -----------------------------------")
         return render(request, self.template_name, context)
-
-
-
-
-

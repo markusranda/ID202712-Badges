@@ -198,3 +198,11 @@ th {
   text-decoration: none;
   cursor: pointer;
 }
+
+.formTextStyling {
+    color: #000;
+    font-size: 25px;
+    font-family: "Do Hyeon", serif;
+    font-weight: bold;
+    text-align: center;
+}
