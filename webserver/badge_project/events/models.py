@@ -13,3 +13,8 @@ class BadgeRequests(models.Model):
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='request')
     event = models.ForeignKey('Events', on_delete=models.CASCADE, related_name='request')
     badge = models.ForeignKey('badges.Badges', on_delete=models.CASCADE, related_name='request')
+
+
+class EventBadges(models.Model):
+    event = models.ForeignKey('Events', on_delete=models.CASCADE, related_name='eventbadge')
+    badge = models.ForeignKey('badges.Badges', on_delete=models.CASCADE, related_name='eventbadge')
