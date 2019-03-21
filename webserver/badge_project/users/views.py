@@ -61,13 +61,13 @@ class ProfileUpdate(generic.UpdateView, SingleObjectMixin):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # current_user = self.request.user
+        current_user = self.request.user
         context['all_badges'] = Badges.objects.all()
 
         return context
 
     def get_success_url(self):
-        # import pdb; pdb.set_trace()
+        import pdb; pdb.set_trace()
         user_id = self.request.user.id
         username = CustomUser.objects.filter(id=user_id)
         return reverse_lazy('profile_page', kwargs={'username': username})
