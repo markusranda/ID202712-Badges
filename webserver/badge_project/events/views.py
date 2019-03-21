@@ -7,12 +7,17 @@ from django.views import generic
 from django.views.generic import *
 from django.contrib.auth import get_user
 from django.views.generic.edit import ModelFormMixin
+from django.views.generic.edit import ModelFormMixin
 from users.models import CustomUser
 
 from users.models import Attendees
 from .forms import EventPinForm
 from .forms import CreateEventForm
 from .models import Events
+
+from badges.models import Badges
+from .forms import EventPinForm, CreateEventForm
+from .models import Events, BadgeRequests
 
 
 class EventView(LoginRequiredMixin, generic.ListView):
@@ -21,8 +26,10 @@ class EventView(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        context['event_historic_list'] = Events.objects.filter(created_by=self.request.user)
-        context['event_active_list'] = Events.objects.all().filter(active=1).filter(created_by=self.request.user)
+        current_user = self.request.user
+        context['event_historic_list'] = current_user.event.get_queryset()
+        context['event_active_list'] = Events.objects.filter(created_by=current_user)
+
         return context
 
 
@@ -88,4 +95,39 @@ class EventProfile(generic.DetailView):
         # context['event_count'] = object_user.event.all().count()
         # context['date_joined'] = object_user.date_joined
         return context
+
+
+class EventProfileUser(generic.DetailView):
+    template_name = 'events/event_profile_user.html'
+    model = Events
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        parameter_event_id = self.kwargs['pk']
+        event_object = kwargs.get("object", "")
+
+        '''Obtain all badges from the relavant badge_requests'''
+        badge_request_qs = BadgeRequests.objects.filter(event_id=event_object.id)
+        badge_requests = []
+        for badge_request in badge_request_qs:
+            badge = badge_request.badge
+            badge_requests.append(badge)
+
+        context['event_name'] = event_object.name
+        context['event_desc'] = event_object.description
+        context['badge_requests'] = badge_requests
+        context['requestable_badge'] = Badges.objects.all()
+
+        # object_user = CustomUser.objects.filter(username=parameter_username).get()
+        # context['showcase_list'] = object_user.showcase_badge.all()
+        # context['badges_list'] = object_user.badge.all()
+        # context['event_active_list'] = object_user.event.filter(active=1)
+        # context['about_me'] = object_user.about_me
+        #
+        # # User stats
+        # context['badge_count'] = object_user.badge.all().count()
+        # context['event_count'] = object_user.event.all().count()
+        # context['date_joined'] = object_user.date_joined
+        return context
+
 
