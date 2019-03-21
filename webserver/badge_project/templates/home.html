@@ -6,9 +6,13 @@
 {% block content %}
 {% if user.is_authenticated %}
 
-        <h1 class="row justify-content-center" id="welcomeMsg">Welcome to the site {{ user.username|capfirst }}</h1>
-        <a style="text-align: center; display: block;" href="{% url 'events:event_pin' %}">Enter a new event</a>
-    {% else %}
+<h1 class="row justify-content-center" id="welcomeMsg">Welcome to the HoneyBadgers</h1>
+<div class="row justify-content-center" id="goToProfilePageBtn">
+    <form method="get" action="{% url 'profile_page' user.username %}">
+        <button type="submit" class="btn signUpBtn"><strong>Go to profile page</strong></button>
+    </form>
+</div>
+{% else %}
 
 <head>
     <meta charset="UTF-8">
