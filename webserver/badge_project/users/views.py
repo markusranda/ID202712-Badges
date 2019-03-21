@@ -8,7 +8,7 @@ from django.views.generic import ListView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from .models import CustomUser
+from .models import CustomUser, Attendees
 from django.shortcuts import get_object_or_404
 
 from .forms import CustomUserCreationForm
@@ -42,14 +42,23 @@ class ProfilePage(generic.ListView):
         context = super(ListView, self).get_context_data(**kwargs)
         parameter_username = self.kwargs['username']
         object_user = CustomUser.objects.filter(username=parameter_username).get()
+
+        '''Obtain all events from the '''
+        attendants_qs = Attendees.objects.filter(user_id=object_user.id)
+        events_list = []
+        for attendants_qs in attendants_qs:
+            if attendants_qs.event.active:
+                event = attendants_qs.event
+                events_list.append(event)
+
         context['showcase_list'] = object_user.showcase_badge.all()
         context['badges_list'] = object_user.badge.all()
-        context['event_active_list'] = object_user.event.filter(active=1)
+        context['event_active_list'] = events_list
         context['about_me'] = object_user.about_me
 
         # User stats
         context['badge_count'] = object_user.badge.all().count()
-        context['event_count'] = object_user.event.all().count()
+        context['event_count'] = Attendees.objects.filter(user_id=object_user.id).count()
         context['date_joined'] = object_user.date_joined
 
         return context
