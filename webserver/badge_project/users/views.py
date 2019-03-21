@@ -67,7 +67,6 @@ class ProfileUpdate(generic.UpdateView, SingleObjectMixin):
         return context
 
     def get_success_url(self):
-        import pdb; pdb.set_trace()
         user_id = self.request.user.id
         username = CustomUser.objects.filter(id=user_id)
         return reverse_lazy('profile_page', kwargs={'username': username})
