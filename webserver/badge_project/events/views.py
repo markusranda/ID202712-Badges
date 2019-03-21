@@ -1,8 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import QueryDict
 from django.views import generic
 from django.views.generic import ListView, CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user
+from django.views.generic.edit import ModelFormMixin
 
 from .models import Events
 from .forms import CreateEventForm
@@ -22,17 +24,15 @@ class EventView(LoginRequiredMixin, generic.ListView):
 class CreateEvent(LoginRequiredMixin, CreateView):
     model = Events
     form_class = CreateEventForm
-    success_url = reverse_lazy('events')
+    success_url = reverse_lazy('events:events')
     template_name = 'events/create_event_form.html'
 
-    def get_form(self, **kwargs):
-        form = super(CreateEvent, self).get_form(**kwargs)
-        form.current_user = self.request.user.id
-        return form
+    # Retrieves the form before it's been successfully posted
+    # Adds a new field to the form name "created_by_id"
+    # Saves the value with current user's id
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.created_by_id = self.request.user.id
+        self.object.save()
 
-    def hop(self, form=form_class):
-        new_event = form.save()
-        event_profile = CreateEventForm.save(commit=False)
-        if event_profile.current_user is None:
-            event_profile.current_user = new_event.get_form()
-        event_profile.save()
+        return super(ModelFormMixin, self).form_valid(form)
