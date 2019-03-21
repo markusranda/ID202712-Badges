@@ -5,8 +5,9 @@ from django.shortcuts import render, render_to_response
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import *
+from users.models import CustomUser
 
-
+from users.models import Attendees
 from .forms import EventPinForm
 from .models import Events
 
@@ -24,9 +25,6 @@ class EventView(LoginRequiredMixin, generic.ListView):
 
 class EventPin(LoginRequiredMixin, View):
     template_name = "events/event_pin.html"
-class CreateBadge(generic.ListView):
-    model = Events
-    template_name = 'events/create_badge.html'
 
     def get_form(self, request, **kwargs):
          form = super(EventPin, self).get_form(request, **kwargs)
@@ -53,6 +51,25 @@ class CreateBadge(generic.ListView):
         return render(request, self.template_name, context)
 
 
+class EventProfile(generic.DetailView):
+    template_name = 'events/event_profile.html'
+    model = Events
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        parameter_event_id = self.kwargs['pk']
+        context['people_joined'] = Attendees.objects.filter(event=1).count()
+        # object_user = CustomUser.objects.filter(username=parameter_username).get()
+        # context['showcase_list'] = object_user.showcase_badge.all()
+        # context['badges_list'] = object_user.badge.all()
+        # context['event_active_list'] = object_user.event.filter(active=1)
+        # context['about_me'] = object_user.about_me
+        #
+        # # User stats
+        # context['badge_count'] = object_user.badge.all().count()
+        # context['event_count'] = object_user.event.all().count()
+        # context['date_joined'] = object_user.date_joined
+        return context
 
 
 
