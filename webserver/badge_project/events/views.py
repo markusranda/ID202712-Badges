@@ -36,11 +36,6 @@ class EventView(LoginRequiredMixin, generic.ListView):
 class EventPin(LoginRequiredMixin, View):
     template_name = "events/event_pin.html"
 
-    def get_form(self, request, **kwargs):
-         form = super(EventPin, self).get_form(request, **kwargs)
-         form.current_user = request.user
-         return form
-
     def get(self, request,*args, **kwargs):
         form = EventPinForm()
         context = {"form": form}
@@ -52,9 +47,11 @@ class EventPin(LoginRequiredMixin, View):
         if form.is_valid():
             cd = form.cleaned_data
             event_pin = cd.pop('event_field')
-            current_event = Events.objects.filter(pin = event_pin).get()
-            current_user = request.user
-            current_user.event.add(current_event)
+            current_event = Events.objects.filter(pin=event_pin).get().id
+            current_user = request.user.id
+            attendee = Attendees(event_id=current_event, user_id=current_user)
+            attendee.save()
+
             return render(request, "events/event_profile.html", context)
         return render(request, self.template_name, context)
 
