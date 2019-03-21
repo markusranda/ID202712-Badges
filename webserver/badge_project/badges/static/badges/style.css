@@ -122,6 +122,22 @@ li {
     text-align: center;
 }
 
+#test {
+    margin-left: 700px;
+    margin-top: 40px;
+}
+
+#mod {
+    margin-left: 800px;
+    margin-top: 40px;
+    color: #FF0000;
+}
+
+#event {
+    margin-left: 820px;
+    margin-top: 40px;
+}
+
 #badge_showcase {
     border-color: black;
     border-style: solid;
