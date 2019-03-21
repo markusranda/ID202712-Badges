@@ -46,8 +46,6 @@ class EventPin(LoginRequiredMixin, View):
             current_user = request.user
             current_user.event.add(current_event)
             return render(request, "events/event_profile.html", context)
-        else:
-            print("----------------------------------- Triggered -----------------------------------")
         return render(request, self.template_name, context)
 
 
