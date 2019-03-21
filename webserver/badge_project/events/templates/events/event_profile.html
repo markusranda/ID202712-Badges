@@ -1,0 +1,29 @@
+{% extends "nav/nav.html"%}
+
+{% block content %}
+
+    <h1 id="event">Event: [name]!</h1>
+
+    <h1 id="mod"><u>Moderator view!</u></h1>
+                <div class="col-md-3" id="test">
+                <div class="bg-white text-dark p-4">
+                    <h2 class="text-center">Statistics</h2>
+                    <div>
+                        <table class="table table-bordered">
+                            <thread>
+                                <tr>
+                                    <th scope="col"> People that have joined: {{ people_joined }}</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col"> Achieved badges: XX</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col"> Something else: XX</th>
+                                    <!-- Other statistics to be filled in!!!! -->
+                                </tr>
+                            </thread>
+                        </table>
+                    </div>
+                </div>
+                </div>
+{% endblock %}
