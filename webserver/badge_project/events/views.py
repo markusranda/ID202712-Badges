@@ -12,7 +12,7 @@ from users.models import Attendees
 
 from badges.models import Badges
 from .forms import EventPinForm, CreateEventForm
-from .models import Events
+from .models import Events, BadgeRequests
 
 
 class EventView(LoginRequiredMixin, generic.ListView):
@@ -101,9 +101,16 @@ class EventProfileUser(generic.DetailView):
         parameter_event_id = self.kwargs['pk']
         event_object = kwargs.get("object", "")
 
+        '''Obtain all badges from the relavant badge_requests'''
+        badge_request_qs = BadgeRequests.objects.filter(event_id=event_object.id)
+        badge_requests = []
+        for badge_request in badge_request_qs:
+            badge = badge_request.badge
+            badge_requests.append(badge)
+
         context['event_name'] = event_object.name
         context['event_desc'] = event_object.description
-        context['badge_requests'] = event_object.badge_request.get_queryset()
+        context['badge_requests'] = badge_requests
         context['requestable_badge'] = Badges.objects.all()
 
         # object_user = CustomUser.objects.filter(username=parameter_username).get()

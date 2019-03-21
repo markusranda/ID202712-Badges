@@ -8,8 +8,6 @@ class Events(models.Model):
     pin = models.IntegerField(unique=True)
     created_by = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
 
-    badge_request = models.ManyToManyField('badges.Badges', blank=True, through='BadgeRequests')
-
 
 class BadgeRequests(models.Model):
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='request')
