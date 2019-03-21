@@ -5,10 +5,11 @@ from django.shortcuts import render, render_to_response
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import *
+from django.views.generic.edit import ModelFormMixin
 from users.models import CustomUser
 
 from users.models import Attendees
-from .forms import EventPinForm
+from .forms import EventPinForm, CreateEventForm
 from .models import Events
 
 
@@ -72,4 +73,19 @@ class EventProfile(generic.DetailView):
         return context
 
 
+class CreateEvent(LoginRequiredMixin, CreateView):
+    model = Events
+    form_class = CreateEventForm
+    success_url = reverse_lazy('events:events')
+    template_name = 'events/create_event_form.html'
+
+    # Retrieves the form before it's been successfully posted
+    # Adds a new field to the form name "created_by_id"
+    # Saves the value with current user's id
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.created_by_id = self.request.user.id
+        self.object.save()
+
+        return super(ModelFormMixin, self).form_valid(form)
 
