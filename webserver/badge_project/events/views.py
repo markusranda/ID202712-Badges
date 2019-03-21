@@ -1,14 +1,17 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import forms
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, QueryDict
 from django.shortcuts import render, render_to_response
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import *
+from django.contrib.auth import get_user
+from django.views.generic.edit import ModelFormMixin
 from users.models import CustomUser
 
 from users.models import Attendees
 from .forms import EventPinForm
+from .forms import CreateEventForm
 from .models import Events
 
 
@@ -49,6 +52,23 @@ class EventPin(LoginRequiredMixin, View):
         return render(request, self.template_name, context)
 
 
+class CreateEvent(LoginRequiredMixin, CreateView):
+    model = Events
+    form_class = CreateEventForm
+    success_url = reverse_lazy('events:events')
+    template_name = 'events/create_event_form.html'
+
+    # Retrieves the form before it's been successfully posted
+    # Adds a new field to the form name "created_by_id"
+    # Saves the value with current user's id
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.created_by_id = self.request.user.id
+        self.object.save()
+
+        return super(ModelFormMixin, self).form_valid(form)
+
+
 class EventProfile(generic.DetailView):
     template_name = 'events/event_profile.html'
     model = Events
@@ -68,6 +88,4 @@ class EventProfile(generic.DetailView):
         # context['event_count'] = object_user.event.all().count()
         # context['date_joined'] = object_user.date_joined
         return context
-
-
 
