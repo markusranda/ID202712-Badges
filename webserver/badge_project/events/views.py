@@ -20,7 +20,7 @@ class EventView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
         current_user = self.request.user
-        context['event_historic_list'] = current_user.event.values_list()
+        context['event_historic_list'] = current_user.event.get_queryset()
         context['event_active_list'] = Events.objects.filter(created_by=current_user)
 
         return context
