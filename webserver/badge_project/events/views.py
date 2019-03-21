@@ -89,3 +89,27 @@ class CreateEvent(LoginRequiredMixin, CreateView):
 
         return super(ModelFormMixin, self).form_valid(form)
 
+
+class EventProfileUser(generic.DetailView):
+    template_name = 'events/event_profile_user.html'
+    model = Events
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        parameter_event_id = self.kwargs['pk']
+        event_object = kwargs.get("object", "")
+
+        context['event_name'] = event_object.name
+        context['event_desc'] = event_object.description
+        context['badge_requests'] = event_object.badge_request.get_queryset()
+        # object_user = CustomUser.objects.filter(username=parameter_username).get()
+        # context['showcase_list'] = object_user.showcase_badge.all()
+        # context['badges_list'] = object_user.badge.all()
+        # context['event_active_list'] = object_user.event.filter(active=1)
+        # context['about_me'] = object_user.about_me
+        #
+        # # User stats
+        # context['badge_count'] = object_user.badge.all().count()
+        # context['event_count'] = object_user.event.all().count()
+        # context['date_joined'] = object_user.date_joined
+        return context
