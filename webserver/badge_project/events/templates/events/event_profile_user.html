@@ -1,2 +1,39 @@
 {% extends 'nav/nav.html' %}
 
+{% block content %}
+
+    <div class="container">
+
+        <div class="row mt-4">
+            <div class="col">
+                <h1 class="text-center text-info">{{ event_name }}</h1>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <p class="text-center">{{ event_desc }}</p>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            {% if badge_requests %}
+
+                <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+                    {% for badge_request in badge_requests %}
+                        <tr>
+                            <td>{{ badge_request.name }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+            {% else %}
+
+                <p>No events are available.</p>
+
+            {% endif %}
+        </div>
+
+    </div>
+
+{% endblock %}
