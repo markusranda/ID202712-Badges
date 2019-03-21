@@ -1,45 +1,35 @@
-from django.\
-    forms import ModelForm, Textarea
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, ButtonHolder, Submit, Row, Column
-from django.contrib.auth import get_user
-import urllib.request
+from crispy_forms.layout import Layout, Field, ButtonHolder, Submit, Row, Column, HTML
+from django.core.exceptions import ObjectDoesNotExist
+from django.forms import ModelForm, NumberInput, Form
+from django import forms
 
 from events.models import Events
 
 
-class CreateEventForm(ModelForm):
+class EventPinForm(Form):
+    event_field = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': "Please enter the event's pin"}))
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Column(
-                'name',
-                'description',
-                Submit('submit', 'Create'),
-                css_class='col-lg-6 mx-auto',
+                'event_field',
+                Submit('submit', 'Enter'),
+                css_class='col-lg-4 mx-auto formTextStyling',
             )
         )
 
-    class Meta:
-        model = Events
-        fields = ('name', 'description')
-        labels = {
-            'name': 'Name',
-            'description': 'Description'
-        }
-        help_texts = {
-            'name': 'Enter a name for the event'
-        }
-        widgets = {
-            'description': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the event here...'})
-        }
+    def clean(self):
+        cd = self.cleaned_data
+        event_pin = cd.get('event_field')
+        try:
+            Events.objects.filter(pin=event_pin).get()
 
+        except ObjectDoesNotExist:
+            self.add_error('event_field', 'Entered pin is not valid!')
 
-    # def hop(self, commit=True):
-    #     new_event = form.save()
-    #     event_profile = CreateEventForm.save(commit=False)
-    #     if event_profile.current_user is None:
-    #         event_profile.current_user = new_event.created_by_id
-    #     event_profile.save()
+        finally:
+            return cd
 
