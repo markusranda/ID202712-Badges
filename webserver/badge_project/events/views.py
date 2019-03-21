@@ -9,6 +9,8 @@ from django.views.generic.edit import ModelFormMixin
 from users.models import CustomUser
 
 from users.models import Attendees
+
+from badges.models import Badges
 from .forms import EventPinForm, CreateEventForm
 from .models import Events
 
@@ -102,6 +104,8 @@ class EventProfileUser(generic.DetailView):
         context['event_name'] = event_object.name
         context['event_desc'] = event_object.description
         context['badge_requests'] = event_object.badge_request.get_queryset()
+        context['requestable_badge'] = Badges.objects.all()
+
         # object_user = CustomUser.objects.filter(username=parameter_username).get()
         # context['showcase_list'] = object_user.showcase_badge.all()
         # context['badges_list'] = object_user.badge.all()

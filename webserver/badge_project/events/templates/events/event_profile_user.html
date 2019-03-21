@@ -32,6 +32,22 @@
                 <p>No events are available.</p>
 
             {% endif %}
+
+            {% if requestable_badge %}
+
+                <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+                    {% for badge in requestable_badge %}
+                        <tr>
+                            <td>{{ badge.name }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+            {% else %}
+
+                <p>No events are available.</p>
+
+            {% endif %}
         </div>
 
     </div>
