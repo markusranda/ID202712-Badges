@@ -103,10 +103,9 @@ class EventProfileUser(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        parameter_event_id = self.kwargs['pk']
         event_object = kwargs.get("object", "")
 
-        '''Obtain all badges from the relavant badge_requests'''
+        '''Obtain all badges from the relevant badge_requests'''
         badge_request_qs = BadgeRequests.objects.filter(event_id=event_object.id)
         badge_requests = []
         for badge_request in badge_request_qs:
@@ -115,19 +114,8 @@ class EventProfileUser(generic.DetailView):
 
         context['event_name'] = event_object.name
         context['event_desc'] = event_object.description
-        context['badge_requests'] = badge_requests
+        context['badge_requests'] = badge_request_qs
         context['requestable_badge'] = Badges.objects.all()
 
-        # object_user = CustomUser.objects.filter(username=parameter_username).get()
-        # context['showcase_list'] = object_user.showcase_badge.all()
-        # context['badges_list'] = object_user.badge.all()
-        # context['event_active_list'] = object_user.event.filter(active=1)
-        # context['about_me'] = object_user.about_me
-        #
-        # # User stats
-        # context['badge_count'] = object_user.badge.all().count()
-        # context['event_count'] = object_user.event.all().count()
-        # context['date_joined'] = object_user.date_joined
         return context
-
 

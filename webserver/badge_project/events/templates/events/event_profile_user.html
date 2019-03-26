@@ -22,7 +22,14 @@
                 <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
                     {% for badge_request in badge_requests %}
                         <tr>
-                            <td>{{ badge_request.name }}</td>
+                            <td>{{ badge_request.badge.name|capfirst }}</td>
+                            <td>{{ badge_request.user.username|capfirst }}</td>
+                            <td>
+                                <form method=""> {% csrf_token %}
+                                    <input type="hidden" name="badge" value={{ badge }}/>
+                                    <input type="submit" value="Approve">
+                                </form>
+                            </td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -41,7 +48,7 @@
                             <td>{{ badge.name }}</td>
                             <td>
                                 <form method="post">
-                                    <input type="hidden" name="badge" value={{badge}}/>
+                                    <input type="hidden" name="badge" value={{ badge }}/>
                                     <input type="submit" value="Request">
                                 </form>
                             </td>
