@@ -16,6 +16,8 @@ class Events(models.Model):
 
     events = models.ManyToManyField('users.CustomUser', through='users.Attendees', related_name='attendingEvents')
 
+    requestable_badges = models.ManyToManyField('badges.Badges', through='EventBadges', related_name='requestable_badges')
+
 
 class BadgeRequests(models.Model):
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='request')
