@@ -79,8 +79,10 @@ class EventProfile(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        event_object = kwargs.get("object", "")
         parameter_event_id = self.kwargs['pk']
         context['people_joined'] = Attendees.objects.filter(event=1).count()
+        context['event_name'] = event_object.name
         # object_user = CustomUser.objects.filter(username=parameter_username).get()
         # context['showcase_list'] = object_user.showcase_badge.all()
         # context['badges_list'] = object_user.badge.all()
