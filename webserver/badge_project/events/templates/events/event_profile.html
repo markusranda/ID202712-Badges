@@ -2,9 +2,15 @@
 
 {% block content %}
 
-    <h1 id="event">Event: [name]!</h1>
 
+    <div class="d-flex justify-content-center">
+    <h1 id="event">Event: {{ event_name }}!</h1>
+    </div>
+
+    <div class="d-flex justify-content-center">
     <h1 id="mod"><u>Moderator view!</u></h1>
+    </div>
+    <div class="d-flex justify-content-center">
                 <div class="col-md-3" id="test">
                 <div class="bg-white text-dark p-4">
                     <h2 class="text-center">Statistics</h2>
@@ -26,4 +32,5 @@
                     </div>
                 </div>
                 </div>
+    </div>
 {% endblock %}
