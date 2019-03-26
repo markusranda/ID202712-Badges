@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import forms
 from django.http import HttpResponseRedirect, QueryDict
 from django.shortcuts import render, render_to_response
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 from django.views.generic import *
 from django.contrib.auth import get_user
@@ -47,13 +47,16 @@ class EventPin(LoginRequiredMixin, View):
         if form.is_valid():
             cd = form.cleaned_data
             event_pin = cd.pop('event_field')
-            current_event = Events.objects.filter(pin=event_pin).get().id
+            current_event_id = Events.objects.filter(pin=event_pin).get().id
             current_user = request.user.id
-            attendee = Attendees(event_id=current_event, user_id=current_user)
+            attendee = Attendees(event_id=current_event_id, user_id=current_user)
             attendee.save()
 
-            return render(request, "events/event_profile.html", context)
+            return HttpResponseRedirect(self.get_success_url(current_event_id))
         return render(request, self.template_name, context)
+
+    def get_success_url(self, pk):
+        return reverse('events:event_profile_user', kwargs={'pk': pk})
 
 
 class CreateEvent(LoginRequiredMixin, CreateView):
