@@ -17,9 +17,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="overflow-x: hidden;">
 
-<nav class="navbar navbar-expand-lg navbar-light m-2">
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top m-0">
     <a class="navbar-brand" href="/"><img class="mr-4" src="{% static 'badges/badger.png' %}" style="max-width: 50px;">The HoneyBadgers</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -47,9 +47,13 @@
     {% endif %}
 </nav>
 
-{% block content %}
+<div style="height:100%;">
 
-{% endblock %}
+    {% block content %}
+
+    {% endblock %}
+
+</div>
 
 
 </body>
