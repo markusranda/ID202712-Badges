@@ -25,7 +25,8 @@
                             <td>{{ badge_request.badge.name|capfirst }}</td>
                             <td>{{ badge_request.user.username|capfirst }}</td>
                             <td>
-                                <form method=""> {% csrf_token %}
+                                <form method="">
+                                    {% csrf_token %}
                                     <input type="hidden" name="badge" value={{ badge }}/>
                                     <input type="submit" value="Approve">
                                 </form>
@@ -48,7 +49,9 @@
                             <td>{{ badge.name }}</td>
                             <td>
                                 <form method="post">
-                                    <input type="hidden" name="badge" value={{ badge }}/>
+                                    {% csrf_token %}
+                                    {{ forms.request_badge }}
+                                    <input type="hidden" name="badge_id" value="{{ badge.id }}">
                                     <input type="submit" value="Request">
                                 </form>
                             </td>
