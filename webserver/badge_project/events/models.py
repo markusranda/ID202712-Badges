@@ -24,6 +24,9 @@ class BadgeRequests(models.Model):
     event = models.ForeignKey('Events', on_delete=models.CASCADE, related_name='request')
     badge = models.ForeignKey('badges.Badges', on_delete=models.CASCADE, related_name='request')
 
+    def __str__(self):
+        return str(self.user) + str(self.event) + str(self.badge)
+
 
 class EventBadges(models.Model):
     event = models.ForeignKey('Events', on_delete=models.CASCADE, related_name='eventbadge')
