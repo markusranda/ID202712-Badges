@@ -59,6 +59,7 @@ class ProfileUpdate(generic.UpdateView, SingleObjectMixin):
     form_class = ChangeProfilePageForm
     template_name = 'users/profile_update_form.html'
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         current_user = self.request.user
@@ -67,10 +68,8 @@ class ProfileUpdate(generic.UpdateView, SingleObjectMixin):
         return context
 
     def get_success_url(self):
-        import pdb; pdb.set_trace()
-        user_id = self.request.user.id
-        username = CustomUser.objects.filter(id=user_id)
-        return reverse_lazy('profile_page', kwargs={'username': username})
+        username = self.kwargs['username']
+        return reverse('profile_page', kwargs={'username': username})
 
     def get_object(self, **kwargs):
         return get_object_or_404(CustomUser, pk=self.request.user.id)
