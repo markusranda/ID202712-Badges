@@ -73,7 +73,7 @@ class CustomUserCreationForm(UserCreationForm):
                 ),
                 'condition',
                 Submit('submit', 'Sign up', css_class="btn btn-primary btn-block"),
-                css_class='col-lg-5 mx-auto',
+                css_class='col-lg-5 mx-auto mb-4 mt-4',
             )
         )
 
