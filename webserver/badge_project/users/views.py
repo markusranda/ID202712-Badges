@@ -76,9 +76,8 @@ class ProfileUpdate(generic.UpdateView, SingleObjectMixin):
         return context
 
     def get_success_url(self):
-        user_id = self.request.user.id
-        username = CustomUser.objects.filter(id=user_id)
-        return reverse_lazy('profile_page', kwargs={'username': username})
+        username = self.kwargs['username']
+        return reverse('profile_page', kwargs={'username': username})
 
     def get_object(self, **kwargs):
         return get_object_or_404(CustomUser, pk=self.request.user.id)

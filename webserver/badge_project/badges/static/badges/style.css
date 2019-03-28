@@ -224,3 +224,12 @@ th {
     font-weight: bold;
     text-align: center;
 }
+
+nav {
+    z-index: 0;
+}
+
+.verticalCentered {
+    margin-top: -2vh;
+    height: 100%;
+}
