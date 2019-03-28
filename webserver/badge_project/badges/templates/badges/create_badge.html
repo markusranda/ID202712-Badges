@@ -6,21 +6,23 @@
 
     <form method="post">
         {% csrf_token %}
-        {{ form }}
-        {% for badge in badge_list %}
-            <table class="table table-borderless">
-                <tr>
-                    <td style="border-top-width: 0; vertical-align: baseline;"><img
-                            src={{ badge.image.url }} width="100px">
-                    </td>
-                    <td style="border-top-width: 0; vertical-align: baseline;">
-                        <label>
-                            <input type="checkbox" name="{{ badge.name }}" value="{{ badge.id }}">
-                        </label>
-                    </td>
-                </tr>
-            </table>
-        {% endfor %}
+        {{ form.as_p }}
+{#        {% for img in img_list %}#}
+{#            <table class="table table-borderless">#}
+{#                <tr>#}
+{#                    <td style="border-top-width: 0; vertical-align: baseline;">#}
+{#                        {% if badge.image.url %}#}
+{#                            <img src="{{ badge.image.url }}" width="100px" alt="">#}
+{#                        {% endif %}#}
+{#                    </td>#}
+{#                    <td style="border-top-width: 0; vertical-align: baseline;">#}
+{#                        <label>#}
+{#                            <input type="checkbox" name="badges" value="{{ badge }}">#}
+{#                        </label>#}
+{#                    </td>#}
+{#                </tr>#}
+{#            </table>#}
+{#        {% endfor %}#}
         <input type="submit" value="Request">
     </form>
 
