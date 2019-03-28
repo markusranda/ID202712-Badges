@@ -1,55 +1,35 @@
 <!-- templates/registration/login.html -->
 {% extends 'nav/nav.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}Login{% endblock %}
 
 {% block content %}
 
-
 {% load static %}
 
+<div class="container">
 
+    <div class="row mt-5 p5 mx-auto">
 
-<html lang="en">
-    <link rel="stylesheet" type="text/css" href="{% static 'badges/style.css' %}">
-<head>
-    <meta charset="UTF-8">
-    <title>Login page</title>
-    <link rel="shortcut icon" href="">
-</head>
-<body>
+        <div class="col-md-1 mx-auto">
+            <div id="badgerWave">
+                <a href="/"><img src="{% static 'badges/hey.gif' %}" style="max-width: 350px;"> </a>
+            </div>
+        </div>
+        <div class="col-md-6 mx-auto">
+                {% crispy form %}
+                <a class="" href="{% url 'password_reset' %}"><strong>Forgot your password?</strong></a>
+                <button class="btn btn-secondary btn-md btn-block mt-2" onclick="location.href='{% url 'signup' %}'">Create new account</button>
+        </div>
+        <div class="col-md-1 mx-auto">
+            <div id="badgerWave1">
+                <a href="/"><img src="{% static 'badges/hey.gif' %}" style="max-width: 350px;"> </a>
+            </div>
+        </div>
+    </div>
 
-
-<div id="badgerWave">
-     <a href="/"><img src="{% static 'badges/hey.gif' %}" style="max-width: 350px;"> </a>
 </div>
-<div id="badgerWave1">
-     <a href="/"><img src="{% static 'badges/hey.gif' %}" style="max-width: 350px;"> </a>
-</div>
-
-
-<h2 class="row justify-content-center" id="loginTitle">Login</h2>
-<div class="row justify-content-center" id="loginContent">
-    <form method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn loginBtn">Login</button>
-    </form>
-</div>
-
-<div class="row justify-content-center" id="underLoginContent1">
-    <form method="get" action="{% url 'password_reset' %}">
-        <a href="{% url 'password_reset' %}"><strong>Forgot your password?</strong></a>
-    </form>
-</div>
-
-<div class="row justify-content-center" id="underLoginContent">
-    <form method="get" action="{% url 'signup' %}">
-            <button type="submit" class="btn signUp">Create new account</button>
-    </form>
-</div>
-
-
 
 {% endblock %}
-</body>
-</html>
