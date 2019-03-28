@@ -107,11 +107,8 @@ class CreateNewBadge:
 
 class LoginView(generic.FormView):
     form_class = LoginForm
+    success_url = reverse_lazy('home')
     template_name = 'registration/login.html'
-
-    def get_success_url(self):
-        username = self.request.user.username
-        return reverse('profile_page', kwargs={'username': username})
 
     def form_valid(self, form):
         username = form.cleaned_data['username']
