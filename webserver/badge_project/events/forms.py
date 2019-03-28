@@ -60,3 +60,16 @@ class EventPinForm(Form):
 
         finally:
             return cd
+
+
+class MultipleForm(forms.Form):
+    action = forms.CharField(max_length=60, widget=forms.HiddenInput())
+
+
+class BadgeRequestForm(MultipleForm):
+    badge_id = forms.IntegerField(widget=forms.HiddenInput())
+
+
+class BadgeApprovalForm(MultipleForm):
+    badge_id_as_str = forms.CharField(max_length=60, widget=forms.HiddenInput())
+

@@ -9,6 +9,10 @@ class CustomUser(AbstractUser):
     about_me = models.CharField(max_length=255)
     email = models.CharField(max_length=254)
 
+    events = models.ManyToManyField('events.Events', through='Attendees', related_name='attendingEvents')
+
+    badge_request = models.ManyToManyField('badges.Badges', through='events.BadgeRequests', related_name='badge_request')
+
     def __str__(self):
         return self.email
 

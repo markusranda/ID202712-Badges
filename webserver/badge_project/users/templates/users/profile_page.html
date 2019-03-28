@@ -117,7 +117,7 @@
 
                                 {% for event in event_active_list %}
                                     <tr>
-                                        <td>{{ event.name }}</td>
+                                        <td><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></td>
                                     </tr>
                                 {% endfor %}
 
@@ -150,10 +150,6 @@
                             {% csrf_token %}
                             {{ form }}
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" value="Update123" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>

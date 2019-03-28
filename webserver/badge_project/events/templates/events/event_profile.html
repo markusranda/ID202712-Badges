@@ -1,11 +1,51 @@
-{% extends "nav/nav.html"%}
+{% extends "nav/nav.html" %}
 
 {% block content %}
 
-    <h1 id="event">Event: [name]!</h1>
 
-    <h1 id="mod"><u>Moderator view!</u></h1>
-                <div class="col-md-3" id="test">
+    <div class="row mt-4">
+
+        <div class="col">
+            <h1 class="text-center text-info">{{ event_name }}</h1>
+        </div>
+
+    </div>
+
+
+    <div class="row mt-4">
+        <div class="col">
+            <p class="text-center">{{ event_desc }}</p>
+        </div>
+    </div>
+
+
+    {% if user_is_moderator %}
+
+    <div class="row mt-4">
+
+        <div class="col-md-2">
+            <button class="btn btn-primary btn-md btn-block" onclick="switchEventProfileContent()">User/Mod Display
+            </button>
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <div id="eventProfileUserContent" style="display: none">
+
+        {% include "events/event_profile_user.html" %}
+
+    </div>
+
+    <div id="eventProfileModContent">
+
+        <div class="d-flex justify-content-center">
+            <h1 id="mod"><u>Moderator view!</u></h1>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="col-md-3" id="test">
                 <div class="bg-white text-dark p-4">
                     <h2 class="text-center">Statistics</h2>
                     <div>
@@ -24,6 +64,32 @@
                             </thread>
                         </table>
                     </div>
+                    <h2 class="text-center">Badge Request</h2>
+                    <div>
+                        <div class="row mt-4">
+                            {% if badge_requests %}
+                                <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+                                    {% for badge_request in badge_requests %}
+                                        <tr>
+                                        <td>{{ badge_request.badge.name|capfirst }}</td>
+                                        <td>{{ badge_request.user.username|capfirst }}</td>
+                                        <td>
+                                        <form method="">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="badge" value={{ badge }}/>
+                                            <input type="submit" value="Approve">
+                                            <input type="submit" value="Reject">
+                                        </form>
+                                        </td>
+                                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No badge requests are available.</p>
+            {% endif %}
+                    </div>
                 </div>
-                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -14,7 +14,7 @@
 
     <div class="row">
 
-    {% if event_historic_list  %}
+    {% if events_historic_list  %}
 
         <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
             <thead class="thead-dark">
@@ -23,9 +23,9 @@
                 </tr>
             </thead>
 
-        {% for event in event_historic_list  %}
+        {% for event in events_historic_list  %}
             <tr>
-                <td>{{ event.name }}</td>
+                <td><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></td>
             </tr>
         {% endfor %}
         </table>
@@ -37,7 +37,7 @@
     {% endif %}
 
 
-    {% if event_active_list %}
+    {% if events_created_list %}
 
         <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
             <thead class="thead-dark">
@@ -46,9 +46,9 @@
                 </tr>
             </thead>
 
-        {% for event in event_active_list  %}
+        {% for event in events_created_list  %}
             <tr>
-                <td>{{ event.name }}</td>
+                <td><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></td>
             </tr>
         {% endfor %}
 
