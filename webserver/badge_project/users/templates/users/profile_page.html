@@ -117,7 +117,7 @@
 
                                 {% for event in event_active_list %}
                                     <tr>
-                                        <td>{{ event.name }}</td>
+                                        <td><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></td>
                                     </tr>
                                 {% endfor %}
 
