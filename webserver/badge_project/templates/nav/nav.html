@@ -10,58 +10,50 @@
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="">
-
     <meta name="description" content="School Project for class ID202712 NTNU Aalesund Bachelor of Computer Engineering.
                 Badge collection similar to achievements in games.">
     <meta name="author" content="Espen Vad, Pernille Skytterholm, Jahn-Willy Nøstdahl and Markus Randa.">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="overflow-x: hidden;">
 
-<nav class="navbar navbar-expand-md sticky-top navbar-light" style="height: 90px" style="margin-top: 18px"> <!--sticky top follows the top of browser-->
-
-    <section>
-        <a class="navbar-brand" href="/"><img src="{% static 'badges/badger.png' %}" style="max-width: 50px;"> </a>
-        <span class="navbar-brand"><h3>The HoneyBadgers</h3></span>
-    </section>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top m-0">
+    <a class="navbar-brand" href="/"><img class="mr-4" src="{% static 'badges/badger.png' %}" style="max-width: 50px;">The HoneyBadgers</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     {% if user.is_authenticated %}
-    <div class="collapse navbar-collapse" id="navbarToggler">
-        <div class="container-fluid" style="margin:5px;">
-            <ul class="navbar-nav bd-navbar-nav  flex-row" style="width: 100%">
-                <li class="nav-item active nav-barlink">
-                    <a class="nav-link" href="/events"><h4>Events</h4></a>
-                </li>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/events">Events <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
 
-                <li class="nav-item active nav-barlink" style="margin-left: auto;">
-                    <a class="nav-link" style="margin-top:5px;" <span style="font-size: 5px" href="{% url 'logout' %}">Logout</span></a>
-                </li>
-
-                <li class="nav-link active nav-barlink">
-                    <a class="nav-link" href="{% url 'profile_page' user.username %}"><span
-                            class="badge badge-pill badge-info" style="font-size: 20px">{{user.username}}</span></a>
-                </li>
-            </ul>
-        </div>
+        <ul class="navbar-nav my-2 my-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-outline-primary my-2 my-sm-0 ml-4" onclick="location.href='{% url 'profile_page' user.username %}'">{{user.username}}</button>
+            </li>
+        </ul>
     </div>
     {% else %}
 
     {% endif %}
-
 </nav>
 
+<div style="height:100%;">
 
-{% block content %}
+    {% block content %}
 
-{% endblock %}
+    {% endblock %}
+
+</div>
 
 
 </body>
