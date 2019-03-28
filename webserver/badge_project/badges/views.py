@@ -12,3 +12,10 @@ class BadgeCreate(LoginRequiredMixin, CreateView):
     form_class = CreateBadgeForm
     success_url = reverse_lazy('home')
     template_name = 'badges/create_badge.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+
+        context['badge_list'] = Badges.objects.all()
+
+        return context
