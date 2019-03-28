@@ -53,7 +53,7 @@ class EventPin(LoginRequiredMixin, View):
         return render(request, self.template_name, context)
 
     def get_success_url(self, pk):
-        return reverse('events:event_profile_user', kwargs={'pk': pk})
+        return reverse('events:event_profile', kwargs={'pk': pk})
 
 
 class CreateEvent(LoginRequiredMixin, CreateView):
