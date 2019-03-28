@@ -16,6 +16,8 @@ from .multiforms import MultiFormsView
 from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm
 from .models import Events, BadgeRequests
 
+from django.db import models
+
 
 class EventView(LoginRequiredMixin, generic.ListView):
     model = Events
@@ -102,6 +104,7 @@ class EventProfile(MultiFormsView):
         context['event_desc'] = event_object.description
         context['badge_requests'] = badge_request_qs
         context['requestable_badge'] = event_object.requestable_badges.all()
+        context['event_pin'] = event_object.pin
 
         return context
 

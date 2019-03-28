@@ -42,8 +42,10 @@
     <div id="eventProfileModContent">
 
         <div class="d-flex justify-content-center">
-            <h1 id="mod"><u>Moderator view!</u></h1>
+            <h1 id="mod"><u>Moderator view!</u>
+            <p>Event pin: {{ event_pin }}</p></h1>
         </div>
+
         <div class="d-flex justify-content-center">
             <div class="col-md-3" id="test">
                 <div class="bg-white text-dark p-4">
@@ -81,15 +83,17 @@
                                             <input type="submit" value="Reject">
                                         </form>
                                         </td>
-                                        </tr>
+                                    </tr>
                     {% endfor %}
                 </table>
             {% else %}
-                <p>No badge requests are available.</p>
+                <p>There are none requests for badges!</p>
             {% endif %}
                     </div>
                 </div>
             </div>
+            <h2 class="text-center">Remove badges from user(s)</h2>
+
         </div>
     </div>
 {% endblock %}
