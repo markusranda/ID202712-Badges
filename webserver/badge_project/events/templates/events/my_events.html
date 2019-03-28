@@ -25,7 +25,7 @@
 
         {% for event in events_historic_list  %}
             <tr>
-                <td><a href="{% url 'events:event_profile_user' event.id %}">{{ event.name }}</a></td>
+                <td><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></td>
             </tr>
         {% endfor %}
         </table>
@@ -48,7 +48,7 @@
 
         {% for event in events_created_list  %}
             <tr>
-                <td><a href="{% url 'events:event_profile_user' event.id %}">{{ event.name }}</a></td>
+                <td><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></td>
             </tr>
         {% endfor %}
 
