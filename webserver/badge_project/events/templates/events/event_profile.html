@@ -3,11 +3,24 @@
 {% block content %}
 
 
-    <div class="d-flex justify-content-center">
-        <h1 id="event">Event: {{ event_name }}!</h1>
+    <div class="row mt-4">
+
+        <div class="col">
+            <h1 class="text-center text-info">{{ event_name }}</h1>
+        </div>
+
     </div>
 
-    <button onclick="switchEventProfileContent()">Switch content</button>
+
+    <div class="row mt-4">
+
+        <div class="col-md-2">
+            <button class="btn btn-primary btn-md btn-block" onclick="switchEventProfileContent()">User/Mod Display
+            </button>
+        </div>
+
+    </div>
+
 
     <div id="eventProfileUserContent" style="display: none">
 
