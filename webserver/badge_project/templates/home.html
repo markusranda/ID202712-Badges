@@ -8,6 +8,7 @@
 
         <h1 class="row justify-content-center" id="welcomeMsg">Welcome to the site {{ user.username|capfirst }}</h1>
         <a style="text-align: center; display: block;" href="{% url 'events:event_pin' %}">Enter a new event</a>
+        <a style="text-align: center; display: block;" href="{% url 'badges:create_new_badge' %}">Create a new badge</a>
     {% else %}
 
 <head>
