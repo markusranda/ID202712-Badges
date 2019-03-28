@@ -31,7 +31,7 @@ class CreateBadge(LoginRequiredMixin, CreateView):
     model = Badges
     form_class = CreateBadgeForm
     success_url = reverse_lazy('home')
-    template_name = 'create_badge.html'
+    template_name = 'badges/create_badge.html'
 
 
 class ProfilePage(generic.ListView):
