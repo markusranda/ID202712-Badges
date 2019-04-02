@@ -4,8 +4,6 @@
 
     <div class="container">
 
-    {% if user.is_authenticated %}
-
         <div class="row mt-4">
             <div class="col-md-3">
                 <h2 class="text-left text-info">{{ user.username|capfirst}}</h2>
@@ -19,23 +17,6 @@
                     profile</a>
             </div>
         </div>
-
-    {% else %}
-
-        <div class="row mt-4">
-            <div class="col-md-3">
-                <h2 class="text-left text-info">{{ user.username|capfirst}}</h2>
-            </div>
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-3">
-            </div>
-        </div>
-
-    {% endif %}
-
 
         <div class="row mt-4">
             <div class="col-md-9 ">
