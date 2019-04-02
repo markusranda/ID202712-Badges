@@ -1,7 +1,6 @@
-{% for name, value in widget.attrs.items() %}
-    {% if value is not sameas False %}
-        {{ name }}
-        {% if value is not sameas True %}="{{ value }}"
+{% for name, value in widget.attrs.items %}
+    {% if value is not False %} {{ name }}
+        {% if value is not True %}="{{ value }}"
         {% endif %}
     {% endif %}
 {% endfor %}
