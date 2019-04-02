@@ -16,6 +16,7 @@ from badges.models import Badges
 from .multiforms import MultiFormsView
 from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm
 from .models import Events, BadgeRequests, EventBadges
+from .models import random
 
 
 class EventView(LoginRequiredMixin, generic.ListView):
@@ -34,12 +35,12 @@ class EventView(LoginRequiredMixin, generic.ListView):
 class EventPin(LoginRequiredMixin, View):
     template_name = "events/event_pin.html"
 
-    def get(self, request,*args, **kwargs):
+    def get(self, request, *args, **kwargs):
         form = EventPinForm()
         context = {"form": form}
         return render(request, self.template_name, context)
 
-    def post(self, request,*args, **kwargs):
+    def post(self, request, *args, **kwargs):
         form = EventPinForm(request.POST)
         context = {"form": form}
         if form.is_valid():
@@ -73,10 +74,14 @@ class CreateEvent(LoginRequiredMixin, CreateView):
             cd = form.cleaned_data
             name = cd.pop('name')
             description = cd.pop('description')
-            badge_id = cd.pop('badge_id')
             user_id = request.user.id
-            event = Events.objects.create(name=name, description=description, active=1, pin=12344321, created_by_id=user_id)
-            EventBadges.objects.create(badge_id=badge_id, event_id=event.id)
+
+            event = Events.objects.create(name=name, description=description, active=1,
+                                          created_by_id=user_id, pin=random())
+
+            for badge in cd.pop('requestable_badges'):
+                EventBadges.objects.create(badge_id=badge.id, event_id=event.id)
+
             return HttpResponseRedirect(self.get_success_url(event.id))
 
         return render(request, self.template_name, context)
@@ -105,7 +110,7 @@ class EventProfile(MultiFormsView):
             badge_requests.append(badge)
 
         user_is_moderator = False
-        if self.request.user.id == event_object.created_by_id :
+        if self.request.user.id == event_object.created_by_id:
             user_is_moderator = True
 
         context['user_is_moderator'] = user_is_moderator
@@ -134,6 +139,3 @@ class EventProfile(MultiFormsView):
     def get_success_url(self, **kwargs):
         pk = self.kwargs['pk']
         return reverse('events:event_profile', kwargs={'pk': pk})
-
-
-
