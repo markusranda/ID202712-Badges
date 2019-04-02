@@ -3,15 +3,17 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+    <div class="container mt-5">
+        {% crispy form %}
 
-{% crispy form %}
+        <form method="get" action="{% url 'delete_profile' user.id %}">
+            <div class="row justify-content-end">
+                <div class="col-lg-4 mr-3 ml-3">
+                    <button type="submit" class="btn btn-danger">Delete my account</button>
+                </div>
+            </div>
+        </form>
 
-<form method="get" action="{% url 'delete_profile' user.id %}">
-    <div class="row justify-content-end">
-        <div class="col-4">
-            <button type="submit" class="btn btn-danger">Delete my account</button>
-        </div>
     </div>
-</form>
 
 {% endblock %}

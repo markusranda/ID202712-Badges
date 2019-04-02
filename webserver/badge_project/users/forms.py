@@ -23,7 +23,7 @@ class ChangeProfilePageForm(ModelForm):
                 'about_me',
                 'showcase_badge',
                 Submit('submit', 'Update'),
-                css_class='col-lg-6 mx-auto',
+                css_class='col-lg-8 mx-auto',
             )
         )
 
