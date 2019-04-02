@@ -1,10 +1,12 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, ButtonHolder, Submit, Row, Column, HTML
 from django.core.exceptions import ObjectDoesNotExist
-from django.forms import ModelForm, NumberInput, Form, Textarea
+from django.forms import ModelForm, NumberInput, Form, Textarea, ModelChoiceField
 from django import forms
 
 from events.models import Events
+
+from badges.models import Badges
 
 
 class CreateEventForm(ModelForm):
@@ -15,6 +17,7 @@ class CreateEventForm(ModelForm):
             Column(
                 'name',
                 'description',
+                'eventbadges',
                 Submit('submit', 'Create'),
                 css_class='col-lg-6 mx-auto',
             )
@@ -22,17 +25,35 @@ class CreateEventForm(ModelForm):
 
     class Meta:
         model = Events
-        fields = ('name', 'description')
+        fields = ('name', 'description', 'eventbadges')
         labels = {
             'name': 'Name',
-            'description': 'Description'
+            'description': 'Description',
+            'eventbadges': 'Add badges'
         }
         help_texts = {
             'name': 'Enter a name for the event'
         }
         widgets = {
-            'description': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the event here...'})
+            'description': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the event here...'}),
+            #'eventbadges': ModelChoiceField(queryset=)
         }
+
+    def clean(self):
+        cd = super().clean()
+        eventbadge = cd.get('eventbadges')
+        badge_object = eventbadge.get()
+        badge_id = badge_object.id
+        try:
+            Badges.objects.filter(id=badge_id).get()
+
+        except ObjectDoesNotExist:
+            self.add_error('badge_id', 'The badge does not exist!')
+
+        finally:
+            cd['badge_id'] = badge_id
+            return cd
+
 
 
 class EventPinForm(Form):
