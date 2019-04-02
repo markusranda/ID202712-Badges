@@ -1,8 +1,7 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Column, Layout, Submit, HTML
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from django.forms import ModelForm, Textarea, CheckboxSelectMultiple, EmailField, BooleanField
-from django.forms import ModelForm, Textarea, CheckboxSelectMultiple
 from django.urls import reverse_lazy
 
 from .models import CustomUser
@@ -82,3 +81,27 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'email')
+
+
+class LoginForm(AuthenticationForm):
+
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+
+        for fieldname in ['username', 'password']:
+            self.fields[fieldname].required = True
+
+        self.helper.layout = Layout(
+            Column(
+                HTML(
+                    """
+                    <h2>Login</h2>
+                    """
+                ),
+                'username',
+                'password',
+                Submit('login', 'Login', css_class="btn btn-primary btn-block"),
+                #css_class='col-lg-5 mx-auto mb-4 mt-4',
+            )
+        )
