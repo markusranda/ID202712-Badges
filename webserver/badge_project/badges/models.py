@@ -9,4 +9,7 @@ class Badges(models.Model):
 
 class Images(models.Model):
     name = models.CharField(max_length=50)
-    url = models.CharField(max_length=255)
+    url = models.ImageField('/badges/', blank=True)
+
+    def __str__(self):
+        return str(self.url)

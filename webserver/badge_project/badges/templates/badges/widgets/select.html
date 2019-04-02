@@ -1,14 +1,13 @@
-<select name="{{ widget.name }}"
-        {% include "badges/widgets/attrs.html" %}>
-    {% for group_name, group_choices, group_index in widget.optgroups %}
-        {% if group_name %}
-            <optgroup label="{{ group_name }}">
-        {% endif %}
-    {% for widget in group_choices %}
-        {% include widget.template_name %}
-    {% endfor %}
-    {% if group_name %}
-        </optgroup>
-    {% endif %}
-    {% endfor %}
-</select>
+
+{% for test_object in form_class.radio %}
+
+{% endfor %}
+
+{% for object in widget.optgroups %}
+
+    <label>
+        <input type="checkbox" value="{{ object }}">
+        <img src="{{ object.1.0.value.2 }}" alt="Very beautiful picture" width="100">
+    </label>
+
+{% endfor %}
