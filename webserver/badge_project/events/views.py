@@ -9,6 +9,8 @@ from django.views.generic.detail import SingleObjectMixin, BaseDetailView
 from django.views.generic.edit import ModelFormMixin, FormMixin
 
 from users.models import Attendees
+from users.models import CustomUser
+from users.models import UserBadges
 
 from badges.models import Badges
 
@@ -95,7 +97,7 @@ class EventProfile(MultiFormsView):
             badge_requests.append(badge)
 
         user_is_moderator = False
-        if self.request.user.id == event_object.created_by_id :
+        if self.request.user.id == event_object.created_by_id:
             user_is_moderator = True
 
         context['user_is_moderator'] = user_is_moderator
@@ -105,12 +107,15 @@ class EventProfile(MultiFormsView):
         context['badge_requests'] = badge_request_qs
         context['requestable_badge'] = event_object.requestable_badges.all()
         context['event_pin'] = event_object.pin
+        context['user_event_badges'] = UserBadges.objects.filter(event_id=event_object.id)
+
 
         return context
 
     def request_badge_form_valid(self, form):
         badge_id = form.cleaned_data.get('badge_id')
         event_id = self.kwargs['pk']
+
         b = Badges.objects.all().get(id=badge_id)
         e = Events.objects.all().get(id=event_id)
         u = self.request.user

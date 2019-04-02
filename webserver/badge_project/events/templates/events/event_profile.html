@@ -93,7 +93,27 @@
                 </div>
             </div>
             <h2 class="text-center">Remove badges from user(s)</h2>
-
+                    <div>
+                        <div class="row mt-4">
+                            {% if user_event_badges %}
+                                <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+                                    {% for user_event_badge in user_event_badges %}
+                                        <tr>
+                                        <td>{{ user_event_badge.badge.name }}</td>
+                                        <td>{{ user_event_badge.user.username }}</td>
+                                        <td>
+                                            <form method="">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="badge" value={{ badge }}/>
+                                                <input type="submit" value="Remove">
+                                            </form>
+                                        </td>
+                                        </tr>
+                                {% endfor %}
+                </table>
+            {% else %}
+                <p>There are none removeable badges!</p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
