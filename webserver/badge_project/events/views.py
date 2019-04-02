@@ -7,14 +7,16 @@ from django.views import generic
 from django.views.generic import *
 from django.views.generic.detail import SingleObjectMixin, BaseDetailView
 from django.views.generic.edit import ModelFormMixin, FormMixin
+from django.contrib.auth import get_user
+from django.views.generic.edit import ModelFormMixin
 
+from users.models import CustomUser
 from users.models import Attendees
-
 from badges.models import Badges
-
 from .multiforms import MultiFormsView
 from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm
-from .models import Events, BadgeRequests
+from .models import Events, BadgeRequests, EventBadges
+from .models import random
 
 
 class EventView(LoginRequiredMixin, generic.ListView):
@@ -33,12 +35,12 @@ class EventView(LoginRequiredMixin, generic.ListView):
 class EventPin(LoginRequiredMixin, View):
     template_name = "events/event_pin.html"
 
-    def get(self, request,*args, **kwargs):
+    def get(self, request, *args, **kwargs):
         form = EventPinForm()
         context = {"form": form}
         return render(request, self.template_name, context)
 
-    def post(self, request,*args, **kwargs):
+    def post(self, request, *args, **kwargs):
         form = EventPinForm(request.POST)
         context = {"form": form}
         if form.is_valid():
@@ -65,12 +67,27 @@ class CreateEvent(LoginRequiredMixin, CreateView):
     # Retrieves the form before it's been successfully posted
     # Adds a new field to the form name "created_by_id"
     # Saves the value with current user's id
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.created_by_id = self.request.user.id
-        self.object.save()
+    def post(self, request, *args, **kwargs):
+        form = CreateEventForm(request.POST)
+        context = {"form": form}
+        if form.is_valid():
+            cd = form.cleaned_data
+            name = cd.pop('name')
+            description = cd.pop('description')
+            user_id = request.user.id
 
-        return super(ModelFormMixin, self).form_valid(form)
+            event = Events.objects.create(name=name, description=description, active=1,
+                                          created_by_id=user_id, pin=random())
+
+            for badge in cd.pop('requestable_badges'):
+                EventBadges.objects.create(badge_id=badge.id, event_id=event.id)
+
+            return HttpResponseRedirect(self.get_success_url(event.id))
+
+        return render(request, self.template_name, context)
+
+    def get_success_url(self, pk):
+        return reverse('events:event_profile', kwargs={'pk': pk})
 
 
 class EventProfile(MultiFormsView):
@@ -93,7 +110,7 @@ class EventProfile(MultiFormsView):
             badge_requests.append(badge)
 
         user_is_moderator = False
-        if self.request.user.id == event_object.created_by_id :
+        if self.request.user.id == event_object.created_by_id:
             user_is_moderator = True
 
         context['user_is_moderator'] = user_is_moderator
@@ -122,6 +139,3 @@ class EventProfile(MultiFormsView):
     def get_success_url(self, **kwargs):
         pk = self.kwargs['pk']
         return reverse('events:event_profile', kwargs={'pk': pk})
-
-
-
