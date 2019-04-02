@@ -4,32 +4,47 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
 
-        <h1 class="row justify-content-center" id="welcomeMsg">Welcome to the site {{ user.username|capfirst }}</h1>
-        <a style="text-align: center; display: block;" href="{% url 'events:event_pin' %}">Enter a new event</a>
-    {% else %}
+        {% if user.is_authenticated %}
+            <div class="container-fluid fill bg-warning text-dark verticalCentered" >
+                <div class="row m-0 h-100">
+                    <div class="col-md-6 m-4 mx-auto my-auto">
+                        <div class="row mt-4 mb-2 justify-content-center">
+                            <h1 class="text-light font-italic">Welcome to the site {{ user.username|capfirst }}</h1>
+                        </div>
+                        <div class="row mt-4 mb-2 justify-content-center">
+                            <a href="{% url 'events:event_pin' %}"><h4 class="text-muted font-weight-light u">Enter a new event</h4></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Front page</title>
-    <link rel="shortcut icon" href="">
-</head>
-<body>
+        {% else %}
 
+            <div class="container-fluid bg-info" style="height: 100%;">
+                <div class="row h-100">
+                    <div class="col-md-4 mx-auto my-auto">
+                        <div class="row mb-2 justify-content-center">
+                            <h1 class="text-light">You are not logged in</h1>
+                        </div>
+                        <div class="row mt-4 mb-2 justify-content-center">
+                            <div class="col-lg-9">
+                                <button class="btn btn-lg btn-light btn-block" onclick="location.href='{% url 'login' %}'">Go to login
+                                page
+                            </button>
+                            </div>
+                        </div>
 
-<h2 class="row justify-content-center" id="loginTitle">You are not logged in</h2>
-<div class="row justify-content-center" id="loginContent">
-    <form method="get" action="{% url 'login' %}">
-            <button type="submit" class="btn loginBtn">Go to login page</button>
-    </form>
-</div>
+                        <div class="row mt-2 mb-2 justify-content-center">
+                            <div class="col-lg-9">
+                            <button class="btn btn-lg btn-outline-light btn-block" onclick="location.href='{% url 'signup' %}'">Create new
+                            account
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
 
-
-<div class="row justify-content-center" id="underLoginContent">
-    <form method="get" action="{% url 'signup' %}">
-            <button type="submit" class="btn signUp">Create new account</button>
-    </form>
-</div>
-{% endif %}
 {% endblock %}

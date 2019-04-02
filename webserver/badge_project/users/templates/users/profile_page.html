@@ -6,7 +6,7 @@
 
         <div class="row mt-4">
             <div class="col-md-3">
-                <h2 class="text-left text-info">{{ user.username }}</h2>
+                <h2 class="text-left text-info">{{ user.username|capfirst}}</h2>
             </div>
             <div class="col-md-3">
             </div>
@@ -91,15 +91,6 @@
                                 <tr>
                                     <th scope="col"> Date Joined: {{ date_joined }}</th>
                                 </tr>
-                                <tr>
-                                    <th>
-                                    <!--  share button -->
-                                        <div class="d-flex justify-content-center">
-                                    <div class="fb-share-button" data-href="http://192.168.50.50:8080/users/Master_Badger/profile_page/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F192.168.50.50%3A8080%2Fusers%2FMaster_Badger%2Fprofile_page%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div
-                                        </div>
-                                    <!-- share button -->
-                                    </th>
-                                </tr>
                             </thread>
                         </table>
                     </div>
@@ -113,14 +104,12 @@
                                 <tr>
                                     <th scope="col">Event Name</th>
                                 </tr>
-                                </thead>
-
                                 {% for event in event_active_list %}
                                     <tr>
-                                        <td><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></td>
+                                        <th><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></th>
                                     </tr>
                                 {% endfor %}
-
+                                </thead>
                             </table>
 
                         {% else %}
@@ -129,7 +118,19 @@
 
                         {% endif %}
                     </div>
+                <div>
+                        <!--  share button -->
+                        <div class="d-flex justify-content-right mb-2 mt-2">
+                            <div class="fb-share-button"
+                                 data-href="http://192.168.50.50:8080/users/Master_Badger/profile_page/"
+                                 data-layout="button" data-size="small"><a target="_blank"
+                                                                           href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F192.168.50.50%3A8080%2Fusers%2FMaster_Badger%2Fprofile_page%2F&amp;src=sdkpreparse"
+                                                                           class="fb-xfbml-parse-ignore">Share</a></div
+                        </div>
+                        <!-- share button -->
+                    </div>
                 </div>
+
             </div>
         </div>
 
