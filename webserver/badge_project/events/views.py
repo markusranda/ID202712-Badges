@@ -12,11 +12,16 @@ from django.views.generic.edit import ModelFormMixin
 
 from users.models import CustomUser
 from users.models import Attendees
+from users.models import CustomUser
+from users.models import UserBadges
+
 from badges.models import Badges
 from .multiforms import MultiFormsView
 from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm
 from .models import Events, BadgeRequests, EventBadges
 from .models import random
+
+from django.db import models
 
 
 class EventView(LoginRequiredMixin, generic.ListView):
@@ -119,12 +124,16 @@ class EventProfile(MultiFormsView):
         context['event_desc'] = event_object.description
         context['badge_requests'] = badge_request_qs
         context['requestable_badge'] = event_object.requestable_badges.all()
+        context['event_pin'] = event_object.pin
+        context['user_event_badges'] = UserBadges.objects.filter(event_id=event_object.id)
+
 
         return context
 
     def request_badge_form_valid(self, form):
         badge_id = form.cleaned_data.get('badge_id')
         event_id = self.kwargs['pk']
+
         b = Badges.objects.all().get(id=badge_id)
         e = Events.objects.all().get(id=event_id)
         u = self.request.user
