@@ -1,5 +1,7 @@
 import os
 
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Column, Submit, Div, Field
 from django import forms
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -7,17 +9,13 @@ from django.forms import ModelForm, Textarea, Form, CheckboxSelectMultiple, Sele
 
 from badges.models import Images
 
+from .models import Badges
 
-class CreateBadgeForm(Form):
-    name = forms.CharField(max_length=50)
-    description = forms.CharField(widget=forms.Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the badge here...'}))
-    image_radio_field = forms.ModelChoiceField(queryset=Images.objects.values_list(), widget=forms.RadioSelect())
-    RadioSelect.template_name = 'badges/widgets/radioList.html'
 
+class CreateBadgeForm(ModelForm):
     def clean(self):
         cd = super().clean()
-        image_object = cd.get('image_radio_field')
-        image_id = image_object[0]
+        image_id = self.data['image']
         try:
             Images.objects.filter(id=image_id).get()
 
@@ -27,3 +25,36 @@ class CreateBadgeForm(Form):
         finally:
             cd['image_id'] = image_id
             return cd
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Column(
+                'name',
+                'description',
+                Field(
+                    'image',
+                    template='badges/widgets/radioList.html',
+                ),
+                Submit(
+                    'submit', 'Create'
+                ),
+                css_class='col-lg-6 mx-auto',
+            )
+        )
+
+    class Meta:
+        model = Badges
+        fields = ('name', 'description', 'image')
+        labels = {
+            'name': 'Name',
+            'description': 'Description',
+        }
+        help_texts = {
+            'name': 'Enter a name for the badge'
+        }
+        widgets = {
+            'description': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the badge here...'}),
+            'image': RadioSelect(),
+        }
