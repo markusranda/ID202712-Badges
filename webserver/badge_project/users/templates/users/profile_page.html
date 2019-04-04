@@ -97,26 +97,27 @@
 
                     <div class="bg-white text-dark pt-2">
                         <h2>Active events</h2>
-                        {% if event_active_list %}
-
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Event Name</th>
-                                </tr>
-                                {% for event in event_active_list %}
+                        <div class="table-responsive">
+                                {% if event_active_list %}
+                                <table class="table table-bordered">
+                                    <thead>
                                     <tr>
-                                        <th><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></th>
+                                        <th scope="col">Event Name</th>
                                     </tr>
-                                {% endfor %}
-                                </thead>
-                            </table>
+                                    {% for event in event_active_list %}
+                                        <tr>
+                                            <th><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></th>
+                                        </tr>
+                                    {% endfor %}
+                                    </thead>
+                                </table>
 
-                        {% else %}
+                            {% else %}
 
-                            <p>No events are available.</p>
+                                <p>No events are available.</p>
 
-                        {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
                 <div>
                         <!--  share button -->
