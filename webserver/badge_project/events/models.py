@@ -13,10 +13,7 @@ class Events(models.Model):
     active = models.BooleanField(default=1)
     pin = models.IntegerField(unique=True, default=random())
     created_by = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='createdBy')
-    eventbadges = models.ManyToManyField('badges.Badges', related_name='is_event_badge', blank=True)
-
     events = models.ManyToManyField('users.CustomUser', through='users.Attendees', related_name='attendingEvents')
-
     requestable_badges = models.ManyToManyField('badges.Badges', through='EventBadges',
                                                 related_name='requestable_badges')
 
