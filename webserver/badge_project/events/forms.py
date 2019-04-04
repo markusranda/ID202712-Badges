@@ -1,10 +1,12 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, ButtonHolder, Submit, Row, Column, HTML
 from django.core.exceptions import ObjectDoesNotExist
-from django.forms import ModelForm, NumberInput, Form, Textarea
+from django.forms import ModelForm, NumberInput, Form, Textarea, ModelChoiceField, CheckboxSelectMultiple
 from django import forms
 
 from events.models import Events
+
+from badges.models import Badges
 
 
 class CreateEventForm(ModelForm):
@@ -15,6 +17,7 @@ class CreateEventForm(ModelForm):
             Column(
                 'name',
                 'description',
+                'requestable_badges',
                 Submit('submit', 'Create'),
                 css_class='col-lg-6 mx-auto',
             )
@@ -22,16 +25,18 @@ class CreateEventForm(ModelForm):
 
     class Meta:
         model = Events
-        fields = ('name', 'description')
+        fields = ('name', 'description', 'requestable_badges')
         labels = {
             'name': 'Name',
-            'description': 'Description'
+            'description': 'Description',
+            'requestable_badges': 'Add badges'
         }
         help_texts = {
             'name': 'Enter a name for the event'
         }
         widgets = {
-            'description': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the event here...'})
+            'description': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the event here...'}),
+            'requestable_badges': CheckboxSelectMultiple()
         }
 
 

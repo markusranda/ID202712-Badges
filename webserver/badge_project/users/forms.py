@@ -2,7 +2,6 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Column, Layout, Submit, HTML
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from django.forms import ModelForm, Textarea, CheckboxSelectMultiple, EmailField, BooleanField
-from django.forms import ModelForm, Textarea, CheckboxSelectMultiple
 from django.urls import reverse_lazy
 
 from .models import CustomUser
