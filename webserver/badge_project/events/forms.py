@@ -15,11 +15,16 @@ class CreateEventForm(ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Column(
+                HTML(
+                    """
+                    <h2>Create event</h2>
+                    """
+                ),
                 'name',
                 'description',
                 'requestable_badges',
                 Submit('submit', 'Create'),
-                css_class='col-lg-6 mx-auto',
+                css_class='col-lg-6 mt-4 mx-auto',
             )
         )
 

@@ -19,6 +19,11 @@ class ChangeProfilePageForm(ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Column(
+                HTML(
+                    """
+                    <h2>Edit profile</h2>
+                    """
+                ),
                 'about_me',
                 'showcase_badge',
                 Submit('submit', 'Update'),
