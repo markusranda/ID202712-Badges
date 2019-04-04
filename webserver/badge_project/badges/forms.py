@@ -1,7 +1,7 @@
 import os
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Column, Submit, Div, Field
+from crispy_forms.layout import Layout, Column, Submit, Div, Field, HTML
 from django import forms
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -31,7 +31,9 @@ class CreateBadgeForm(ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Column(
-                'name',
+                Field(
+                    'name', placeholder='Enter a badge name',
+                ),
                 'description',
                 Field(
                     'image',
@@ -40,7 +42,7 @@ class CreateBadgeForm(ModelForm):
                 Submit(
                     'submit', 'Create'
                 ),
-                css_class='col-lg-6 mx-auto',
+                css_class='col-lg-6 mx-auto text-white',
             )
         )
 
@@ -50,9 +52,6 @@ class CreateBadgeForm(ModelForm):
         labels = {
             'name': 'Name',
             'description': 'Description',
-        }
-        help_texts = {
-            'name': 'Enter a name for the badge'
         }
         widgets = {
             'description': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the badge here...'}),
