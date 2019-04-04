@@ -19,10 +19,15 @@ class ChangeProfilePageForm(ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Column(
+                HTML(
+                    """
+                    <h2>Edit profile</h2>
+                    """
+                ),
                 'about_me',
                 'showcase_badge',
                 Submit('submit', 'Update'),
-                css_class='col-lg-6 mx-auto',
+                css_class='col-lg-8 mx-auto',
             )
         )
 
