@@ -2,6 +2,41 @@
 
 {% block content %}
 
+    <div class="container-fluid fill h-100 bg-info">
+            <div class="row mx-auto mb-6">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4 mt-4 mb-4">
+                    <h1 class="text-white text-center font-weight-bold">{{ event_name }}</h1>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+            <div class="row mx-auto mt-4 mb-5 pb-5">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h2 class="text-white text-center font-weight-bold">Event pin: </h2>
+                    <h2 class="text-white text-center font-weight-light">{{ event_pin }}</h2>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+            <div class="row mx-auto mt-5 mb-0 pb-0">
+                <div class="col-md-4">
+                        <h2 class="text-white text-center font-weight-bold">Badges available: </h2>
+                        <h2 class="text-white text-center font-weight-light">{{ requestable_badge.count }}</h2>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="text-white text-center font-weight-bold">Event description: </h2>
+                    <h4 class="text-white text-center font-weight-light">{{ event_desc }}</h4>
+                </div>
+                <div class="col-md-4 mb-0">
+                        <h2 class="text-white text-center font-weight-bold">Joined event: </h2>
+                        <h2 class="text-white text-center font-weight-light">{{ people_joined }}</h2>
+                </div>
+        </div>
+</div>
 
     <div class="row mt-4">
 
@@ -116,4 +151,6 @@
             {% endif %}
         </div>
     </div>
+
+
 {% endblock %}
