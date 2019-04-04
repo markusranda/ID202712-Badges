@@ -9,5 +9,5 @@ urlpatterns = [
     path('event_pin/', views.EventPin.as_view(), name='event_pin'),
     path('<int:pk>/event_profile/', views.EventProfile.as_view(), name='event_profile'),
     path('create_event/', views.CreateEvent.as_view(), name='create_event'),
-    path('end_event/', views.endEvent, name='end_event'),
+    path('<int:pin>event_end/', views.endEvent, name='end_event'),
 ]

@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import forms
-from django.http import HttpResponseRedirect, QueryDict
+from django.http import HttpResponseRedirect, QueryDict, request
 from django.shortcuts import render, render_to_response
 from django.urls import reverse_lazy, reverse
 from django.views import generic
@@ -149,13 +149,36 @@ class EventProfile(MultiFormsView):
         pk = self.kwargs['pk']
         return reverse('events:event_profile', kwargs={'pk': pk})
 
-class endEvent(LoginRequiredMixin, ):
-    model = Events
-    form_class = CreateEventForm
-    success_url = reverse_lazy('events:events')
+class endEvent(request, EventPin):
+    if EventPin:
+        a = Events.objects.get(pin=EventPin)
+        a.active = 0
+        a.save()
+    # sett in en satans return
 
-    def end(self):
-        event_id = self.kwargs['pk']
-        e = Events.objects.all().get(id=event_id)
-        e.active.set(0) # Set value to zero == False
-        e.save() # Save the changes
+
+    # model = Events
+    # form_class = CreateEventForm
+    # template_name = "events/event_profile"
+    # success_url = reverse_lazy('events:events')
+
+    # def post(self, request, *args, **kwargs):
+    #     form = endEventForm(request.POST)
+    #     context = { "form": form }
+    #     if form.is_valid():
+    #         cd = form.cleaned_data
+    #         event_active = cd.pop('event_field')
+    #         current_event_active = Events.objects.filter(active=event_active).get().active = 0
+    #         current_event_active.save()
+    #         event_id = Events.objects.filter(pin=event_active).get().id
+    #
+    #         return HttpResponseRedirect(self.get_success_url(event_id))
+    #     return render(request, self.template_name, context)
+
+    def get_success_url(self, pk):
+        return reverse('events:event_profile', kwargs={'pk': pk})
+
+        # event_id = self.kwargs['pk']
+        # e = Events.objects.all().get(id=event_id)
+        # e.active.set(0) # Set value to zero == False
+        # e.save() # Save the changes
