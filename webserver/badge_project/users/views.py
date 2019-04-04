@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 from django.views.generic import ListView
@@ -18,8 +19,9 @@ from events.models import Events
 # from users.models import CustomUser
 
 
-from .forms import CustomUserCreationForm, ChangeProfilePageForm
+from .forms import CustomUserCreationForm, ChangeProfilePageForm, LoginForm
 from users.models import CustomUser
+
 
 class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
@@ -101,5 +103,22 @@ class DeleteUser(DeleteView):
 class CreateNewBadge:
     form_class = ChangeProfilePageForm
     template_name = 'users/profile_update_form.html'
+
+
+class LoginView(generic.FormView):
+    form_class = LoginForm
+    success_url = reverse_lazy('home')
+    template_name = 'registration/login.html'
+
+    def form_valid(self, form):
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = authenticate(username=username, password=password)
+
+        if user is not None and user.is_active:
+            login(self.request, user)
+            return super(LoginView, self).form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 
