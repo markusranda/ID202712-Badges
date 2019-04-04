@@ -1,0 +1,22 @@
+<div class="row justify-content-md-center">
+
+    {% for object in field.field.choices.field.queryset %}
+
+        <div class="col">
+            <label>
+                <input type="radio" value="{{ object.id }}" name="image">
+                <img src="{{ object.url }}" alt="Very beautiful picture" width="100">
+                <div style="display: contents;">{{ object.name }}</div>
+            </label>
+        </div>
+
+        {% if forloop.counter|divisibleby:3 %}
+
+            <!-- Force next columns to break to new line -->
+            <div class="w-100"></div>
+
+        {% endif %}
+
+    {% endfor %}
+
+</div>

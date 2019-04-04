@@ -13,7 +13,6 @@ from .models import CustomUser, Attendees
 from django.shortcuts import get_object_or_404
 
 from .forms import CustomUserCreationForm
-from create_badge.forms import CreateBadgeForm
 from badges.models import Badges
 from events.models import Events
 # from users.models import CustomUser
@@ -27,13 +26,6 @@ class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
-
-
-class CreateBadge(LoginRequiredMixin, CreateView):
-    model = Badges
-    form_class = CreateBadgeForm
-    success_url = reverse_lazy('home')
-    template_name = 'create_badge.html'
 
 
 class ProfilePage(generic.ListView):

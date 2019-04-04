@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'users.apps.UsersConfig',
-    'create_badge.apps.CreateBadgeConfig',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
