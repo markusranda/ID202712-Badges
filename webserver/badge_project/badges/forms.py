@@ -12,8 +12,7 @@ class CreateBadgeForm(Form):
     name = forms.CharField(max_length=50)
     description = forms.CharField(widget=forms.Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the badge here...'}))
     image_radio_field = forms.ModelChoiceField(queryset=Images.objects.values_list(), widget=forms.RadioSelect())
-    RadioSelect.template_name = 'badges/widgets/select.html'
-    RadioSelect.option_template_name = 'badges/widgets/select_option.html'
+    RadioSelect.template_name = 'badges/widgets/radioList.html'
 
     def clean(self):
         cd = super().clean()
