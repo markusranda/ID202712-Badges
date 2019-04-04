@@ -26,6 +26,8 @@
         <div class="col-md-2">
             <button class="btn btn-primary btn-md btn-block" onclick="switchEventProfileContent()">User/Mod Display
             </button>
+
+            <button class="btn btn-danger btn-sm btn-block" onclick="end_event">End Event</button>
         </div>
 
     </div>
@@ -60,7 +62,7 @@
                                     <th scope="col"> Achieved badges: XX</th>
                                 </tr>
                                 <tr>
-                                    <th scope="col"> Something else: XX</th>
+                                    <th scope="col"> Something else: {{ event_active }}</th>
                                     <!-- Other statistics to be filled in!!!! -->
                                 </tr>
                             </thread>

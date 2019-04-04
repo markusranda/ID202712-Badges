@@ -148,3 +148,14 @@ class EventProfile(MultiFormsView):
     def get_success_url(self, **kwargs):
         pk = self.kwargs['pk']
         return reverse('events:event_profile', kwargs={'pk': pk})
+
+class endEvent(LoginRequiredMixin, ):
+    model = Events
+    form_class = CreateEventForm
+    success_url = reverse_lazy('events:events')
+
+    def end(self):
+        event_id = self.kwargs['pk']
+        e = Events.objects.all().get(id=event_id)
+        e.active.set(0) # Set value to zero == False
+        e.save() # Save the changes
