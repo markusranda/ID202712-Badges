@@ -107,6 +107,7 @@
                                 {% for badge in requestable_badge %}
                                     <tr>
                                         <th>{{ badge.name }}</th>
+                                        <th><img src={{ badge.image}} width="75"></th>
                                         <th>
                                             <form method="post">
                                                 {% csrf_token %}
