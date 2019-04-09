@@ -3,8 +3,7 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="{% static 'badges/style.css' %}">
 <div id="fb-root"></div>
-<script async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2"></script>
 <script type="text/javascript" src="{% static 'badges/switchEventProfileContent.js' %}"></script>
 
 
@@ -31,10 +30,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'events:events' %}">Events <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/events">Events <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'badges:create_new_badge' %}">Create new badge</a>
+                <a class="nav-link" href="/create_badge">Create new badge</a>
             </li>
         </ul>
 

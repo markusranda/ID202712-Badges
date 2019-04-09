@@ -1,10 +1,10 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Column, Layout, Submit, HTML, Field, MultiField
+from crispy_forms.layout import Column, Layout, Submit, HTML
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
-from django.forms import ModelForm, Textarea, CheckboxSelectMultiple, EmailField, BooleanField, \
-    ModelMultipleChoiceField, CharField
+from django.forms import ModelForm, Textarea, CheckboxSelectMultiple, EmailField, BooleanField
+from django.urls import reverse_lazy
 
-from .models import CustomUser, UserBadges
+from .models import CustomUser
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -14,46 +14,29 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class ChangeProfilePageForm(ModelForm):
-    badge_id = CharField()
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Column(
-                HTML(
-                    """
-                    <h2>Edit profile</h2>
-                    """
-                ),
                 'about_me',
-                MultiField(
-                    'badge_id',
-                    template='users/widgets/multipleCheckboxes.html'
-                ),
-                Submit(
-                    'submit', 'Update'
-                ),
-                css_class='col-lg-8 mx-auto',
+                'showcase_badge',
+                Submit('submit', 'Update'),
+                css_class='col-lg-6 mx-auto',
             )
         )
 
     class Meta:
         model = CustomUser
-        fields = ('about_me',)
+        fields = ('about_me', 'showcase_badge')
         labels = {
             'about_me': 'About me',
+            'showcase_badge': 'Choose badges to showcase'
         }
         widgets = {
             'about_me': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Write something about yourself...'}),
+            'showcase_badge': CheckboxSelectMultiple(attrs={'cols': 40, 'rows': 5, 'placeholder': ''})
         }
-
-    def clean(self):
-        cd = super().clean()
-        userbadge_list = self.data.getlist('badge_id')
-        cd['userbadge_list'] = userbadge_list
-
-        return cd
 
 
 class CustomUserCreationForm(UserCreationForm):

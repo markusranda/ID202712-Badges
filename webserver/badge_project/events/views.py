@@ -17,9 +17,8 @@ from users.models import UserBadges
 
 from badges.models import Badges
 from .multiforms import MultiFormsView
-from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm, DeleteBadgeRequestForm, \
-    RemoveBadgeFromUserForm
-from .models import Events, BadgeRequests
+from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm, EndEventForm
+from .models import Events, BadgeRequests, EventBadges
 from .models import random
 
 from django.db import models
@@ -101,8 +100,7 @@ class EventProfile(MultiFormsView):
     model = Events
     form_classes = {'request_badge': BadgeRequestForm,
                     'approve_badge': BadgeApprovalForm,
-                    'delete_badge_request': DeleteBadgeRequestForm,
-                    'remove_badge_from_user': RemoveBadgeFromUserForm,
+                    'end_event': EndEventForm,
                     }
 
     def get_context_data(self, **kwargs):
@@ -130,6 +128,7 @@ class EventProfile(MultiFormsView):
         context['requestable_badge'] = event_object.requestable_badges.all()
         context['event_pin'] = event_object.pin
         context['user_event_badges'] = UserBadges.objects.filter(event_id=event_object.id)
+
 
         return context
 
@@ -159,19 +158,41 @@ class EventProfile(MultiFormsView):
         pk = self.kwargs['pk']
         return reverse('events:event_profile', kwargs={'pk': pk})
 
-    def delete_badge_request_form_valid(self, form):
-        badge_id = form.cleaned_data.get('badge_id')
-        event_id = self.kwargs['pk']
-        user_id = self.request.user.id
-        b = BadgeRequests.objects.filter(badge_id=badge_id, event_id=event_id, user_id=user_id).get()
-        b.delete()
+# class EventEnd(EventPin):
+#     model = Events
+#     template_name = "events/event_profile"
+#     success_url = reverse_lazy('events:events')
+#     def end_event(self):
+#         if EventPin:
+#             a = Events.objects.get(pin=EventPin)
+#             a.active = 0
+#             a.save()
+#             event_id = Events.objects.get(id)
+#
+#         return HttpResponseRedirect(self.get_success_url(event_id))
 
-        return HttpResponseRedirect(self.get_success_url())
+    # model = Events
+    # form_class = CreateEventForm
+    # template_name = "events/event_profile"
+    # success_url = reverse_lazy('events:events')
 
-    def remove_badge_from_user_form_valid(self, form):
-        badge_id = form.cleaned_data.get('badge_id')
-        event_id = self.kwargs['pk']
-        user_id = form.cleaned_data.get('user_id')
-        UserBadges.objects.create(badge_id, event_id, user_id)
-
-        return HttpResponseRedirect(self.get_success_url())
+    # def post(self, request, *args, **kwargs):
+    #     form = endEventForm(request.POST)
+    #     context = { "form": form }
+    #     if form.is_valid():
+    #         cd = form.cleaned_data
+    #         event_active = cd.pop('event_field')
+    #         current_event_active = Events.objects.filter(active=event_active).get().active = 0
+    #         current_event_active.save()
+    #         event_id = Events.objects.filter(pin=event_active).get().id
+    #
+    #         return HttpResponseRedirect(self.get_success_url(event_id))
+    #     return render(request, self.template_name, context)
+    #
+    # def get_success_url(self, pk):
+    #     return reverse('events:event_profile', kwargs={'pk': pk})
+    #
+    #     # event_id = self.kwargs['pk']
+    #     # e = Events.objects.all().get(id=event_id)
+    #     # e.active.set(0) # Set value to zero == False
+    #     # e.save() # Save the changes

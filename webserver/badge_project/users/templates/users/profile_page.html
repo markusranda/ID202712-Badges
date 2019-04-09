@@ -6,7 +6,7 @@
 
         <div class="row mt-4">
             <div class="col-md-3">
-                <h2 class="text-left text-info">{{ user.username|capfirst }}</h2>
+                <h2 class="text-left text-info">{{ user.username|capfirst}}</h2>
             </div>
             <div class="col-md-3">
             </div>
@@ -27,11 +27,8 @@
                             <div class="table-responsive">
                                 <table class="table table-borderless">
                                     <tr>
-                                        {% for userbadge in showcase_list %}
-                                            <td style="border-top-width: 0;"><img src="{{ userbadge.badge.image.url }}"
-                                                                                  width="150"
-                                                                                  alt="Picture is missing, did the developer assign the wrong path?">
-                                            </td>
+                                        {% for badge in showcase_list %}
+                                            <td style="border-top-width: 0;"><img src={{ badge.image.url }} width="150"></td>
                                         {% endfor %}
                                     </tr>
                                 </table>
@@ -54,28 +51,27 @@
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col">
-                        <div class="bg-white text-dark p-4">
-                            <h2>Recently earned badges</h2>
-                            <div class="table-responsive">
-                                {% if badges_list %}
-                                    <table class="table table-borderless">
-                                        {% for badge in badges_list %}
-                                            <tr>
-                                                <td style="border-top-width: 0; vertical-align: baseline;"><img
-                                                        src={{ badge.image.url }} width="100"></td>
-                                                <td style="border-top-width: 0; vertical-align: baseline;">{{ badge.name }}</td>
-                                            </tr>
-                                        {% endfor %}
+                <div class="col">
+                    <div class="bg-white text-dark p-4">
+                        <h2>Recently earned badges</h2>
+                    <div class="table-responsive">
+                        {% if badges_list %}
+                            <table class="table table-borderless">
+                                {% for badge in badges_list %}
+                                    <tr>
+                                        <td style="border-top-width: 0; vertical-align: baseline;"><img src={{ badge.image.url }} width="100"></td>
+                                        <td style="border-top-width: 0; vertical-align: baseline;">{{ badge.name }}</td>
+                                    </tr>
+                                {% endfor %}
 
-                                    </table>
+                            </table>
 
-                                {% else %}
-                                    <p>No badges are available.</p>
-                                {% endif %}
-                            </div>
-                        </div>
+                        {% else %}
+                            <p>No badges are available.</p>
+                        {% endif %}
                     </div>
+                    </div>
+                </div>
                 </div>
 
             </div>
@@ -101,30 +97,28 @@
 
                     <div class="bg-white text-dark pt-2">
                         <h2>Active events</h2>
-                        <div class="table-responsive">
-                                {% if event_active_list %}
-                                <table class="table table-bordered">
-                                    <thead>
+                        {% if event_active_list %}
+
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Event Name</th>
+                                </tr>
+                                {% for event in event_active_list %}
                                     <tr>
-                                        <th><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a>
-                                        </th>
+                                        <th><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></th>
                                     </tr>
-                                    {% for event in event_active_list %}
-                                        <tr>
-                                            <th><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></th>
-                                        </tr>
-                                    {% endfor %}
-                                    </thead>
-                                </table>
+                                {% endfor %}
+                                </thead>
+                            </table>
 
-                            {% else %}
+                        {% else %}
 
-                                <p>No events are available.</p>
+                            <p>No events are available.</p>
 
-                            {% endif %}
-                        </div>
+                        {% endif %}
                     </div>
-                    <div>
+                <div>
                         <!--  share button -->
                         <div class="d-flex justify-content-right mb-2 mt-2">
                             <div class="fb-share-button"
