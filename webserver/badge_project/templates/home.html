@@ -5,46 +5,50 @@
 
 {% block content %}
 
-        {% if user.is_authenticated %}
-            <div class="container-fluid fill bg-warning text-dark verticalCentered" >
-                <div class="row m-0 h-100">
-                    <div class="col-md-6 m-4 mx-auto my-auto">
-                        <div class="row mt-4 mb-2 justify-content-center">
-                            <h1 class="text-light font-italic">Welcome to the site {{ user.username|capfirst }}</h1>
-                        </div>
-                        <div class="row mt-4 mb-2 justify-content-center">
-                            <a href="{% url 'events:event_pin' %}"><h4 class="text-muted font-weight-light u">Enter a new event</h4></a>
-                        </div>
+    {% if user.is_authenticated %}
+        <div class="container-fluid fill bg-warning text-dark verticalCentered">
+            <div class="row m-0 h-100">
+                <div class="col-md-6 m-4 mx-auto my-auto">
+                    <div class="row mt-4 mb-2 justify-content-center">
+                        <h1 class="text-light font-italic">Welcome to the site {{ user.username|capfirst }}</h1>
+                    </div>
+                    <div class="row mt-4 mb-2 justify-content-center">
+                        <button class="btn btn-outline-light my-2 btn-lg font-weight-bold"
+                                onclick="location.href='{% url 'events:event_pin' %}'">Enter a new event
+                        </button>
                     </div>
                 </div>
             </div>
+        </div>
 
     {% else %}
 
-            <div class="container-fluid bg-info" style="height: 100%;">
-                <div class="row h-100">
-                    <div class="col-md-4 mx-auto my-auto">
-                        <div class="row mb-2 justify-content-center">
-                            <h1 class="text-light">You are not logged in</h1>
-                        </div>
-                        <div class="row mt-4 mb-2 justify-content-center">
-                            <div class="col-lg-9">
-                                <button class="btn btn-lg btn-light btn-block" onclick="location.href='{% url 'login' %}'">Go to login
+        <div class="container-fluid bg-info" style="height: 100%;">
+            <div class="row h-100">
+                <div class="col-md-4 mx-auto my-auto">
+                    <div class="row mb-2 justify-content-center">
+                        <h1 class="text-light">You are not logged in</h1>
+                    </div>
+                    <div class="row mt-4 mb-2 justify-content-center">
+                        <div class="col-lg-9">
+                            <button class="btn btn-lg btn-light btn-block" onclick="location.href='{% url 'login' %}'">
+                                Go to login
                                 page
                             </button>
-                            </div>
                         </div>
+                    </div>
 
-                        <div class="row mt-2 mb-2 justify-content-center">
-                            <div class="col-lg-9">
-                            <button class="btn btn-lg btn-outline-light btn-block" onclick="location.href='{% url 'signup' %}'">Create new
-                            account
+                    <div class="row mt-2 mb-2 justify-content-center">
+                        <div class="col-lg-9">
+                            <button class="btn btn-lg btn-outline-light btn-block"
+                                    onclick="location.href='{% url 'signup' %}'">Create new
+                                account
                             </button>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        {% endif %}
+        </div>
+    {% endif %}
 
 {% endblock %}
