@@ -26,7 +26,6 @@
             <div class="col-md-2">
                 <button class="btn btn-primary btn-md btn-block" onclick="switchEventProfileContent()">User/Mod Display
                 </button>
-
                 <form method="post">
                     {% csrf_token %}
                     {{ forms.end_event }}
@@ -34,7 +33,6 @@
                     <input type="submit" class="btn btn-danger btn-sm btn-block" value="End Event">
                 </form>
             </div>
-
         </div>
 
     {% endif %}
