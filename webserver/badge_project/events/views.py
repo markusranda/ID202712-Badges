@@ -86,6 +86,7 @@ class CreateEvent(LoginRequiredMixin, CreateView):
                                           created_by_id=user_id, pin=random())
 
             for badge in cd.pop('requestable_badges'):
+                # TODO fix this bug, we no longer have EventBadges, use UserBadges instead.
                 EventBadges.objects.create(badge_id=badge.id, event_id=event.id)
 
             return HttpResponseRedirect(self.get_success_url(event.id))
@@ -164,6 +165,8 @@ class EventProfile(MultiFormsView):
         badge_id = form.cleaned_data.get('badge_id')
         event_id = self.kwargs['pk']
         user_id = form.cleaned_data.get('user_id')
-        UserBadges.objects.create(badge_id, event_id, user_id)
+
+        userbadge = UserBadges.objects.filter(user_id=user_id, badge_id=badge_id, event_id=event_id).get()
+        userbadge.delete()
 
         return HttpResponseRedirect(self.get_success_url())
