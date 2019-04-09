@@ -2,7 +2,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Column, Layout, Submit, HTML, Field, MultiField
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from django.forms import ModelForm, Textarea, CheckboxSelectMultiple, EmailField, BooleanField, \
-    ModelMultipleChoiceField, CharField
+    ModelMultipleChoiceField, CharField, forms
 
 from .models import CustomUser, UserBadges
 
@@ -31,6 +31,11 @@ class ChangeProfilePageForm(ModelForm):
                     'badge_id',
                     template='users/widgets/multipleCheckboxes.html'
                 ),
+                HTML(
+                    """
+                    <p>Choose no more than 4 badges.</p>
+                    """
+                ),
                 Submit(
                     'submit', 'Update'
                 ),
@@ -52,6 +57,8 @@ class ChangeProfilePageForm(ModelForm):
         cd = super().clean()
         userbadge_list = self.data.getlist('badge_id')
         cd['userbadge_list'] = userbadge_list
+        if len(self.cleaned_data['userbadge_list']) > 4: # Make sure the user does not select more than 4 badges.
+            raise forms.ValidationError('Select no more than 4.')
 
         return cd
 
