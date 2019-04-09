@@ -46,6 +46,12 @@
                         User/Mod
                         Display
                     </button>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ forms.end_event }}
+                        <input type="hidden" name="event_id" value={{ event_id }}>
+                        <input type="submit" class="btn btn-danger btn-sm btn-block" value="End Event">
+                    </form>
                 {% endif %}
             </div>
             <div class="col-md-4">
@@ -73,10 +79,13 @@
                                         <th>{{ badge_request.badge.name|capfirst }}</th>
                                         <th>{{ badge_request.user.username|capfirst }}</th>
                                         <th>
-                                            <form method="">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="badge" value={{ badge }}/>
-                                                <input class="btn btn-light btn-sm btn-block ml-0 mr-1 " type="submit" value="Approve">
+                                            <form method="post">
+                                            {% csrf_token %}
+                                            {{ forms.delete_badge_request }}
+                                            {{ forms.approve_badge_mod }}
+                                            <input type="hidden" name="badge_id" value="{{ badge_request.badge.id }}">
+                                             <input type="hidden" name="user_id" value="{{ badge_request.user.id }}">
+                                            <input type="submit" value="Approve">
                                             </form>
                                         </th>
                                     </tr>
@@ -112,7 +121,7 @@
                         </div>
                     {% else %}
 
-                        <p class="text-center mt-4 p-5 pb-0">No events are available.</p>
+                        <p class="text-center mt-4 p-5 pb-0">No badges to request at the moment...</p>
 
                     {% endif %}
                 </div>

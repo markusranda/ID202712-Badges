@@ -80,6 +80,11 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
             userbadge_list_all = UserBadges.objects.filter(user_id=self.request.user.id)
             userbadge_list_add = cd.pop('userbadge_list')
 
+            user = self.request.user
+            about_me = cd.pop('about_me')
+            user.about_me = about_me
+            user.save()
+
             for userbadge in userbadge_list_all:
 
                 if str(userbadge.id) in userbadge_list_add:

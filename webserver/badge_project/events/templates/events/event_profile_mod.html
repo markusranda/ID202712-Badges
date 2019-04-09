@@ -19,11 +19,18 @@
                                     <th>{{ badge_request.badge.name|capfirst }}</th>
                                     <th>{{ badge_request.user.username|capfirst }}</th>
                                     <th>
-                                        <form method="">
+                                         <form method="post">
                                             {% csrf_token %}
-                                            <input type="hidden" name="badge" value={{ badge }}/>
-                                            <input class="btn btn-light btn-sm btn-block m-1 " type="submit" value="Approve">
-                                            <input class="btn btn-light btn-sm btn-block m-1" type="submit" value="Reject">
+                                            {{ forms.delete_badge_request }}
+                                            <input type="hidden" name="badge_id" value="{{ badge_request.badge.id }}">
+                                            <input type="submit" value="Reject">
+                                        </form>
+                                         <form method="post">
+                                            {% csrf_token %}
+                                            {{ forms.approve_badge_mod }}
+                                            <input type="hidden" name="badge_id" value="{{ badge_request.badge.id }}">
+                                             <input type="hidden" name="user_id" value="{{ badge_request.user.id }}">
+                                            <input type="submit" value="Approve">
                                         </form>
                                     </th>
                                 </tr>

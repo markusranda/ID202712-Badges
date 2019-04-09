@@ -83,3 +83,19 @@ class BadgeRequestForm(MultipleForm):
 class BadgeApprovalForm(MultipleForm):
     badge_id_as_str = forms.CharField(max_length=60, widget=forms.HiddenInput())
 
+
+class DeleteBadgeRequestForm(MultipleForm):
+    badge_id = forms.IntegerField(widget=forms.HiddenInput())
+
+
+class RemoveBadgeFromUserForm(MultipleForm):
+    badge_id = forms.IntegerField(widget=forms.HiddenInput())
+    user_id = forms.IntegerField(widget=forms.HiddenInput())
+
+class EndEventForm(MultipleForm):
+    event_id = forms.IntegerField(widget=forms.HiddenInput())
+
+
+class BadgeApprovalModeratorForm(MultipleForm):
+    badge_id = forms.IntegerField(widget=forms.HiddenInput())
+    user_id = forms.IntegerField(widget=forms.HiddenInput())

@@ -14,7 +14,7 @@ class Events(models.Model):
     pin = models.IntegerField(unique=True, default=random())
     created_by = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='createdBy')
     events = models.ManyToManyField('users.CustomUser', through='users.Attendees', related_name='attendingEvents')
-    requestable_badges = models.ManyToManyField('badges.Badges', through='EventBadges',
+    requestable_badges = models.ManyToManyField('badges.Badges', through='users.UserBadges',
                                                 related_name='requestable_badges')
 
 
@@ -25,9 +25,3 @@ class BadgeRequests(models.Model):
 
     def __str__(self):
         return str(self.user) + str(self.event) + str(self.badge)
-
-
-class EventBadges(models.Model):
-    event = models.ForeignKey('Events', on_delete=models.CASCADE, related_name='eventbadge')
-    badge = models.ForeignKey('badges.Badges', on_delete=models.CASCADE, related_name='eventbadge')
-
