@@ -18,7 +18,7 @@ from users.models import UserBadges
 from badges.models import Badges
 from .multiforms import MultiFormsView
 from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm, DeleteBadgeRequestForm, \
-    RemoveBadgeFromUserForm
+    RemoveBadgeFromUserForm, EndEventForm
 from .models import Events, BadgeRequests
 from .models import random
 
@@ -103,6 +103,7 @@ class EventProfile(MultiFormsView):
                     'approve_badge': BadgeApprovalForm,
                     'delete_badge_request': DeleteBadgeRequestForm,
                     'remove_badge_from_user': RemoveBadgeFromUserForm,
+                    'end_event': EndEventForm,
                     }
 
     def get_context_data(self, **kwargs):
