@@ -19,7 +19,7 @@ from badges.models import Badges
 from .multiforms import MultiFormsView
 from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm, DeleteBadgeRequestForm, \
     RemoveBadgeFromUserForm
-from .models import Events, BadgeRequests, EventBadges
+from .models import Events, BadgeRequests
 from .models import random
 
 from django.db import models
