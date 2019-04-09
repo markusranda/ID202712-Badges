@@ -21,17 +21,21 @@
 
     {% if user_is_moderator %}
 
-    <div class="row mt-4">
+        <div class="row mt-4">
 
-        <div class="col-md-2">
-            <button class="btn btn-primary btn-md btn-block" onclick="switchEventProfileContent()">User/Mod Display
-            </button>
-            <a href="event_end/{{ event_pin }}">
-                <button type="submit" class="btn btn-danger btn-sm btn-block" >End Event</button>
-            </a>
+            <div class="col-md-2">
+                <button class="btn btn-primary btn-md btn-block" onclick="switchEventProfileContent()">User/Mod Display
+                </button>
+
+                <form method="post">
+                    {% csrf_token %}
+                    {{ forms.end_event }}
+                    <input type="hidden" name="event_id" value={{ event_id }}>
+                    <input type="submit" class="btn btn-danger btn-sm btn-block" value="End Event">
+                </form>
+            </div>
+
         </div>
-
-    </div>
 
     {% endif %}
 
@@ -46,7 +50,7 @@
 
         <div class="d-flex justify-content-center">
             <h1 id="mod"><u>Moderator view!</u>
-            <p>Event pin: {{ event_pin }}</p></h1>
+                <p>Event pin: {{ event_pin }}</p></h1>
         </div>
 
         <div class="d-flex justify-content-center">
@@ -73,35 +77,36 @@
                     <div>
                         <div class="row mt-4">
                             {% if badge_requests %}
-                                <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+                                <table class="table col-sm"
+                                       style="border-color: black; border-style: solid; margin: 25px;">
                                     {% for badge_request in badge_requests %}
                                         <tr>
-                                        <td>{{ badge_request.badge.name|capfirst }}</td>
-                                        <td>{{ badge_request.user.username|capfirst }}</td>
-                                        <td>
-                                        <form method="">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="badge" value={{ badge }}/>
-                                            <input type="submit" value="Approve">
-                                            <input type="submit" value="Reject">
-                                        </form>
-                                        </td>
-                                    </tr>
-                    {% endfor %}
-                </table>
-            {% else %}
-                <p>There are none requests for badges!</p>
-            {% endif %}
+                                            <td>{{ badge_request.badge.name|capfirst }}</td>
+                                            <td>{{ badge_request.user.username|capfirst }}</td>
+                                            <td>
+                                                <form method="">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="badge" value={{ badge }}/>
+                                                    <input type="submit" value="Approve">
+                                                    <input type="submit" value="Reject">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            {% else %}
+                                <p>There are none requests for badges!</p>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <h2 class="text-center">Remove badges from user(s)</h2>
-                    <div>
-                        <div class="row mt-4">
-                            {% if user_event_badges %}
-                                <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
-                                    {% for user_event_badge in user_event_badges %}
-                                        <tr>
+                <h2 class="text-center">Remove badges from user(s)</h2>
+                <div>
+                    <div class="row mt-4">
+                        {% if user_event_badges %}
+                            <table class="table col-sm" style="border-color: black; border-style: solid; margin: 25px;">
+                                {% for user_event_badge in user_event_badges %}
+                                    <tr>
                                         <td>{{ user_event_badge.badge.name }}</td>
                                         <td>{{ user_event_badge.user.username }}</td>
                                         <td>
@@ -111,12 +116,12 @@
                                                 <input type="submit" value="Remove">
                                             </form>
                                         </td>
-                                        </tr>
+                                    </tr>
                                 {% endfor %}
-                </table>
-            {% else %}
-                <p>There are none removeable badges!</p>
-            {% endif %}
-        </div>
-    </div>
+                            </table>
+                        {% else %}
+                            <p>There are none removeable badges!</p>
+                        {% endif %}
+                    </div>
+                </div>
 {% endblock %}

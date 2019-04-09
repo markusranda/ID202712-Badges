@@ -17,7 +17,7 @@ from users.models import UserBadges
 
 from badges.models import Badges
 from .multiforms import MultiFormsView
-from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm
+from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm, EndEventForm
 from .models import Events, BadgeRequests, EventBadges
 from .models import random
 
@@ -100,6 +100,7 @@ class EventProfile(MultiFormsView):
     model = Events
     form_classes = {'request_badge': BadgeRequestForm,
                     'approve_badge': BadgeApprovalForm,
+                    'end_event': EndEventForm,
                     }
 
     def get_context_data(self, **kwargs):
@@ -122,6 +123,7 @@ class EventProfile(MultiFormsView):
         context['people_joined'] = Attendees.objects.filter(event=event_object.id).count()
         context['event_name'] = event_object.name
         context['event_desc'] = event_object.description
+        context['event_id'] = event_object.id
         context['badge_requests'] = badge_request_qs
         context['requestable_badge'] = event_object.requestable_badges.all()
         context['event_pin'] = event_object.pin
@@ -145,17 +147,29 @@ class EventProfile(MultiFormsView):
         form_name = form.cleaned_data.get('action')
         return HttpResponseRedirect(self.get_success_url())
 
+    def end_event_form_valid(self, form):
+        event_id = form.cleaned_data.get('event_id')
+        event = Events.objects.get(id=event_id)
+        event.active = 0
+        event.save()
+        return HttpResponseRedirect(self.get_success_url())
+
     def get_success_url(self, **kwargs):
         pk = self.kwargs['pk']
         return reverse('events:event_profile', kwargs={'pk': pk})
 
-class endEvent(request, EventPin):
-    if EventPin:
-        a = Events.objects.get(pin=EventPin)
-        a.active = 0
-        a.save()
-    # sett in en satans return
-
+# class EventEnd(EventPin):
+#     model = Events
+#     template_name = "events/event_profile"
+#     success_url = reverse_lazy('events:events')
+#     def end_event(self):
+#         if EventPin:
+#             a = Events.objects.get(pin=EventPin)
+#             a.active = 0
+#             a.save()
+#             event_id = Events.objects.get(id)
+#
+#         return HttpResponseRedirect(self.get_success_url(event_id))
 
     # model = Events
     # form_class = CreateEventForm
@@ -174,11 +188,11 @@ class endEvent(request, EventPin):
     #
     #         return HttpResponseRedirect(self.get_success_url(event_id))
     #     return render(request, self.template_name, context)
-
-    def get_success_url(self, pk):
-        return reverse('events:event_profile', kwargs={'pk': pk})
-
-        # event_id = self.kwargs['pk']
-        # e = Events.objects.all().get(id=event_id)
-        # e.active.set(0) # Set value to zero == False
-        # e.save() # Save the changes
+    #
+    # def get_success_url(self, pk):
+    #     return reverse('events:event_profile', kwargs={'pk': pk})
+    #
+    #     # event_id = self.kwargs['pk']
+    #     # e = Events.objects.all().get(id=event_id)
+    #     # e.active.set(0) # Set value to zero == False
+    #     # e.save() # Save the changes
