@@ -50,7 +50,7 @@
                         {% csrf_token %}
                         {{ forms.end_event }}
                         <input type="hidden" name="event_id" value={{ event_id }}>
-                        <input type="submit" class="btn btn-danger btn-sm btn-block" value="End Event">
+                        <input type="submit" class="btn btn-danger btn-md btn-block mt-2" value="End Event">
                     </form>
                 {% endif %}
             </div>
@@ -85,7 +85,7 @@
                                             {{ forms.approve_badge_mod }}
                                             <input type="hidden" name="badge_id" value="{{ badge_request.badge.id }}">
                                              <input type="hidden" name="user_id" value="{{ badge_request.user.id }}">
-                                            <input type="submit" value="Approve">
+                                            <input class="btn btn-light btn-sm btn-block ml-0 mr-2" type="submit" value="Approve">
                                             </form>
                                         </th>
                                     </tr>
