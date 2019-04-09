@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 class CustomUser(AbstractUser):
-    badge = models.ManyToManyField('badges.Badges', through="UserBadges", related_name='userbadges', blank=True)
+    badge = models.ManyToManyField('events.EventBadges', through="UserBadges", related_name='userbadges', blank=True)
     about_me = models.CharField(max_length=255)
     email = models.CharField(max_length=254)
     events = models.ManyToManyField('events.Events', through='Attendees', related_name='attendingEvents')
@@ -23,7 +23,6 @@ class Attendees(models.Model):
 
 
 class UserBadges(models.Model):
-    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE, related_name='userbadge')
-    badge = models.ForeignKey('badges.Badges', on_delete=models.CASCADE, related_name='userbadge')
-    event = models.ForeignKey('events.Events', on_delete=models.CASCADE, related_name='userbadge')
+    eventbadge = models.ForeignKey('events.EventBadges', on_delete=models.CASCADE, related_name='eventbadge')
+    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE, related_name='user')
     is_showcase = models.BooleanField()
