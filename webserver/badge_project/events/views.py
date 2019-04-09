@@ -17,7 +17,8 @@ from users.models import UserBadges
 
 from badges.models import Badges
 from .multiforms import MultiFormsView
-from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm
+from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm, DeleteBadgeRequestForm, \
+    RemoveBadgeFromUserForm
 from .models import Events, BadgeRequests, EventBadges
 from .models import random
 
@@ -100,6 +101,8 @@ class EventProfile(MultiFormsView):
     model = Events
     form_classes = {'request_badge': BadgeRequestForm,
                     'approve_badge': BadgeApprovalForm,
+                    'delete_badge_request': DeleteBadgeRequestForm,
+                    'remove_badge_from_user': RemoveBadgeFromUserForm,
                     }
 
     def get_context_data(self, **kwargs):
@@ -147,3 +150,20 @@ class EventProfile(MultiFormsView):
     def get_success_url(self, **kwargs):
         pk = self.kwargs['pk']
         return reverse('events:event_profile', kwargs={'pk': pk})
+
+    def delete_badge_request_form_valid(self, form):
+        badge_id = form.cleaned_data.get('badge_id')
+        event_id = self.kwargs['pk']
+        user_id = self.request.user.id
+        b = BadgeRequests.objects.filter(badge_id=badge_id, event_id=event_id, user_id=user_id).get()
+        b.delete()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def remove_badge_from_user_form_valid(self, form):
+        badge_id = form.cleaned_data.get('badge_id')
+        event_id = self.kwargs['pk']
+        user_id = form.cleaned_data.get('user_id')
+        UserBadges.objects.create(badge_id, event_id, user_id)
+
+        return HttpResponseRedirect(self.get_success_url())
