@@ -76,11 +76,17 @@
                                         <td>{{ badge_request.badge.name|capfirst }}</td>
                                         <td>{{ badge_request.user.username|capfirst }}</td>
                                         <td>
-                                        <form method="">
+                                        <form method="post">
                                             {% csrf_token %}
-                                            <input type="hidden" name="badge" value={{ badge }}/>
-                                            <input type="submit" value="Approve">
+                                            {{ forms.delete_badge_request }}
+                                            <input type="hidden" name="badge_id" value="{{ badge_request.badge.id }}">
                                             <input type="submit" value="Reject">
+                                        </form>
+                                         <form method="post">
+                                            {% csrf_token %}
+                                            {{ forms.delete_badge_request }}
+                                            <input type="hidden" name="badge_id" value="{{ badge_request.badge.id }}">
+                                            <input type="submit" value="Approve">
                                         </form>
                                         </td>
                                     </tr>
