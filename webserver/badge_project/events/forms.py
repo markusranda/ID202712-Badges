@@ -15,11 +15,16 @@ class CreateEventForm(ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Column(
+                HTML(
+                    """
+                    <h2>Create event</h2>
+                    """
+                ),
                 'name',
                 'description',
                 'requestable_badges',
                 Submit('submit', 'Create'),
-                css_class='col-lg-6 mx-auto',
+                css_class='col-lg-6 mt-4 mx-auto',
             )
         )
 
@@ -79,5 +84,10 @@ class BadgeApprovalForm(MultipleForm):
     badge_id_as_str = forms.CharField(max_length=60, widget=forms.HiddenInput())
 
 
-class EndEventForm(MultipleForm):
-    event_id = forms.IntegerField(widget=forms.HiddenInput())
+class DeleteBadgeRequestForm(MultipleForm):
+    badge_id = forms.IntegerField(widget=forms.HiddenInput())
+
+
+class RemoveBadgeFromUserForm(MultipleForm):
+    badge_id = forms.IntegerField(widget=forms.HiddenInput())
+    user_id = forms.IntegerField(widget=forms.HiddenInput())
