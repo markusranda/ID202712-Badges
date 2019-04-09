@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, HttpResponseForbidden
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy, reverse
 from django.views import generic
@@ -9,7 +9,7 @@ from django.views.generic import ListView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from .models import CustomUser, Attendees
+from .models import CustomUser, Attendees, UserBadges
 from django.shortcuts import get_object_or_404
 
 from .forms import CustomUserCreationForm
@@ -45,7 +45,7 @@ class ProfilePage(generic.ListView):
                 event = attendants_qs.event
                 events_list.append(event)
 
-        context['showcase_list'] = object_user.showcase_badge.all()
+        context['showcase_list'] = object_user.userbadge.filter(is_showcase=1)
         context['badges_list'] = object_user.badge.all()
         context['event_active_list'] = events_list
         context['about_me'] = object_user.about_me
@@ -58,21 +58,39 @@ class ProfilePage(generic.ListView):
         return context
 
 
-class ProfileUpdate(generic.UpdateView, SingleObjectMixin):
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
     form_class = ChangeProfilePageForm
     template_name = 'users/profile_update_form.html'
 
-
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        current_user = self.request.user
-        context['all_badges'] = Badges.objects.all()
-
+        context = super().get_context_data()
+        object_user = self.request.user
+        context['userbadges'] = object_user.userbadge.all()
         return context
 
     def get_success_url(self):
         username = self.kwargs['username']
         return reverse('profile_page', kwargs={'username': username})
+
+    def post(self, request, *args, **kwargs):
+        form = ChangeProfilePageForm(request.POST)
+        context = {"form": form}
+        if form.is_valid():
+            cd = form.cleaned_data
+            userbadge_list_all = UserBadges.objects.filter(user_id=self.request.user.id)
+            userbadge_list_add = cd.pop('userbadge_list')
+
+            for userbadge in userbadge_list_all:
+
+                if str(userbadge.id) in userbadge_list_add:
+                    new_userbadge = UserBadges.objects.get(id=userbadge.id)
+                    new_userbadge.is_showcase = 1
+                    new_userbadge.save()
+                else:
+                    userbadge.is_showcase = 0
+                    userbadge.save()
+
+        return HttpResponseRedirect(self.get_success_url())
 
     def get_object(self, **kwargs):
         return get_object_or_404(CustomUser, pk=self.request.user.id)

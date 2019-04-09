@@ -1,10 +1,10 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Column, Layout, Submit, HTML
+from crispy_forms.layout import Column, Layout, Submit, HTML, Field, MultiField
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
-from django.forms import ModelForm, Textarea, CheckboxSelectMultiple, EmailField, BooleanField
-from django.urls import reverse_lazy
+from django.forms import ModelForm, Textarea, CheckboxSelectMultiple, EmailField, BooleanField, \
+    ModelMultipleChoiceField, CharField
 
-from .models import CustomUser
+from .models import CustomUser, UserBadges
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -14,6 +14,8 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class ChangeProfilePageForm(ModelForm):
+    badge_id = CharField()
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -25,23 +27,33 @@ class ChangeProfilePageForm(ModelForm):
                     """
                 ),
                 'about_me',
-                'showcase_badge',
-                Submit('submit', 'Update'),
+                MultiField(
+                    'badge_id',
+                    template='users/widgets/multipleCheckboxes.html'
+                ),
+                Submit(
+                    'submit', 'Update'
+                ),
                 css_class='col-lg-8 mx-auto',
             )
         )
 
     class Meta:
         model = CustomUser
-        fields = ('about_me', 'showcase_badge')
+        fields = ('about_me',)
         labels = {
             'about_me': 'About me',
-            'showcase_badge': 'Choose badges to showcase'
         }
         widgets = {
             'about_me': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Write something about yourself...'}),
-            'showcase_badge': CheckboxSelectMultiple(attrs={'cols': 40, 'rows': 5, 'placeholder': ''})
         }
+
+    def clean(self):
+        cd = super().clean()
+        userbadge_list = self.data.getlist('badge_id')
+        cd['userbadge_list'] = userbadge_list
+
+        return cd
 
 
 class CustomUserCreationForm(UserCreationForm):

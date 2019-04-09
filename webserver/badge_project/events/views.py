@@ -127,7 +127,6 @@ class EventProfile(MultiFormsView):
         context['event_pin'] = event_object.pin
         context['user_event_badges'] = UserBadges.objects.filter(event_id=event_object.id)
 
-
         return context
 
     def request_badge_form_valid(self, form):
