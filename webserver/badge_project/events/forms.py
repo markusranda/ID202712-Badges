@@ -81,3 +81,8 @@ class BadgeApprovalForm(MultipleForm):
 
 class DeleteBadgeRequestForm(MultipleForm):
     badge_id = forms.IntegerField(widget=forms.HiddenInput())
+
+
+class BadgeApprovalModeratorForm(MultipleForm):
+    badge_id = forms.IntegerField(widget=forms.HiddenInput())
+    user_id = forms.IntegerField(widget=forms.HiddenInput())

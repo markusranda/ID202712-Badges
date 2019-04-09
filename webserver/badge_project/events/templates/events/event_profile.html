@@ -84,8 +84,9 @@
                                         </form>
                                          <form method="post">
                                             {% csrf_token %}
-                                            {{ forms.delete_badge_request }}
+                                            {{ forms.approve_badge_mod }}
                                             <input type="hidden" name="badge_id" value="{{ badge_request.badge.id }}">
+                                             <input type="hidden" name="user_id" value="{{ badge_request.user.id }}">
                                             <input type="submit" value="Approve">
                                         </form>
                                         </td>
