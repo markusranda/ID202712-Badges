@@ -24,6 +24,6 @@ class Attendees(models.Model):
 
 class UserBadges(models.Model):
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE, related_name='userbadge')
-    is_showcase = models.BooleanField()
+    is_showcase = models.BooleanField(default=0)
     date_earned = models.DateTimeField(auto_now_add=True, blank=False)
     event_badge = models.ForeignKey('events.EventBadges', on_delete=models.CASCADE, related_name='user_badges')
