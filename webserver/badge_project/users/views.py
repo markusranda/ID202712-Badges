@@ -42,7 +42,7 @@ class ProfilePage(generic.ListView):
         parameter_username = self.kwargs['username']
         object_user = CustomUser.objects.filter(username=parameter_username).get()
 
-        badges = object_user.badge.get_queryset().order_by('badge_request__userbadge__date_earned')         # hoped to reverse the list so I get the latest earned badge first
+        badges = object_user.userbadge.get_queryset().order_by('badge_request__userbadge__date_earned')         # hoped to reverse the list so I get the latest earned badge first
                                                     # before pagination kicks in... does not work.
         p = Paginator(badges, self.paginate_by)     # paginate the queryset we made earlier
         context['badges_list'] = p.page(context['page_obj'].number)
