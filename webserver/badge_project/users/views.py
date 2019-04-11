@@ -65,7 +65,7 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         object_user = self.request.user
-        context['eventbadges'] = object_user.badge.all()
+        context['user_badge_list'] = object_user.user.all()
         return context
 
     def get_success_url(self):

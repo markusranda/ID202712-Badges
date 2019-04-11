@@ -1,16 +1,16 @@
 <div class="row justify-content-md-center">
 
-    {% for userbadge in userbadges %}
+    {% for user_badge in user_badge_list %}
 
         <div class="col">
             <label>
-                {% if userbadge.is_showcase == True %}
-                    <input type="checkbox" value="{{ userbadge.id }}" name="badge_id" checked>
+                {% if user_badge.is_showcase == True %}
+                    <input type="checkbox" value="{{ user_badge.id }}" name="badge_id" checked>
                 {% else %}
-                    <input type="checkbox" value="{{ userbadge.id }}" name="badge_id">
+                    <input type="checkbox" value="{{ user_badge.id }}" name="badge_id">
                 {% endif %}
-                <img src="{{ userbadge.badge.image.url }}" alt="Very beautiful picture" width="100">
-                <div style="display: contents;">{{ userbadge.badge.name }}</div>
+                <img src="{{ user_badge.event_badge.badge.image.url }}" alt="Very beautiful picture" width="100">
+                <div style="display: contents;">{{ user_badge.event_badge.badge.name }}</div>
             </label>
         </div>
 
