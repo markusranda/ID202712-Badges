@@ -11,6 +11,7 @@ from django.views.generic.edit import FormMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import CustomUser, Attendees, UserBadges
 from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
 
 from .forms import CustomUserCreationForm
 from badges.models import Badges
@@ -32,10 +33,19 @@ class ProfilePage(generic.ListView):
     model = Badges
     template_name = 'users/profile_page.html'
 
+    paginate_by = 5
+    context_object_name = "badges_list"
+
+
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
         parameter_username = self.kwargs['username']
         object_user = CustomUser.objects.filter(username=parameter_username).get()
+
+        badges = object_user.badge.get_queryset().order_by('badge_request__userbadge__date_earned')         # hoped to reverse the list so I get the latest earned badge first
+                                                    # before pagination kicks in... does not work.
+        p = Paginator(badges, self.paginate_by)     # paginate the queryset we made earlier
+        context['badges_list'] = p.page(context['page_obj'].number)
 
         '''Obtain all events from the '''
         attendants_qs = Attendees.objects.filter(user_id=object_user.id)
@@ -45,8 +55,8 @@ class ProfilePage(generic.ListView):
                 event = attendants_qs.event
                 events_list.append(event)
 
-        context['showcase_list'] = object_user.userbadge.filter(is_showcase=1)
-        context['badges_list'] = object_user.badge.all()
+        context['showcase_list'] = object_user.userbadge.filter(is_showcase=1) # for now this has to be overridden
+        # context['badges_list'] = object_user.badge.all() # override also override built-in pagination.
         context['event_active_list'] = events_list
         context['about_me'] = object_user.about_me
 
