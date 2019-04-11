@@ -48,18 +48,18 @@
                 </div>
                 <div class="col-md-4 mx-auto">
                     <h2 class="text-center text-white font-weight-light">Remove badges from users</h2>
-                    {% if user_event_badges %}
+                    {% if user_badge_list %}
                         <table class="table table-striped table-sm mt-4 text-white">
                             {% for user_badge in user_badge_list %}
                                 <tr>
-                                    <td>{{ user_badge.badge.name }}</td>
+                                    <td>{{ user_badge.event_badge.badge.name }}</td>
                                     <td>{{ user_badge.user.username }}</td>
                                     <td>
                                         <form method="post">
                                             {% csrf_token %}
                                             {{ forms.remove_badge_from_user }}
-                                            <input type="hidden" name="badge_id" value="{{ user_event_badge.badge_id }}">
-                                            <input type="hidden" name="user_id" value="{{ user.id }}">
+                                            <input type="hidden" name="badge_id" value="{{ user_badge.event_badge.badge_id }}">
+                                            <input type="hidden" name="user_id" value="{{ user_badge.user.id }}">
                                             <input type="submit" class="btn btn-light btn-sm btn-block m-1" value="Remove badge">
                                         </form>
                                     </td>

@@ -123,6 +123,14 @@ class EventProfile(MultiFormsView):
         if self.request.user.id == event_object.created_by_id:
             user_is_moderator = True
 
+        event_badge_list = event_object.event.all()
+        user_badge_list = []
+        for event_badge in event_badge_list:
+            user_badge_qs = event_badge.user_badges.all()
+            for user_badge in user_badge_qs:
+                    user_badge_list.append(user_badge)
+
+
         context['user_is_moderator'] = user_is_moderator
         context['people_joined'] = Attendees.objects.filter(event=event_object.id).count()
         context['event_name'] = event_object.name
@@ -131,7 +139,8 @@ class EventProfile(MultiFormsView):
         context['badge_requests'] = badge_request_qs
         context['requestable_badge'] = event_object.badge.all()
         context['event_pin'] = event_object.pin
-        context['user_badge_list'] = event_object.event.all()
+        context['user_badge_list'] = user_badge_list
+
 
         return context
 
@@ -174,8 +183,8 @@ class EventProfile(MultiFormsView):
         badge_id = form.cleaned_data.get('badge_id')
         event_id = self.kwargs['pk']
         user_id = form.cleaned_data.get('user_id')
-
-        userbadge = UserBadges.objects.filter(user_id=user_id, badge_id=badge_id, event_id=event_id).get()
+        event_badge = EventBadges.objects.get(badge_id=badge_id, event_id=event_id)
+        userbadge = UserBadges.objects.filter(event_badge=event_badge, user_id=user_id).get()
         userbadge.delete()
 
         return HttpResponseRedirect(self.get_success_url())
@@ -184,7 +193,9 @@ class EventProfile(MultiFormsView):
         badge_id = form.cleaned_data.get('badge_id')
         event_id = self.kwargs['pk']
         user_id = form.cleaned_data.get('user_id')
-        userbadge = UserBadges.objects.create(is_showcase=0, badge_id=badge_id, event_id=event_id, user_id=user_id)
+        event_badge = EventBadges.objects.get(badge_id=badge_id, event_id=event_id)
+        UserBadges.objects.create(event_badge=event_badge, user_id=user_id)
         b = BadgeRequests.objects.filter(badge_id=badge_id, event_id=event_id, user_id=user_id).get()
         b.delete()
+
         return HttpResponseRedirect(self.get_success_url())

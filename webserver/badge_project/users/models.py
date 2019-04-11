@@ -23,6 +23,6 @@ class Attendees(models.Model):
 
 
 class UserBadges(models.Model):
-    event_badge = models.ForeignKey('events.EventBadges', on_delete=models.CASCADE, related_name='eventbadge')
+    event_badge = models.ForeignKey('events.EventBadges', on_delete=models.CASCADE, related_name='user_badges')
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE, related_name='user')
     is_showcase = models.BooleanField(default=False)
