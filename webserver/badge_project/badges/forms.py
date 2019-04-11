@@ -31,6 +31,9 @@ class CreateBadgeForm(ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Column(
+                HTML(
+                    "<h1>Create a new badge</h1>"
+                ),
                 Field(
                     'name', placeholder='Enter a badge name',
                 ),
@@ -45,7 +48,7 @@ class CreateBadgeForm(ModelForm):
                 Submit(
                     'submit', 'Create'
                 ),
-                css_class='col-lg-6 mx-auto text-white',
+                css_class='col-lg-6 mx-auto text-white pt-5',
             )
         )
 
