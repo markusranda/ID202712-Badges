@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Badges(models.Model):
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=55)
     description = models.CharField(max_length=255)
     image = models.ForeignKey('Images', on_delete=models.CASCADE,)
 
