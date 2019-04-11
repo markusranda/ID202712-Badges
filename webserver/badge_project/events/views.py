@@ -80,12 +80,13 @@ class CreateEvent(LoginRequiredMixin, CreateView):
             cd = form.cleaned_data
             name = cd.pop('name')
             description = cd.pop('description')
+            badges = cd.pop('badge')
             user_id = request.user.id
 
             event = Events.objects.create(name=name, description=description, active=1,
                                           created_by_id=user_id, pin=random())
 
-            for badge in cd.pop('requestable_badges'):
+            for badge in badges:
                 EventBadges.objects.create(badge_id=badge.id, event_id=event.id)
 
             return HttpResponseRedirect(self.get_success_url(event.id))
