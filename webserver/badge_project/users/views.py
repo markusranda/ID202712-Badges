@@ -49,11 +49,13 @@ class ProfilePage(generic.ListView):
         context['event_badge_list'] = object_user.event_badge.all()
         context['event_active_list'] = events_list
         context['about_me'] = object_user.about_me
+        context['profile_owner'] = parameter_username
 
         # User stats
         context['badge_count'] = object_user.event_badge.all().count()
         context['event_count'] = Attendees.objects.filter(user_id=object_user.id).count()
         context['date_joined'] = object_user.date_joined
+
 
         return context
 
