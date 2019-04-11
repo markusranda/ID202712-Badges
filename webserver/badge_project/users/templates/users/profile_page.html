@@ -58,16 +58,33 @@
                         <div class="bg-white text-dark p-4">
                             <h2>Recently earned badges</h2>
                             <div class="table-responsive">
-                                {% if event_badge_list %}
+                                {% if badges_list %}
 
                                     <table class="table table-borderless">
-                                        {% for event_badge in event_badge_list %}
+                                        {% for user_badge in badges_list %}
                                             <tr>
                                                 <td style="border-top-width: 0; vertical-align: baseline;">
-                                                    <img src="{{ event_badge.badge.image.url }}" width="100" alt="Picture is missing, did the developer assign the wrong path?"></td>
-                                                <td style="border-top-width: 0; vertical-align: baseline;">{{ event_badge.badge.name }}</td>
+                                                    <img src="{{ user_badge.event_badge.badge.image.url }}" width="100" alt="Picture is missing, did the developer assign the wrong path?"></td>
+                                                <td style="border-top-width: 0; vertical-align: baseline;">{{ user_badge.event_badge.badge.name }}</td>
                                             </tr>
                                         {% endfor %}
+                                    <div class="pagination">
+                                        <span class="step-links">
+                                            {% if badges_list.has_previous %}
+                                                <a href="?page=1">&laquo; first</a>
+                                                <a href="?page={{ badges_list.previous_page_number }}">previous</a>
+                                            {% endif %}
+
+                                            <span class="current">
+                                                Page {{ badges_list.number }} of {{ badges_list.paginator.num_pages }}.
+                                            </span>
+
+                                            {% if badges_list.has_next %}
+                                                <a href="?page={{ badges_list.next_page_number }}">next</a>
+                                                <a href="?page={{ badges_list.paginator.num_pages }}">last &raquo;</a>
+                                            {% endif %}
+                                        </span>
+                                    </div>
                                     </table>
 
                                 {% else %}
