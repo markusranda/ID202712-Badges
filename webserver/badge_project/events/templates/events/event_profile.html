@@ -1,44 +1,45 @@
 {% extends "nav/nav.html" %}
 
 {% block content %}
-
     <div class="container-fluid fill bg-info">
-        <div class="row mx-auto mb-6 pt-5">
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-4 mt-4 mb-5">
-                <h1 class="text-white text-center font-weight-bold text-uppercase eventName">{{ event_name }}</h1>
-            </div>
-            <div class="col-md-4">
-            </div>
-        </div>
-        <div class="row mx-auto mt-4 mb-5 pb-5">
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-4 mb-4">
-                <h2 class="text-white text-center font-weight-bold pb-2">Event pin: </h2>
-                <h2 class="text-white text-center font-weight-light bg-white text-dark pt-3 pb-3">{{ event_pin }}</h2>
-            </div>
-            <div class="col-md-4">
-            </div>
-        </div>
-        <div class="row mx-auto mt-5 mb-0 pb-5">
-            <div class="col-md-4">
-                <h2 class="text-white text-center font-weight-bold">Badges available: </h2>
-                <h2 class="text-white text-center font-weight-light">{{ requestable_badge.count }}</h2>
-            </div>
-            <div class="col-md-4">
-                <h2 class="text-white text-center font-weight-bold">Event description: </h2>
-                <h4 class="text-white text-center font-weight-light">{{ event_desc }}</h4>
-            </div>
-            <div class="col-md-4 mb-5 pb-5">
-                <h2 class="text-white text-center font-weight-bold">Joined event: </h2>
-                <h2 class="text-white text-center font-weight-light">{{ people_joined }}</h2>
-            </div>
+        <div class="centerThis">
+                <div class="row mx-auto mb-6">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4 mt-4 mb-5">
+                        <h1 class="text-white text-center font-weight-bold text-uppercase eventName">{{ event_name }}</h1>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+                <div class="row mx-auto mt-4 mb-5">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <h2 class="text-white text-center font-weight-bold pb-2">Event pin: </h2>
+                        <h2 class="text-white text-center font-weight-light bg-white text-dark pt-3 pb-3">{{ event_pin }}</h2>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+                <div class="row mx-auto mt-5 mb-0">
+                    <div class="col-md-4">
+                        <h2 class="text-white text-center font-weight-bold">Badges available: </h2>
+                        <h2 class="text-white text-center font-weight-light">{{ requestable_badge.count }}</h2>
+                    </div>
+                    <div class="col-md-4 eventDescription">
+                        <h2 class="text-white text-center font-weight-bold">Event description: </h2>
+                        <h4 class="text-white text-center font-weight-light">{{ event_desc }}</h4>
+                    </div>
+                    <div class="col-md-4 mb-5 pb-5">
+                        <h2 class="text-white text-center font-weight-bold">Joined event: </h2>
+                        <h2 class="text-white text-center font-weight-light">{{ people_joined }}</h2>
+                    </div>
+                </div>
         </div>
     </div>
 
-    <div class="container-fluid fill bg-success">
+    <div class="container-fluid fill bg-success clearfix">
         <div class="row mx-auto mt-0 mb-6">
             <div class="col-md-4 mt-4">
                 {% if user_is_moderator %}
@@ -50,7 +51,7 @@
                         {% csrf_token %}
                         {{ forms.end_event }}
                         <input type="hidden" name="event_id" value={{ event_id }}>
-                        <input type="submit" class="btn btn-danger btn-sm btn-block" value="End Event">
+                        <input type="submit" class="btn btn-danger btn-md btn-block mt-2" value="End Event">
                     </form>
                 {% endif %}
             </div>
@@ -66,9 +67,8 @@
 
         </div>
 
-        <div class="row mt-0 mb-6 justify-content-center">
-            <div class="col"></div>
-            <div class="col">
+        <div class="row mt-0 pt-4 justify-content-center">
+            <div class="col-lg-5 m-5 p-5">
                 <div id="eventProfileUserContent">
                     {% if badge_requests %}
                         <div class="table-responsive">
@@ -85,7 +85,7 @@
                                             {{ forms.approve_badge_mod }}
                                             <input type="hidden" name="badge_id" value="{{ badge_request.badge.id }}">
                                              <input type="hidden" name="user_id" value="{{ badge_request.user.id }}">
-                                            <input type="submit" value="Approve">
+                                            <input class="btn btn-light btn-sm btn-block ml-0 mr-2" type="submit" value="Approve">
                                             </form>
                                         </th>
                                     </tr>
@@ -106,6 +106,7 @@
                             <table class="table table-striped table-sm text-white  ">
                                 {% for badge in requestable_badge %}
                                     <tr>
+                                        <th><img src={{ badge.image}} width="75"></th>
                                         <th>{{ badge.name }}</th>
                                         <th>
                                             <form method="post">
@@ -124,10 +125,9 @@
                         <p class="text-center mt-4 p-5 pb-0">No badges to request at the moment...</p>
 
                     {% endif %}
-                </div></div>
-            <div class="col"></div>
+                </div>
+            </div>
         </div>
-
     </div>
 
 {% endblock %}
