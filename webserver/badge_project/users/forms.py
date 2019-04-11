@@ -27,14 +27,14 @@ class ChangeProfilePageForm(ModelForm):
                     """
                 ),
                 'about_me',
+                HTML(
+                    "<h4>Select badges for your showcase</h4>"
+                    "<p>Choose no more than 4 badges.</p>"
+
+                ),
                 MultiField(
                     'badge_id',
                     template='users/widgets/multipleCheckboxes.html'
-                ),
-                HTML(
-                    """
-                    <p>Choose no more than 4 badges.</p>
-                    """
                 ),
                 Submit(
                     'submit', 'Update'
