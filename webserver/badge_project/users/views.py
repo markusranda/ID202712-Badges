@@ -33,7 +33,7 @@ class ProfilePage(generic.ListView):
     template_name = 'users/profile_page.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         parameter_username = self.kwargs['username']
         object_user = CustomUser.objects.filter(username=parameter_username).get()
 
@@ -45,13 +45,13 @@ class ProfilePage(generic.ListView):
                 event = attendants_qs.event
                 events_list.append(event)
 
-        context['showcase_list'] = object_user.userbadge.filter(is_showcase=1)
-        context['badges_list'] = object_user.badge.all()
+        context['showcase_list'] = object_user.user.filter(is_showcase=1)
+        context['event_badge_list'] = object_user.event_badge.all()
         context['event_active_list'] = events_list
         context['about_me'] = object_user.about_me
 
         # User stats
-        context['badge_count'] = object_user.badge.all().count()
+        context['badge_count'] = object_user.event_badge.all().count()
         context['event_count'] = Attendees.objects.filter(user_id=object_user.id).count()
         context['date_joined'] = object_user.date_joined
 
@@ -65,7 +65,7 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         object_user = self.request.user
-        context['userbadges'] = object_user.userbadge.all()
+        context['eventbadges'] = object_user.badge.all()
         return context
 
     def get_success_url(self):
