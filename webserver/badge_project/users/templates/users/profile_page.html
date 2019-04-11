@@ -105,10 +105,6 @@
                                 {% if event_active_list %}
                                 <table class="table table-bordered">
                                     <thead>
-                                    <tr>
-                                        <th><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a>
-                                        </th>
-                                    </tr>
                                     {% for event in event_active_list %}
                                         <tr>
                                             <th><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></th>
