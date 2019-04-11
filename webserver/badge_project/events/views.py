@@ -19,7 +19,7 @@ from badges.models import Badges
 from .multiforms import MultiFormsView
 from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm, DeleteBadgeRequestForm, \
     BadgeApprovalModeratorForm, RemoveBadgeFromUserForm, EndEventForm
-from .models import Events, BadgeRequests
+from .models import Events, BadgeRequests, EventBadges
 from .models import random
 
 from django.db import models
@@ -80,12 +80,13 @@ class CreateEvent(LoginRequiredMixin, CreateView):
             cd = form.cleaned_data
             name = cd.pop('name')
             description = cd.pop('description')
+            badges = cd.pop('badge')
             user_id = request.user.id
 
             event = Events.objects.create(name=name, description=description, active=1,
                                           created_by_id=user_id, pin=random())
 
-            for badge in cd.pop('requestable_badges'):
+            for badge in badges:
                 EventBadges.objects.create(badge_id=badge.id, event_id=event.id)
 
             return HttpResponseRedirect(self.get_success_url(event.id))
@@ -123,15 +124,25 @@ class EventProfile(MultiFormsView):
         if self.request.user.id == event_object.created_by_id:
             user_is_moderator = True
 
+        event_badge_list = event_object.event.all()
+        user_badge_list = []
+        for event_badge in event_badge_list:
+            user_badge_qs = event_badge.user_badges.all()
+            for user_badge in user_badge_qs:
+                    user_badge_list.append(user_badge)
+
+
         context['user_is_moderator'] = user_is_moderator
         context['people_joined'] = Attendees.objects.filter(event=event_object.id).count()
         context['event_name'] = event_object.name
         context['event_desc'] = event_object.description
         context['event_id'] = event_object.id
         context['badge_requests'] = badge_request_qs
-        context['requestable_badge'] = event_object.requestable_badges.all()
+        context['requestable_badge'] = event_object.badge.all()
         context['event_pin'] = event_object.pin
-        context['user_event_badges'] = UserBadges.objects.filter(event_id=event_object.id)
+        context['user_badge_list'] = user_badge_list
+        context['event_active'] = event_object.active
+
 
         return context
 
@@ -174,7 +185,9 @@ class EventProfile(MultiFormsView):
         badge_id = form.cleaned_data.get('badge_id')
         event_id = self.kwargs['pk']
         user_id = form.cleaned_data.get('user_id')
-        UserBadges.objects.create(badge_id, event_id, user_id)
+        event_badge = EventBadges.objects.get(badge_id=badge_id, event_id=event_id)
+        userbadge = UserBadges.objects.filter(event_badge=event_badge, user_id=user_id).get()
+        userbadge.delete()
 
         return HttpResponseRedirect(self.get_success_url())
 
@@ -182,7 +195,9 @@ class EventProfile(MultiFormsView):
         badge_id = form.cleaned_data.get('badge_id')
         event_id = self.kwargs['pk']
         user_id = form.cleaned_data.get('user_id')
-        userbadge = UserBadges.objects.create(is_showcase=0, badge_id=badge_id, event_id=event_id, user_id=user_id)
+        event_badge = EventBadges.objects.get(badge_id=badge_id, event_id=event_id)
+        UserBadges.objects.create(event_badge=event_badge, user_id=user_id)
         b = BadgeRequests.objects.filter(badge_id=badge_id, event_id=event_id, user_id=user_id).get()
         b.delete()
+
         return HttpResponseRedirect(self.get_success_url())

@@ -14,7 +14,7 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class ChangeProfilePageForm(ModelForm):
-    badge_id = CharField()
+    badge_id = CharField(required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

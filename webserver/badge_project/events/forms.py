@@ -22,7 +22,7 @@ class CreateEventForm(ModelForm):
                 ),
                 'name',
                 'description',
-                'requestable_badges',
+                'badge',
                 Submit('submit', 'Create'),
                 css_class='col-lg-6 mt-4 mx-auto',
             )
@@ -30,18 +30,18 @@ class CreateEventForm(ModelForm):
 
     class Meta:
         model = Events
-        fields = ('name', 'description', 'requestable_badges')
+        fields = ('name', 'description', 'badge')
         labels = {
             'name': 'Name',
             'description': 'Description',
-            'requestable_badges': 'Add badges'
+            'badge': 'Add badges'
         }
         help_texts = {
             'name': 'Enter a name for the event'
         }
         widgets = {
             'description': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the event here...'}),
-            'requestable_badges': CheckboxSelectMultiple()
+            'badge': CheckboxSelectMultiple()
         }
 
 

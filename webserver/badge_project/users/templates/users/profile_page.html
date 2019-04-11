@@ -6,7 +6,7 @@
 
         <div class="row mt-4">
             <div class="col-md-3">
-                <h2 class="text-left text-info">{{ user.username|capfirst }}</h2>
+                <h2 class="text-left text-info">{{ profile_owner }}</h2>
             </div>
             <div class="col-md-3">
             </div>
@@ -28,7 +28,7 @@
                                 <table class="table table-borderless">
                                     <tr>
                                         {% for userbadge in showcase_list %}
-                                            <td style="border-top-width: 0;"><img src="{{ userbadge.badge.image.url }}"
+                                            <td style="border-top-width: 0;"><img src="{{ userbadge.event_badge.badge.image.url }}"
                                                                                   width="150"
                                                                                   alt="Picture is missing, did the developer assign the wrong path?">
                                             </td>
@@ -58,16 +58,16 @@
                         <div class="bg-white text-dark p-4">
                             <h2>Recently earned badges</h2>
                             <div class="table-responsive">
-                                {% if badges_list %}
+                                {% if event_badge_list %}
+
                                     <table class="table table-borderless">
-                                        {% for badge in badges_list %}
+                                        {% for event_badge in event_badge_list %}
                                             <tr>
-                                                <td style="border-top-width: 0; vertical-align: baseline;"><img
-                                                        src={{ badge.image.url }} width="100"></td>
-                                                <td style="border-top-width: 0; vertical-align: baseline;">{{ badge.name }}</td>
+                                                <td style="border-top-width: 0; vertical-align: baseline;">
+                                                    <img src="{{ event_badge.badge.image.url }}" width="100" alt="Picture is missing, did the developer assign the wrong path?"></td>
+                                                <td style="border-top-width: 0; vertical-align: baseline;">{{ event_badge.badge.name }}</td>
                                             </tr>
                                         {% endfor %}
-
                                     </table>
 
                                 {% else %}
@@ -105,10 +105,6 @@
                                 {% if event_active_list %}
                                 <table class="table table-bordered">
                                     <thead>
-                                    <tr>
-                                        <th><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a>
-                                        </th>
-                                    </tr>
                                     {% for event in event_active_list %}
                                         <tr>
                                             <th><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></th>
@@ -128,10 +124,9 @@
                         <!--  share button -->
                         <div class="d-flex justify-content-right mb-2 mt-2">
                             <div class="fb-share-button"
-                                 data-href="http://192.168.50.50:8080/users/Master_Badger/profile_page/"
                                  data-layout="button" data-size="small"><a target="_blank"
-                                                                           href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F192.168.50.50%3A8080%2Fusers%2FMaster_Badger%2Fprofile_page%2F&amp;src=sdkpreparse"
-                                                                           class="fb-xfbml-parse-ignore">Share</a></div
+                                                                           href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F192.168.50.50%3A8080%2Fusers%2F<username>%2Fprofile_page%2F&amp;src=sdkpreparse"
+                                                                           class="fb-xfbml-parse-ignore">Share</a>
                         </div>
                         <!-- share button -->
                     </div>

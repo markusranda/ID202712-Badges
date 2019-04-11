@@ -38,7 +38,7 @@ class ProfilePage(generic.ListView):
 
 
     def get_context_data(self, **kwargs):
-        context = super(ListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         parameter_username = self.kwargs['username']
         object_user = CustomUser.objects.filter(username=parameter_username).get()
 
@@ -59,11 +59,13 @@ class ProfilePage(generic.ListView):
         # context['badges_list'] = object_user.badge.all() # override also override built-in pagination.
         context['event_active_list'] = events_list
         context['about_me'] = object_user.about_me
+        context['profile_owner'] = parameter_username
 
         # User stats
-        context['badge_count'] = object_user.badge.all().count()
+        context['badge_count'] = object_user.event_badge.all().count()
         context['event_count'] = Attendees.objects.filter(user_id=object_user.id).count()
         context['date_joined'] = object_user.date_joined
+
 
         return context
 
@@ -75,7 +77,7 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         object_user = self.request.user
-        context['userbadges'] = object_user.userbadge.all()
+        context['user_badge_list'] = object_user.user.all()
         return context
 
     def get_success_url(self):
