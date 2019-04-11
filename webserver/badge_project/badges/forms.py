@@ -35,6 +35,9 @@ class CreateBadgeForm(ModelForm):
                     'name', placeholder='Enter a badge name',
                 ),
                 'description',
+                HTML(
+                    "<h4>Choose the image that you wish use!</h4>"
+                ),
                 Field(
                     'image',
                     template='badges/widgets/radioList.html',
@@ -49,10 +52,6 @@ class CreateBadgeForm(ModelForm):
     class Meta:
         model = Badges
         fields = ('name', 'description', 'image')
-        labels = {
-            'name': 'Name',
-            'description': 'Description',
-        }
         widgets = {
             'description': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the badge here...'}),
             'image': RadioSelect(),
