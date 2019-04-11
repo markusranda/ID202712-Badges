@@ -3,6 +3,7 @@
     {% for user_badge in user_badge_list %}
 
         <div class="col">
+        <h4>Select badges for your showcase</h4>
             <label>
                 {% if user_badge.is_showcase == True %}
                     <input type="checkbox" value="{{ user_badge.id }}" name="badge_id" checked>

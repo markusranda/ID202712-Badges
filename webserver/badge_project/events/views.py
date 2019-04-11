@@ -141,6 +141,7 @@ class EventProfile(MultiFormsView):
         context['requestable_badge'] = event_object.badge.all()
         context['event_pin'] = event_object.pin
         context['user_badge_list'] = user_badge_list
+        context['event_active'] = event_object.active
 
 
         return context

@@ -3,6 +3,17 @@
 {% block content %}
     <div class="container-fluid fill bg-info">
         <div class="centerThis">
+                {% if event_active is False %}
+                <div class="row mx-auto mb-6">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4 mt-4 mb-5">
+                        <h1 class="text-danger text-center font-weight-bold text-uppercase eventName" style="font-size: 60px">Event has ended!</h1>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+                {% endif %}
                 <div class="row mx-auto mb-6">
                     <div class="col-md-4">
                     </div>
