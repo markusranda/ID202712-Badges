@@ -27,3 +27,4 @@ class UserBadges(models.Model):
     badge = models.ForeignKey('badges.Badges', on_delete=models.CASCADE, related_name='userbadge')
     event = models.ForeignKey('events.Events', on_delete=models.CASCADE, related_name='userbadge')
     is_showcase = models.BooleanField()
+    date_earned = models.DateTimeField(auto_now_add=True, blank=False)
