@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import forms
-from django.http import HttpResponseRedirect, QueryDict
+from django.http import HttpResponseRedirect, QueryDict, request
 from django.shortcuts import render, render_to_response
 from django.urls import reverse_lazy, reverse
 from django.views import generic
@@ -18,7 +18,7 @@ from users.models import UserBadges
 from badges.models import Badges
 from .multiforms import MultiFormsView
 from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm, DeleteBadgeRequestForm, \
-    RemoveBadgeFromUserForm
+    BadgeApprovalModeratorForm, RemoveBadgeFromUserForm, EndEventForm
 from .models import Events, BadgeRequests, EventBadges
 from .models import random
 
@@ -103,6 +103,8 @@ class EventProfile(MultiFormsView):
                     'approve_badge': BadgeApprovalForm,
                     'delete_badge_request': DeleteBadgeRequestForm,
                     'remove_badge_from_user': RemoveBadgeFromUserForm,
+                    'end_event': EndEventForm,
+                    'approve_badge_mod': BadgeApprovalModeratorForm,
                     }
 
     def get_context_data(self, **kwargs):
@@ -125,6 +127,7 @@ class EventProfile(MultiFormsView):
         context['people_joined'] = Attendees.objects.filter(event=event_object.id).count()
         context['event_name'] = event_object.name
         context['event_desc'] = event_object.description
+        context['event_id'] = event_object.id
         context['badge_requests'] = badge_request_qs
         context['requestable_badge'] = event_object.badge.all()
         context['event_pin'] = event_object.pin
@@ -145,6 +148,13 @@ class EventProfile(MultiFormsView):
     def approve_badge_form_valid(self, form):
         badge_id_as_str = form.cleaned_data.get('badge_id_as_str')
         form_name = form.cleaned_data.get('action')
+        return HttpResponseRedirect(self.get_success_url())
+
+    def end_event_form_valid(self, form):
+        event_id = form.cleaned_data.get('event_id')
+        event = Events.objects.get(id=event_id)
+        event.active = 0
+        event.save()
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self, **kwargs):
@@ -168,4 +178,13 @@ class EventProfile(MultiFormsView):
         userbadge = UserBadges.objects.filter(user_id=user_id, badge_id=badge_id, event_id=event_id).get()
         userbadge.delete()
 
+        return HttpResponseRedirect(self.get_success_url())
+
+    def approve_badge_mod_form_valid(self, form):
+        badge_id = form.cleaned_data.get('badge_id')
+        event_id = self.kwargs['pk']
+        user_id = form.cleaned_data.get('user_id')
+        userbadge = UserBadges.objects.create(is_showcase=0, badge_id=badge_id, event_id=event_id, user_id=user_id)
+        b = BadgeRequests.objects.filter(badge_id=badge_id, event_id=event_id, user_id=user_id).get()
+        b.delete()
         return HttpResponseRedirect(self.get_success_url())
