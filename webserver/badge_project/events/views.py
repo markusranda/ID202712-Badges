@@ -19,7 +19,7 @@ from badges.models import Badges
 from .multiforms import MultiFormsView
 from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm, DeleteBadgeRequestForm, \
     RemoveBadgeFromUserForm
-from .models import Events, BadgeRequests
+from .models import Events, BadgeRequests, EventBadges
 from .models import random
 
 from django.db import models
@@ -86,7 +86,6 @@ class CreateEvent(LoginRequiredMixin, CreateView):
                                           created_by_id=user_id, pin=random())
 
             for badge in cd.pop('requestable_badges'):
-                # TODO fix this bug, we no longer have EventBadges, use UserBadges instead.
                 EventBadges.objects.create(badge_id=badge.id, event_id=event.id)
 
             return HttpResponseRedirect(self.get_success_url(event.id))
@@ -127,9 +126,9 @@ class EventProfile(MultiFormsView):
         context['event_name'] = event_object.name
         context['event_desc'] = event_object.description
         context['badge_requests'] = badge_request_qs
-        context['requestable_badge'] = event_object.requestable_badges.all()
+        context['requestable_badge'] = event_object.badge.all()
         context['event_pin'] = event_object.pin
-        context['user_event_badges'] = UserBadges.objects.filter(event_id=event_object.id)
+        context['user_badge_list'] = event_object.event.all()
 
         return context
 

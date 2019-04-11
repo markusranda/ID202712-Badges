@@ -49,10 +49,10 @@
         <h2 class="text-center text-white font-weight-light">Remove badges from users</h2>
         {% if user_event_badges %}
             <table class="table table-striped table-sm mt-4 text-white">
-                {% for user_event_badge in user_event_badges %}
+                {% for user_badge in user_badge_list %}
                     <tr>
-                        <td>{{ user_event_badge.badge.name }}</td>
-                        <td>{{ user_event_badge.user.username }}</td>
+                        <td>{{ user_badge.badge.name }}</td>
+                        <td>{{ user_badge.user.username }}</td>
                         <td>
                             <form method="post">
                                 {% csrf_token %}
