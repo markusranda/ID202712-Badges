@@ -29,3 +29,29 @@ class BadgeRequests(models.Model):
 class EventBadges(models.Model):
     badge = models.ForeignKey('badges.Badges', on_delete=models.CASCADE, related_name='userbadge')
     event = models.ForeignKey('Events', on_delete=models.CASCADE, related_name='event')
+
+
+class Activity(models.Model):
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
+                             related_name='%(app_label)s_%(class)s_related',
+                             related_query_name='%(app_label)s_%(class)ss')
+    event = models.ForeignKey('Events', on_delete=models.CASCADE,
+                              related_name='%(app_label)s_%(class)s_related',
+                              related_query_name='%(app_label)s_%(class)ss)')
+    datetime_earned = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        abstract = True
+
+
+class EarnedBadgeActivity(Activity):
+    badge = models.ForeignKey('badges.Badges', on_delete=models.CASCADE, related_name='%(app_label)s_%(class)s_related')
+
+    def __str__(self):
+        return 'Just earned the badge: ' + self.badge.name
+
+
+class JoinedEventActivity(Activity):
+
+    def __str__(self):
+        return 'Just joined the event!'
