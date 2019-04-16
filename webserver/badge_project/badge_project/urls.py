@@ -18,6 +18,13 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from tastypie.api import Api
+
+from api.resources import ActivityResource, UserResource
+
+v1_api = Api(api_name='resources')
+v1_api.register(ActivityResource())
+v1_api.register(UserResource())
 
 
 urlpatterns = [
@@ -27,4 +34,5 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('users/', include('django.contrib.auth.urls')),
     path('events/', include('events.urls')),
+    path('api/', include(v1_api.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

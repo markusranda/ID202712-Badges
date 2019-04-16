@@ -7,6 +7,7 @@ def random():
     rand = get_random_string(5, '0123456789')
     return rand
 
+
 class Events(models.Model):
     name = models.CharField(max_length=25)
     description = models.CharField(max_length=255)
@@ -54,4 +55,4 @@ class EarnedBadgeActivity(Activity):
 class JoinedEventActivity(Activity):
 
     def __str__(self):
-        return 'Just joined the event!'
+        return self.user.username.capitalize() + ' Just joined the event!'
