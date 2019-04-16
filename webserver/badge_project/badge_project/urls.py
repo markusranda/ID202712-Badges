@@ -20,11 +20,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from tastypie.api import Api
 
-from api.resources import ActivityResource, UserResource
+from api.resources import JoinedEventActivityResource, EarnedBadgeActivityResource, UserResource, BadgeResource
 
-v1_api = Api(api_name='resources')
-v1_api.register(ActivityResource())
-v1_api.register(UserResource())
+api_resources = Api(api_name='resources')
+api_resources.register(UserResource())
+api_resources.register(BadgeResource())
+api_resources.register(JoinedEventActivityResource())
+api_resources.register(EarnedBadgeActivityResource())
 
 
 urlpatterns = [
@@ -34,5 +36,5 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('users/', include('django.contrib.auth.urls')),
     path('events/', include('events.urls')),
-    path('api/', include(v1_api.urls)),
+    path('api/', include(api_resources.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
