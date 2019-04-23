@@ -9,6 +9,10 @@ body, html {
     overflow-x: hidden;
 }
 
+.full-width {
+    width: 100%;
+}
+
 .bg-light {
     background-color: #204c77!important;
 }

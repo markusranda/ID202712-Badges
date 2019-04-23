@@ -1,4 +1,5 @@
 {% extends "nav/nav.html" %}
+{% load static %}
 
 {% block content %}
     <div class="container-fluid fill bg-info">
@@ -47,6 +48,10 @@
                     <h2 class="text-white text-center font-weight-bold">Joined event: </h2>
                     <h2 class="text-white text-center font-weight-light">{{ people_joined }}</h2>
                 </div>
+            </div>
+            <div id="activityFeedContainer" class="row mx-auto mt-5 mb-0"
+                 style="background: #204c77; overflow: scroll; overflow-x: hidden; max-height: 250px;">
+                <script type="text/javascript" src="{% static 'badges/activityFeed.js' %}"></script>
             </div>
         </div>
     </div>
@@ -120,7 +125,7 @@
                             <table class="table table-striped table-sm text-white  ">
                                 {% for badge in requestable_badge %}
                                     <tr>
-                                        <th><img src={{ badge.image }} width="75"></th>
+                                        <th><img src="{{ badge.image }}" width="75" alt="badge_img"></th>
                                         <th>{{ badge.name }}</th>
                                         <th>
                                             <form method="post">

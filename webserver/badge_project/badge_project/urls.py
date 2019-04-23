@@ -20,13 +20,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from tastypie.api import Api
 
-from api.resources import JoinedEventActivityResource, EarnedBadgeActivityResource, UserResource, BadgeResource
+from api.resources import JoinedEventActivityResource, EarnedBadgeActivityResource, UserResource, BadgeResource, JoinedEventActivityCountResource
 
 api_resources = Api(api_name='resources')
 api_resources.register(UserResource())
 api_resources.register(BadgeResource())
 api_resources.register(JoinedEventActivityResource())
 api_resources.register(EarnedBadgeActivityResource())
+api_resources.register(JoinedEventActivityCountResource())
 
 
 urlpatterns = [
