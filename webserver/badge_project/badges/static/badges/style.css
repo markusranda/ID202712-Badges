@@ -262,3 +262,7 @@ nav {
         font-size: 1em;
     }
 }
+
+.colorBtn {
+    box-shadow: 5px 5px gray;
+}
