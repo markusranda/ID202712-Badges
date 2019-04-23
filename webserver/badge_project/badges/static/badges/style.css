@@ -251,6 +251,13 @@ nav {
 }
 
 @media screen and (max-width: 400px) {
+        .centerThis {
+        padding-top: 5vh;
+        padding-bottom: 10vh;
+    }
+}
+
+@media screen and (max-width: 400px) {
     .eventDescription {
         font-size: 1em;
     }
