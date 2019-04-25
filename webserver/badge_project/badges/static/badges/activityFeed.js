@@ -1,60 +1,9 @@
 let count;
+let newCount;
+const debugging = true;
 const container = document.getElementById("activityFeedContainer");
 const baseUrl = "http://192.168.50.50:8080";
 
-function printLatestActivity() {
-    let newCount = getCount();
-
-    // Check for changes
-    if (newCount > count) {
-
-        // Get how many new activities that exist in the database
-        let numActivities = newCount - count;
-
-        // Save the position of the activity in the database
-        let pos = count + 1;
-
-        for (let i = 0; i < numActivities; i++) {
-            // Retrieves a specific activity
-            printActivity(pos);
-
-            pos++;
-        }
-
-        console.log("TEST");
-
-        // Set the count to the new value
-        count = newCount;
-    }
-
-    function printActivity(pos) {
-        $.getJSON("http://192.168.50.50:8080/api/resources/joined_event_activities/?id=" + event_id, function (result) {
-            let curUser = result.objects.user;
-            let curTime = result.objects.timestamp;
-            createNewJoinedEventRow(curUser, curTime);
-        });
-    }
-
-    return undefined;
-}
-
-
-function getCount() {
-
-    $.getJSON("//192.168.50.50:8080/api/resources/joined_event_activities/?id=" + event_id, function (result) {
-        return result.meta.total_count;
-    });
-}
-
-
-function print10LastActivities() {
-    $.getJSON("http://192.168.50.50:8080/api/resources/joined_event_activities/?id=" + event_id, function (result) {
-
-        $.each(result.objects, function () {
-            createNewJoinedEventRow(this.user, this.datetime_earned)
-        });
-    });
-}
 
 function createNewJoinedEventRow(user, timestamp) {
 
@@ -80,6 +29,7 @@ function createNewJoinedEventRow(user, timestamp) {
     rowContainer.appendChild(activityTextContainer);
     rowContainer.appendChild(datetimeContainer);
     container.appendChild(rowContainer);
+    container.insertBefore(rowContainer, container.firstChild);
 
     // Get the URI to the user
     let user_uri = baseUrl + user;
@@ -87,8 +37,8 @@ function createNewJoinedEventRow(user, timestamp) {
     // Get the username
     $.getJSON(user_uri, function (result) {
         // Get the involved user and add it to the html element
-        username = result.username;
-        const url = baseUrl + "/users/" + username + "/profile_page/";
+        let username = result.username;
+        let url = baseUrl + "/users/" + username + "/profile_page/";
         nameContainer.href = url;
         nameContainer.innerHTML += username;
     });
@@ -97,17 +47,52 @@ function createNewJoinedEventRow(user, timestamp) {
 }
 
 
-!function checkForUpdate() {
+!function buildAndLoop() {
 
-    // Get the 10 latest activities for the event
-    print10LastActivities();
+    // Get the 10 latest activities
+    $.getJSON(baseUrl + "/api/resources/joined_event_activities/?event_id=" + event_id, function (result) {
 
-    // Get the current number of activities for the event
-    count = getCount();
+        // Create each of them in the activity feed
+        $.each(result.objects, function () {
+            createNewJoinedEventRow(this.user, this.datetime_earned);
+        });
 
-    // Creates a new thread that will be fetching new activities
+        // Get the count of the activities
+        $.getJSON(baseUrl + "/api/resources/joined_event_activities/?event_id=" + event_id + "&attach_dynamic_fields=get_count", function (result) {
+            // Get the first number of activities
+            count = result.objects[0].attach_dynamic_fields_get_count;
 
-    // Check every second for a new activity
-    setInterval(printLatestActivity(), 1000);
+            if (debugging) {
+                console.log(count + " - Initial count");
+            }
 
+            // Check for new activities every fifth second
+            setInterval(function () {
+
+                $.getJSON(baseUrl + "/api/resources/joined_event_activities/?event_id=" + event_id + "&attach_dynamic_fields=get_count", function (result) {
+                    newCount = result.objects[0].attach_dynamic_fields_get_count;
+                    if (debugging) {
+                        console.log(newCount + " - Current count");
+                    }
+                    // Check for changes
+                    if (newCount > count) {
+
+                        for (let i = count; i < newCount; i++) {
+                            // Retrieves a specific activity
+                            let object = result.objects[i];
+                            createNewJoinedEventRow(object.user, object.datetime_earned);
+                        }
+
+                        // Set the count to the new value
+                        count = newCount;
+
+                        if (debugging) {
+                            console.log(count + " - New count");
+                        }
+                    }
+                });
+
+            }, 5000);
+        });
+    });
 }();

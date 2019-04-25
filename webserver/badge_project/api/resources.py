@@ -51,6 +51,12 @@ class JoinedEventActivityResource(ModelResource):
         newValue = oldValue.strftime("%H:%M:%S")
         return newValue
 
+    def dehydrate(self, bundle):
+        if bundle.request.GET.get('attach_dynamic_fields'):
+            event_id = bundle.request.GET.get('event_id')
+            bundle.data['attach_dynamic_fields_get_count'] = JoinedEventActivity.objects.filter(event_id=event_id).count()
+        return bundle
+
 
 class EarnedBadgeActivityResource(ModelResource):
     badge = fields.ForeignKey(BadgeResource, 'badge')
