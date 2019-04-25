@@ -131,9 +131,10 @@ class EventProfile(MultiFormsView):
             for user_badge in user_badge_qs:
                     user_badge_list.append(user_badge)
 
-
         context['user_is_moderator'] = user_is_moderator
         context['people_joined'] = Attendees.objects.filter(event=event_object.id).count()
+        context['attendees'] = Attendees.objects.filter(event=event_object.id)
+        context['earned'] = event_object.badge.all().count()
         context['event_name'] = event_object.name
         context['event_desc'] = event_object.description
         context['event_id'] = event_object.id
