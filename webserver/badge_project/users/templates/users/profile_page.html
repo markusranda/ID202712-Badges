@@ -1,6 +1,8 @@
 {% extends "nav/nav.html" %}
 
 {% block content %}
+    {% load static %}
+    <script src="{% static 'badges/jscolor.js' %}"></script>
 
     <div class="container">
 
@@ -138,8 +140,23 @@
                         </div>
                     </div>
                     <div>
+                        <p class="font-weight-bold">Choose a color for your profile!</p>
+                    </div>
+                    <div class="d-flex justify-content-center mb-2">
+{#                        <input class="input jscolor {onFineChange:'update(this)'}" value="cc66ff">#}
+                        <button class="btn colorBtn btn-block jscolor {onFineChange:'update(this)'} mb-3">
+                        </button>
+
+                        <script>
+                            function update(jscolor) {
+                                // 'jscolor' instance can be used as a string
+                                document.getElementById('bgColour').style.backgroundColor = '#' + jscolor
+                            }
+                        </script>
+                    </div>
+                    <div>
                         <!--  share button -->
-                        <div class="d-flex justify-content-right mb-2 mt-2">
+                        <div class="d-flex justify-content-right mb-2">
                             <div class="fb-share-button"
                                  data-layout="button" data-size="small"><a target="_blank"
                                                                            href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F192.168.50.50%3A8080%2Fusers%2F<username>%2Fprofile_page%2F&amp;src=sdkpreparse"
