@@ -83,8 +83,8 @@ function createNewJoinedEventRow(username, color, timestamp) {
     let rowOuterContainer = document.createElement("DIV");
     rowOuterContainer.classList.add("container");
     rowOuterContainer.classList.add("full-width");
-    rowOuterContainer.style.cssText = "margin-right: 0 important!";
-    rowOuterContainer.style.cssText = "margin-left: 0 important!";
+    rowOuterContainer.style.cssText = "margin-right: 0 !important";
+    rowOuterContainer.style.cssText = "margin-left: 0 !important";
 
     let rowInnerContainer = document.createElement("DIV");
     rowInnerContainer.classList.add("row");
@@ -132,7 +132,7 @@ function createNewJoinedEventRow(username, color, timestamp) {
             $.getJSON(user_uri, function (result) {
                 // Get the involved user and add it to the html element
                 let username = result.username;
-                let color = result.personal_color;
+                let color = result.color_value;
                 createNewJoinedEventRow(username, color, timestamp);
             });
         });
@@ -190,7 +190,7 @@ function createNewJoinedEventRow(username, color, timestamp) {
             // Get the username and personal color
             $.getJSON(user_uri, function (result) {
                 let username = result.username;
-                let color = result.personal_color;
+                let color = result.color_value;
 
                 // Get the badge title, description and img
                 $.getJSON(badge_uri, function (result) {
@@ -240,7 +240,7 @@ function createNewJoinedEventRow(username, color, timestamp) {
                             // Get the username and personal color
                             $.getJSON(user_uri, function (result) {
                                 let username = result.username;
-                                let color = result.personal_color;
+                                let color = result.color_value;
 
                                 // Get the badge title, description and img
                                 $.getJSON(badge_uri, function (result) {
