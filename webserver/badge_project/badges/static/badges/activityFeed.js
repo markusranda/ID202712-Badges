@@ -6,7 +6,7 @@ const container = document.getElementById("activityFeedContainer");
 const baseUrl = "http://192.168.50.50:8080";
 
 
-function createNewJoinedEventRow(user, timestamp) {
+function createNewJoinedEventRow(username, color, timestamp) {
 
     // Create all the html elements, and add them to the row container
     let rowContainer = document.createElement("DIV");
@@ -15,7 +15,10 @@ function createNewJoinedEventRow(user, timestamp) {
 
     let nameContainer = document.createElement("a");
     nameContainer.classList.add("col-md-1");
-    nameContainer.classList.add("text-white");
+    nameContainer.style.cssText = 'color:' + color + " !important";
+    nameContainer.classList.add("activityFeedNameStyle");
+    nameContainer.href = baseUrl + "/users/" + username + "/profile_page/";
+    nameContainer.innerHTML += username;
 
     let activityTextContainer = document.createElement("p");
     activityTextContainer.classList.add("col-md-8");
@@ -25,6 +28,7 @@ function createNewJoinedEventRow(user, timestamp) {
     let datetimeContainer = document.createElement("p");
     datetimeContainer.classList.add("col-md-1");
     datetimeContainer.classList.add("text-warning");
+    datetimeContainer.innerHTML += timestamp;
 
     rowContainer.appendChild(nameContainer);
     rowContainer.appendChild(activityTextContainer);
@@ -32,25 +36,6 @@ function createNewJoinedEventRow(user, timestamp) {
     container.appendChild(rowContainer);
     container.insertBefore(rowContainer, container.firstChild);
 
-    // Get the URI to the user
-    let user_uri = baseUrl + user;
-
-    // Get the username
-    $.getJSON(user_uri, function (result) {
-        // Get the involved user and add it to the html element
-        let username = result.username;
-        let color = result.personal_color;
-        nameContainer.href = baseUrl + "/users/" + username + "/profile_page/";
-        nameContainer.innerHTML += username;
-        nameContainer.style.cssText = 'color:' + color + " !important";
-        nameContainer.classList.add("activityFeedNameStyle");
-        if (debugging) {
-            console.log(username + "'s personal color is: " + color );
-        }
-
-    });
-    // Set the timestamp
-    datetimeContainer.innerHTML += timestamp;
 }
 
 
@@ -61,7 +46,18 @@ function createNewJoinedEventRow(user, timestamp) {
 
         // Create each of them in the activity feed
         $.each(result.objects, function () {
-            createNewJoinedEventRow(this.user, this.datetime_earned);
+
+            // Get the URI to the user
+            let user_uri = baseUrl + this.user;
+            let datetime = this.datetime_earned;
+
+            // Get the username
+            $.getJSON(user_uri, function (result) {
+                // Get the involved user and add it to the html element
+                let username = result.username;
+                let color = result.personal_color;
+                createNewJoinedEventRow(username, color, datetime);
+            });
         });
 
         // Get the count of the activities
