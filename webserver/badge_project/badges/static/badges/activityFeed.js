@@ -13,8 +13,10 @@ function createNewEarnedBadgeRow(username, color, timestamp, badgeTitle, badgeDe
 
     // Create all the html elements, and add them to the row container
     let rowContainer = document.createElement("DIV");
-    rowContainer.classList.add("row");
+    rowContainer.classList.add("container");
     rowContainer.classList.add("full-width");
+    rowContainer.style.cssText = "margin-right: 0 !important";
+    rowContainer.style.cssText = "margin-left: 0 !important";
 
     let firstRow = document.createElement("DIV");
     firstRow.classList.add("row");
@@ -78,9 +80,15 @@ function createNewEarnedBadgeRow(username, color, timestamp, badgeTitle, badgeDe
 function createNewJoinedEventRow(username, color, timestamp) {
 
     // Create all the html elements, and add them to the row container
-    let rowContainer = document.createElement("DIV");
-    rowContainer.classList.add("row");
-    rowContainer.classList.add("full-width");
+    let rowOuterContainer = document.createElement("DIV");
+    rowOuterContainer.classList.add("container");
+    rowOuterContainer.classList.add("full-width");
+    rowOuterContainer.style.cssText = "margin-right: 0 important!";
+    rowOuterContainer.style.cssText = "margin-left: 0 important!";
+
+    let rowInnerContainer = document.createElement("DIV");
+    rowInnerContainer.classList.add("row");
+    rowInnerContainer.classList.add("full-width");
 
     let nameContainer = document.createElement("a");
     nameContainer.classList.add("col-md-1");
@@ -99,11 +107,12 @@ function createNewJoinedEventRow(username, color, timestamp) {
     datetimeContainer.classList.add("text-warning");
     datetimeContainer.innerHTML += timestamp;
 
-    rowContainer.appendChild(nameContainer);
-    rowContainer.appendChild(activityTextContainer);
-    rowContainer.appendChild(datetimeContainer);
-    container.appendChild(rowContainer);
-    container.insertBefore(rowContainer, container.firstChild);
+    rowInnerContainer.appendChild(nameContainer);
+    rowInnerContainer.appendChild(activityTextContainer);
+    rowInnerContainer.appendChild(datetimeContainer);
+    rowOuterContainer.appendChild(rowInnerContainer);
+    container.appendChild(rowOuterContainer);
+    container.insertBefore(rowOuterContainer, container.firstChild);
 }
 
 
