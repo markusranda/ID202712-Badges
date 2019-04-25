@@ -39,9 +39,15 @@ function createNewJoinedEventRow(user, timestamp) {
     $.getJSON(user_uri, function (result) {
         // Get the involved user and add it to the html element
         let username = result.username;
-        let url = baseUrl + "/users/" + username + "/profile_page/";
-        nameContainer.href = url;
+        let color = result.personal_color;
+        nameContainer.href = baseUrl + "/users/" + username + "/profile_page/";
         nameContainer.innerHTML += username;
+        nameContainer.style.cssText = 'color:' + color + " !important";
+        nameContainer.classList.add("activityFeedNameStyle");
+        if (debugging) {
+            console.log(username + "'s personal color is: " + color );
+        }
+
     });
     // Set the timestamp
     datetimeContainer.innerHTML += timestamp;

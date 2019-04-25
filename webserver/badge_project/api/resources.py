@@ -14,7 +14,7 @@ class UserResource(ModelResource):
     class Meta:
         queryset = CustomUser.objects.all()
         resource_name = 'user'
-        fields = ['username']
+        fields = ['username', 'personal_color']
         allowed_methods = ['get']
 
 

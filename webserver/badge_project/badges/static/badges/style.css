@@ -270,3 +270,7 @@ nav {
 .colorBtn {
     box-shadow: 5px 5px gray;
 }
+
+.activityFeedNameStyle {
+    font-weight: bold;
+}
