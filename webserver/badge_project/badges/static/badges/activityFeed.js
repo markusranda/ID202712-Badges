@@ -1,6 +1,7 @@
 let count;
 let newCount;
 const debugging = true;
+const UPDATE_INTERVAL = 5000;
 const container = document.getElementById("activityFeedContainer");
 const baseUrl = "http://192.168.50.50:8080";
 
@@ -92,7 +93,7 @@ function createNewJoinedEventRow(user, timestamp) {
                     }
                 });
 
-            }, 5000);
+            }, UPDATE_INTERVAL);
         });
     });
 }();
