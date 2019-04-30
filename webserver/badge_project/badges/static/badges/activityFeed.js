@@ -162,18 +162,29 @@ function createNewJoinedEventRow(username, color, timestamp) {
                         for (let i = joinedCount; i < joinedNewCount; i++) {
                             // Retrieves a specific activity
                             let object = result.objects[i];
-                            createNewJoinedEventRow(object.user, object.datetime_earned);
-                        }
 
-                        // Set the count to the new value
-                        joinedCount = joinedNewCount;
+                            // Get the URI to the user
+                            let badge_uri = baseUrl + object.badge;
+                            let timestamp = object.datetime_earned;
+                            let user_uri = baseUrl + object.user;
 
-                        if (debugging) {
-                            console.log(count + " - JOINED - New count");
+                            // Get the username and personal color
+                            $.getJSON(user_uri, function (result) {
+                                let username = result.username;
+                                let color = result.color_value;
+
+                                createNewJoinedEventRow(username, color, timestamp);
+                            });
+
+                            // Set the count to the new value
+                            joinedCount = joinedNewCount;
+
+                            if (debugging) {
+                                console.log(joinedCount + " - JOINED - New count");
+                            }
                         }
                     }
                 });
-
             }, UPDATE_INTERVAL);
         });
     });
