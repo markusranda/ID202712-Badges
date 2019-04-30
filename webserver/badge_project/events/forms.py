@@ -5,11 +5,25 @@ from django.forms import ModelForm, NumberInput, Form, Textarea, ModelChoiceFiel
 from django import forms
 
 from events.models import Events
+from badges.models import Images
 
 from badges.models import Badges
 
 
 class CreateEventForm(ModelForm):
+    def clean(self):
+        cd = super().clean()
+        image_id = self.data['image']
+        try:
+            Images.objects.filter(id=image_id).get()
+
+        except ObjectDoesNotExist:
+            self.add_error('image_id', 'Image does not exist in database!')
+
+        finally:
+            cd['image_id'] = image_id
+            return cd
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -22,7 +36,10 @@ class CreateEventForm(ModelForm):
                 ),
                 'name',
                 'description',
+                Field(
                 'badge',
+                template='widgets/multipleCheckboxes.html',
+                ),
                 Submit('submit', 'Create'),
                 css_class='col-lg-6 mt-4 mx-auto',
             )
@@ -34,14 +51,14 @@ class CreateEventForm(ModelForm):
         labels = {
             'name': 'Name',
             'description': 'Description',
-            'badge': 'Add badges'
+            # 'badge': 'Add badges'
         }
         help_texts = {
             'name': 'Enter a name for the event'
         }
         widgets = {
             'description': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the event here...'}),
-            'badge': CheckboxSelectMultiple()
+            # 'badge': CheckboxSelectMultiple()
         }
 
 
