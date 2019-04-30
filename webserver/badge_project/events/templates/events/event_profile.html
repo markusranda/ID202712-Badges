@@ -47,8 +47,34 @@
                         <h2 class="text-white text-center font-weight-light">{{ people_joined }}</h2>
                     </div>
                 </div>
+
+        <div class="container">
+                {% if people_joined %}
+                        <div class="table-responsive">
+                            <h2 class="text-white font-weight-bold">Attendees: </h2>
+                        <div style="max-height: 150px; max-width: 45%; overflow-y: auto">
+                            <table class="table table-striped table-sm text-white">
+                            <tr>
+                                <th class="text-white text-center font-weight-bold">Username</th>
+                                <th class="text-white text-center font-weight-bold">#Badges earned</th>
+                            </tr>
+                                {% for users in attendees %}
+                                    <tr>
+                                        <td class="text-white text-center font-weight-bold">{{ users.user.username }}</td>
+                                        <td class="text-white text-center font-weight-bold">{{ earned }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                        </div>
+                    {% else %}
+                        <p class="text-center mt-4 p-5 pb-0">No attendees at the moment...</p>
+                {% endif %}
+        </div>
+
         </div>
     </div>
+
 
     <div class="container-fluid fill bg-success clearfix">
         <div class="row mx-auto mt-0 mb-6">
