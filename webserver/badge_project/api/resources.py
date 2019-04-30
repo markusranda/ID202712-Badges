@@ -59,7 +59,7 @@ class JoinedEventActivityResource(ModelResource):
 
     def dehydrate_datetime_earned(self, bundle):
         oldValue = bundle.data['datetime_earned']
-        newValue = oldValue.strftime("%H:%M:%S")
+        newValue = oldValue.strftime("%H:%M:%S - %d.%m")
         return newValue
 
     def dehydrate(self, bundle):
@@ -85,7 +85,7 @@ class EarnedBadgeActivityResource(ModelResource):
 
     def dehydrate_datetime_earned(self, bundle):
         oldValue = bundle.data['datetime_earned']
-        newValue = oldValue.strftime("%H:%M:%S")
+        newValue = oldValue.strftime("%H:%M:%S - %d.%m")
         return newValue
 
     def dehydrate(self, bundle):

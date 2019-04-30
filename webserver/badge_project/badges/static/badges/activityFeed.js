@@ -59,7 +59,7 @@ function createNewEarnedBadgeRow(username, color, timestamp, badgeTitle, badgeDe
     activityTextContainer.innerHTML += 'Just won the badge!';
 
     let datetimeContainer = document.createElement("p");
-    datetimeContainer.classList.add("col-md-1");
+    datetimeContainer.classList.add("col");
     datetimeContainer.classList.add("text-warning");
     datetimeContainer.innerHTML += timestamp;
 
