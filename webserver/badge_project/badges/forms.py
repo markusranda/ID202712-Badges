@@ -6,6 +6,9 @@ from django import forms
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms import ModelForm, Textarea, Form, CheckboxSelectMultiple, Select, RadioSelect
+from django.shortcuts import render
+from django.urls import reverse_lazy, reverse
+import subprocess
 
 from badges.models import Images
 
@@ -51,6 +54,10 @@ class CreateBadgeForm(ModelForm):
                 css_class='col-lg-6 mx-auto text-white pt-5',
             )
         )
+
+    def post(self):
+        proc = subprocess.Popen("php croppie.php", shell=True, stdout=subprocess.PIPE)
+        script_response = proc.stdout.read()
 
     class Meta:
         model = Badges
