@@ -15,6 +15,7 @@ function createNewEarnedBadgeRow(username, color, timestamp, badgeTitle, badgeDe
     let rowContainer = document.createElement("DIV");
     rowContainer.classList.add("container");
     rowContainer.classList.add("full-width");
+    rowContainer.classList.add("fadeIn");
     rowContainer.style.cssText = "margin-right: 0 !important";
     rowContainer.style.cssText = "margin-left: 0 !important";
 
@@ -83,6 +84,7 @@ function createNewJoinedEventRow(username, color, timestamp) {
     let rowOuterContainer = document.createElement("DIV");
     rowOuterContainer.classList.add("container");
     rowOuterContainer.classList.add("full-width");
+    rowOuterContainer.classList.add("fadeIn");
     rowOuterContainer.style.cssText = "margin-right: 0 !important";
     rowOuterContainer.style.cssText = "margin-left: 0 !important";
 
@@ -103,7 +105,7 @@ function createNewJoinedEventRow(username, color, timestamp) {
     activityTextContainer.innerHTML += 'Just joined the event!';
 
     let datetimeContainer = document.createElement("p");
-    datetimeContainer.classList.add("col-md-1");
+    datetimeContainer.classList.add("col");
     datetimeContainer.classList.add("text-warning");
     datetimeContainer.innerHTML += timestamp;
 

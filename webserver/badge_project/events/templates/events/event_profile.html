@@ -1,5 +1,6 @@
 {% extends "nav/nav.html" %}
 {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'badges/animations.css' %}">
 
 {% block content %}
     <div class="container-fluid fill bg-info">
@@ -49,35 +50,36 @@
                     <h2 class="text-white text-center font-weight-light">{{ people_joined }}</h2>
                 </div>
             </div>
-            <div id="activityFeedContainer" class="row mx-auto mt-5 mb-0"
-                 style="background: #204c77; overflow: scroll; overflow-x: hidden; max-height: 350px; width: 80%">
-                <script>let event_id = {{ event_id }};</script>
-                <script type="text/javascript" src="{% static 'badges/activityFeed.js' %}"></script>
-            </div>
-            <div class="container">
-                {% if people_joined %}
-                    <div class="table-responsive">
-                        <h2 class="text-white font-weight-bold">Attendees: </h2>
-                        <div style="max-height: 150px; max-width: 45%; overflow-y: auto">
-                            <table class="table table-striped table-sm text-white">
-                                <tr>
-                                    <th class="text-white text-center font-weight-bold">Username</th>
-                                    <th class="text-white text-center font-weight-bold">#Badges earned</th>
-                                </tr>
-                                {% for users in attendees %}
+            <div class="row mx-auto mt-5 mb-0" style="width: 80%;">
+                <div id="activityFeedContainer" class="col-md-7"
+                     style="background: #204c77; overflow: scroll; overflow-x: hidden; height: 350px ;max-height: 350px; width: 80%">
+                    <script>let event_id = {{ event_id }};</script>
+                    <script type="text/javascript" src="{% static 'badges/activityFeed.js' %}"></script>
+                </div>
+                <div class="col-md-4">
+                    {% if people_joined %}
+                        <div class="table-responsive">
+                            <h2 class="text-white font-weight-bold">Attendees: </h2>
+                            <div style="max-height: 150px; max-width: 45%; overflow-y: auto">
+                                <table class="table table-striped table-sm text-white">
                                     <tr>
-                                        <td class="text-white text-center font-weight-bold">{{ users.user.username }}</td>
-                                        <td class="text-white text-center font-weight-bold">{{ earned }}</td>
+                                        <th class="text-white text-center font-weight-bold">Username</th>
+                                        <th class="text-white text-center font-weight-bold">#Badges earned</th>
                                     </tr>
-                                {% endfor %}
-                            </table>
+                                    {% for users in attendees %}
+                                        <tr>
+                                            <td class="text-white text-center font-weight-bold">{{ users.user.username }}</td>
+                                            <td class="text-white text-center font-weight-bold">{{ earned }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                {% else %}
-                    <p class="text-center mt-4 p-5 pb-0">No attendees at the moment...</p>
-                {% endif %}
+                    {% else %}
+                        <p class="text-center mt-4 p-5 pb-0">No attendees at the moment...</p>
+                    {% endif %}
+                </div>
             </div>
-
         </div>
     </div>
 
