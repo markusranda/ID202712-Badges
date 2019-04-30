@@ -114,36 +114,36 @@
         <div class="row mt-0 pt-4 justify-content-center">
             <div class="col-lg-5 m-5 p-5">
                 <div id="eventProfileUserContent">
-                    {% if badge_requests %}
-                        <div class="table-responsive">
-                            <h2 class="text-white text-center font-weight-light">Approve a badge:</h2>
-                            <table class="table table-striped table-sm mt-4 text-white">
-                                {% for badge_request in badge_requests %}
-                                    <tr>
-                                        <th>{{ badge_request.badge.name|capfirst }}</th>
-                                        <th>{{ badge_request.user.username|capfirst }}</th>
-                                        <th>
-                                            <form method="post">
-                                                {% csrf_token %}
-                                                {{ forms.delete_badge_request }}
-                                                {{ forms.approve_badge_mod }}
-                                                <input type="hidden" name="badge_id"
-                                                       value="{{ badge_request.badge.id }}">
-                                                <input type="hidden" name="user_id" value="{{ badge_request.user.id }}">
-                                                <input class="btn btn-light btn-sm btn-block ml-0 mr-2" type="submit"
-                                                       value="Approve">
-                                            </form>
-                                        </th>
-                                    </tr>
-                                {% endfor %}
-                            </table>
-                        </div>
-
-                    {% else %}
-                        <h2 class="text-white text-center font-weight-light">Approve a badge:</h2>
-                        <p class="text-center mt-2 pb-0 mb-4 ">No badge requests are available.</p>
-
-                    {% endif %}
+{#                    {% if badge_requests %}#}
+{#                        <div class="table-responsive">#}
+{#                            <h2 class="text-white text-center font-weight-light">Approve a badge:</h2>#}
+{#                            <table class="table table-striped table-sm mt-4 text-white">#}
+{#                                {% for badge_request in badge_requests %}#}
+{#                                    <tr>#}
+{#                                        <th>{{ badge_request.badge.name|capfirst }}</th>#}
+{#                                        <th>{{ badge_request.user.username|capfirst }}</th>#}
+{#                                        <th>#}
+{#                                            <form method="post">#}
+{#                                                {% csrf_token %}#}
+{#                                                {{ forms.delete_badge_request }}#}
+{#                                                {{ forms.approve_badge_mod }}#}
+{#                                                <input type="hidden" name="badge_id"#}
+{#                                                       value="{{ badge_request.badge.id }}">#}
+{#                                                <input type="hidden" name="user_id" value="{{ badge_request.user.id }}">#}
+{#                                                <input class="btn btn-light btn-sm btn-block ml-0 mr-2" type="submit"#}
+{#                                                       value="Approve">#}
+{#                                            </form>#}
+{#                                        </th>#}
+{#                                    </tr>#}
+{#                                {% endfor %}#}
+{#                            </table>#}
+{#                        </div>#}
+{##}
+{#                    {% else %}#}
+{#                        <h2 class="text-white text-center font-weight-light">Approve a badge:</h2>#}
+{#                        <p class="text-center mt-2 pb-0 mb-4 ">No badge requests are available.</p>#}
+{##}
+{#                    {% endif %}#}
 
                     {% if requestable_badge %}
 
