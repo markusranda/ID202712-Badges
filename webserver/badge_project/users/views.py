@@ -95,6 +95,7 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
             user = self.request.user
             about_me = cd.pop('about_me')
             user.about_me = about_me
+            user.color_value = cd.pop('color_value')
             user.save()
 
             for userbadge in userbadge_list_all:

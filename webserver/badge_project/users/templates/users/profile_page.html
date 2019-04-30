@@ -2,7 +2,6 @@
 
 {% block content %}
     {% load static %}
-    <script src="{% static 'badges/jscolor.js' %}"></script>
 
     <div class="container">
 
@@ -30,9 +29,10 @@
                                 <table class="table table-borderless">
                                     <tr>
                                         {% for userbadge in showcase_list %}
-                                            <td style="border-top-width: 0;"><img src="{{ userbadge.event_badge.badge.image.url }}"
-                                                                                  width="150"
-                                                                                  alt="Picture is missing, did the developer assign the wrong path?">
+                                            <td style="border-top-width: 0;"><img
+                                                    src="{{ userbadge.event_badge.badge.image.url }}"
+                                                    width="150"
+                                                    alt="Picture is missing, did the developer assign the wrong path?">
                                             </td>
                                         {% endfor %}
                                     </tr>
@@ -66,11 +66,13 @@
                                         {% for user_badge in badges_list %}
                                             <tr>
                                                 <td style="border-top-width: 0; vertical-align: baseline;">
-                                                    <img src="{{ user_badge.event_badge.badge.image.url }}" width="100" alt="Picture is missing, did the developer assign the wrong path?"></td>
+                                                    <img src="{{ user_badge.event_badge.badge.image.url }}" width="100"
+                                                         alt="Picture is missing, did the developer assign the wrong path?">
+                                                </td>
                                                 <td style="border-top-width: 0; vertical-align: baseline;">{{ user_badge.event_badge.badge.name }}</td>
                                             </tr>
                                         {% endfor %}
-                                    <div class="pagination">
+                                        <div class="pagination">
                                         <span class="step-links">
                                             {% if badges_list.has_previous %}
                                                 <a href="?page=1">&laquo; first</a>
@@ -86,7 +88,7 @@
                                                 <a href="?page={{ badges_list.paginator.num_pages }}">last &raquo;</a>
                                             {% endif %}
                                         </span>
-                                    </div>
+                                        </div>
                                     </table>
 
                                 {% else %}
@@ -104,7 +106,7 @@
                     <h2 class="text-left">Statistics</h2>
                     <div>
                         <table class="table table-bordered">
-                            <thread>
+                            <thead>
                                 <tr>
                                     <th scope="col"> Badges Earned: {{ badge_count }}</th>
                                 </tr>
@@ -114,19 +116,20 @@
                                 <tr>
                                     <th scope="col"> Date Joined: {{ date_joined }}</th>
                                 </tr>
-                            </thread>
+                            </thead>
                         </table>
                     </div>
 
                     <div class="bg-white text-dark pt-2">
                         <h2>Active events</h2>
                         <div class="table-responsive">
-                                {% if event_active_list %}
+                            {% if event_active_list %}
                                 <table class="table table-bordered">
                                     <thead>
                                     {% for event in event_active_list %}
                                         <tr>
-                                            <th><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></th>
+                                            <th><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a>
+                                            </th>
                                         </tr>
                                     {% endfor %}
                                     </thead>
@@ -140,21 +143,6 @@
                         </div>
                     </div>
                     <div>
-                        <p class="font-weight-bold">Choose a color for your profile!</p>
-                    </div>
-                    <div class="d-flex justify-content-center mb-2">
-{#                        <input class="input jscolor {onFineChange:'update(this)'}" value="cc66ff">#}
-                        <button class="btn colorBtn btn-block jscolor {onFineChange:'update(this)'} mb-3">
-                        </button>
-
-                        <script>
-                            function update(jscolor) {
-                                // 'jscolor' instance can be used as a string
-                                document.getElementById('bgColour').style.backgroundColor = '#' + jscolor
-                            }
-                        </script>
-                    </div>
-                    <div>
                         <!--  share button -->
                         <div class="d-flex justify-content-right mb-2">
                             <div class="fb-share-button"
@@ -162,36 +150,37 @@
                                 <a target="_blank"
                                    href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F192.168.50.50%3A8080%2Fusers%2F<username>%2Fprofile_page%2F&amp;src=sdkpreparse"
                                    class="fb-xfbml-parse-ignore">Share</a>
+                            </div>
+                            <!-- share button -->
                         </div>
-                        <!-- share button -->
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <form method="post">
+                <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                {% csrf_token %}
+                                {{ form }}
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-            </div>
+            </form>
         </div>
-
-        <!-- Modal -->
-        <form method="post">
-            <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-
-                            {% csrf_token %}
-                            {{ form }}
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
     </div>
 
 {% endblock %}
