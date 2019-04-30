@@ -252,7 +252,7 @@ nav {
 }
 
 .centerThis {
-    padding-top: 20vh;
+    padding-top: 1px;
     padding-bottom: 15vh;
 }
 
@@ -302,7 +302,7 @@ nav {
     box-shadow: 0 5px 10px -5px rgba(50, 50, 50, 0.5);
     overflow: scroll;
     overflow-x: hidden;
-    height: 300px;
-    max-height: 300px;
+    height: 280px;
+    max-height: 280px;
     width: 80%;
 }
