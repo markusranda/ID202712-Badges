@@ -89,6 +89,9 @@ class CreateEvent(LoginRequiredMixin, CreateView):
             for badge in badges:
                 EventBadges.objects.create(badge_id=badge.id, event_id=event.id)
 
+            Attendees.objects.create(event_id=event.id, user_id=user_id)
+            JoinedEventActivity.objects.create(event_id=event.id, user_id=user_id)
+
             return HttpResponseRedirect(self.get_success_url(event.id))
 
         return render(request, self.template_name, context)
