@@ -9,11 +9,15 @@ body, html {
     overflow-x: hidden;
 }
 
-.bg-light {
-    background-color: #204c77!important;
+.full-width {
+    width: 100%;
 }
 
-.nav-barlink :hover{
+.bg-light {
+    background-color: #204c77 !important;
+}
+
+.nav-barlink :hover {
     background-color: #abecf4;
     opacity: 1;
     font-weight: bolder;
@@ -72,19 +76,21 @@ body, html {
 }
 
 .loginBtn:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
+
 #signUpContent {
     margin-top: 2%;
 }
+
 #signUpTitle {
     margin-top: 5%;
 }
 
 #loginContent {
-  margin-top: 2%;
+    margin-top: 2%;
 }
 
 #underLoginContent {
@@ -103,7 +109,7 @@ body, html {
     float: right;
     margin-top: 250px;
     margin-right: 350px;
-  
+
 }
 
 #badgerWave1 {
@@ -114,11 +120,11 @@ body, html {
 }
 
 #loginTitle {
-  margin-top: 10%;
+    margin-top: 10%;
 }
 
 #welcomeMsg {
-  margin-top: 10%;
+    margin-top: 10%;
 }
 
 #center {
@@ -158,7 +164,7 @@ thead, tbody {
     display: block;
 }
 
-tbody{
+tbody {
     overflow-y: hidden; /* Do not allow vertical scolling */
     overflow-x: auto; /* Allows for horisontal scolling */
 }
@@ -177,46 +183,46 @@ th {
 }
 
 .modal-backdrop {
-  display: none;
+    display: none;
 }
 
 
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .formTextStyling {
@@ -246,12 +252,12 @@ nav {
 }
 
 .centerThis {
-    padding-top: 20vh;
+    padding-top: 1px;
     padding-bottom: 15vh;
 }
 
 @media screen and (max-width: 400px) {
-        .centerThis {
+    .centerThis {
         padding-top: 5vh;
         padding-bottom: 10vh;
     }
@@ -265,6 +271,40 @@ nav {
 
 .colorBtn {
     box-shadow: 5px 5px gray;
+}
+
+.activityFeedNameStyle {
+    font-weight: bold;
+}
+
+/* width */
+.scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.scroll::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+.scroll::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.veryNiceBox {
+    border-radius: 2px;
+    box-shadow: 0 5px 10px -5px rgba(50, 50, 50, 0.5);
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 280px;
+    max-height: 280px;
+    width: 80%;
 }
 
 .navStyling {

@@ -18,6 +18,18 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from tastypie.api import Api
+
+from api.resources import JoinedEventActivityResource, EarnedBadgeActivityResource, UserResource, BadgeResource, EventResource, ImageResource, AttendeesResource
+
+api_resources = Api(api_name='resources')
+api_resources.register(UserResource())
+api_resources.register(BadgeResource())
+api_resources.register(EventResource())
+api_resources.register(ImageResource())
+api_resources.register(JoinedEventActivityResource())
+api_resources.register(EarnedBadgeActivityResource())
+api_resources.register(AttendeesResource())
 
 
 urlpatterns = [
@@ -27,4 +39,5 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('users/', include('django.contrib.auth.urls')),
     path('events/', include('events.urls')),
+    path('api/', include(api_resources.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
