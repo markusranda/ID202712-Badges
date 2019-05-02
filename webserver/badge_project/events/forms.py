@@ -1,29 +1,16 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, ButtonHolder, Submit, Row, Column, HTML
+from crispy_forms.layout import Layout, Field, ButtonHolder, Submit, Row, Column, HTML, MultiField
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms import ModelForm, NumberInput, Form, Textarea, ModelChoiceField, CheckboxSelectMultiple
 from django import forms
 
 from events.models import Events
-from badges.models import Images
+#from badges.models import Images
 
 from badges.models import Badges
 
 
 class CreateEventForm(ModelForm):
-    def clean(self):
-        cd = super().clean()
-        image_id = self.data['image']
-        try:
-            Images.objects.filter(id=image_id).get()
-
-        except ObjectDoesNotExist:
-            self.add_error('image_id', 'Image does not exist in database!')
-
-        finally:
-            cd['image_id'] = image_id
-            return cd
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -51,16 +38,14 @@ class CreateEventForm(ModelForm):
         labels = {
             'name': 'Name',
             'description': 'Description',
-            # 'badge': 'Add badges'
+            'badge': 'Add badges'
         }
         help_texts = {
             'name': 'Enter a name for the event'
         }
         widgets = {
             'description': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the event here...'}),
-            # 'badge': CheckboxSelectMultiple()
         }
-
 
 class EventPinForm(Form):
     event_field = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': "Please enter the event's pin"}))
