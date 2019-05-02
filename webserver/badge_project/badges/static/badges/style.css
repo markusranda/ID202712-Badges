@@ -9,10 +9,6 @@ body, html {
     overflow-x: hidden;
 }
 
-.bg-light {
-    background-color: #204c77!important;
-}
-
 .nav-barlink :hover{
     background-color: #abecf4;
     opacity: 1;

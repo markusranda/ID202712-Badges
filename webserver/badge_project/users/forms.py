@@ -24,26 +24,23 @@ class ChangeProfilePageForm(ModelForm):
                 HTML(
                     """
                     <h2>Edit profile</h2>
-                    """
+                    """,
                 ),
-                'about_me',
-                HTML(
-                    "<h4>Select badges for your showcase</h4>"
-                    "<p>Choose no more than 4 badges.</p>"
-
-                ),
+                Field('about_me'),
                 MultiField(
                     'badge_id',
                     template='users/widgets/multipleCheckboxes.html'
                 ),
                 MultiField(
                     'color_value',
-                    template='users/widgets/colorPicker.html'
+                    template='users/widgets/colorPicker.html',
+                    css_class='p-0 m-0'
                 ),
                 Submit(
-                    'submit', 'Update'
+                    'submit', 'Update',
+                    css_class="mb-4"
                 ),
-                css_class='col-lg-8 mx-auto',
+                css_class='col-lg-8 mx-auto profileBoxes bg-white pt-2',
             )
         )
 

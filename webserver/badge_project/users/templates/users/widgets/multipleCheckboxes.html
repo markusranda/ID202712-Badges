@@ -1,27 +1,35 @@
-<div class="row justify-content-md-center">
+ <div class="bg-light p-2">
+        <h4>Select badges for your showcase</h4>
+        <p>Choose no more than 4 badges.</p>
 
+        <div class="row">
 
-    {% for user_badge in user_badge_list %}
+            {% for user_badge in user_badge_list %}
 
-        <div class="col">
-            <label>
-                {% if user_badge.is_showcase == True %}
-                    <input type="checkbox" value="{{ user_badge.id }}" name="badge_id" checked>
-                {% else %}
-                    <input type="checkbox" value="{{ user_badge.id }}" name="badge_id">
+                <div class="col-lg-4 p-4">
+                    <label>
+                        {% if user_badge.is_showcase == True %}
+                            <input type="checkbox" value="{{ user_badge.id }}" name="badge_id" checked>
+                        {% else %}
+                            <input type="checkbox" value="{{ user_badge.id }}" name="badge_id">
+                        {% endif %}
+                        <div class="m-2">
+                            <img src="{{ user_badge.event_badge.badge.image.url }}"
+                                 alt="Very beautiful picture"
+                                 width="100">
+                            <p>{{ user_badge.event_badge.badge.name }}</p>
+                        </div>
+                    </label>
+                </div>
+
+                {% if forloop.counter|divisibleby:3 %}
+
+                    <!-- Force next columns to break to new line -->
+                    <div class="w-100"></div>
+
                 {% endif %}
-                <img src="{{ user_badge.event_badge.badge.image.url }}" alt="Very beautiful picture" width="100">
-                <div style="display: contents;">{{ user_badge.event_badge.badge.name }}</div>
-            </label>
+
+            {% endfor %}
+
         </div>
-
-        {% if forloop.counter|divisibleby:3 %}
-
-            <!-- Force next columns to break to new line -->
-            <div class="w-100"></div>
-
-        {% endif %}
-
-    {% endfor %}
-
 </div>

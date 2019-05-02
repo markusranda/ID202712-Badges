@@ -5,7 +5,7 @@ from django.forms import ModelForm, NumberInput, Form, Textarea, ModelChoiceFiel
 from django import forms
 
 from events.models import Events
-#from badges.models import Images
+# from badges.models import Images
 
 from badges.models import Badges
 
@@ -24,8 +24,8 @@ class CreateEventForm(ModelForm):
                 'name',
                 'description',
                 Field(
-                'badge',
-                template='widgets/multipleCheckboxes.html',
+                    'badge',
+                    template='widgets/multipleCheckboxes.html',
                 ),
                 Submit('submit', 'Create'),
                 css_class='col-lg-6 mt-4 mx-auto',
@@ -46,6 +46,7 @@ class CreateEventForm(ModelForm):
         widgets = {
             'description': Textarea(attrs={'cols': 40, 'rows': 5, 'placeholder': 'Describe the event here...'}),
         }
+
 
 class EventPinForm(Form):
     event_field = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': "Please enter the event's pin"}))
@@ -93,6 +94,7 @@ class DeleteBadgeRequestForm(MultipleForm):
 class RemoveBadgeFromUserForm(MultipleForm):
     badge_id = forms.IntegerField(widget=forms.HiddenInput())
     user_id = forms.IntegerField(widget=forms.HiddenInput())
+
 
 class EndEventForm(MultipleForm):
     event_id = forms.IntegerField(widget=forms.HiddenInput())
