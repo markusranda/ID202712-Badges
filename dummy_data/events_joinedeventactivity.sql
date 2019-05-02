@@ -1,0 +1,2 @@
+INSERT INTO badgesdb.events_joinedeventactivity (id, datetime_earned, event_id, user_id) VALUES (38, '2019-05-02 16:03:10.083000', 1, 1);
+INSERT INTO badgesdb.events_joinedeventactivity (id, datetime_earned, event_id, user_id) VALUES (39, '2019-05-02 17:03:13.141000', 1, 2);
