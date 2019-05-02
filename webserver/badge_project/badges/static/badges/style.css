@@ -266,3 +266,13 @@ nav {
 .colorBtn {
     box-shadow: 5px 5px gray;
 }
+
+.navStyling {
+    min-height: 75px;
+}
+
+.showcaseTable {
+    border-collapse: separate;
+    border-spacing: 0.5em 0;
+    text-align: center;
+}

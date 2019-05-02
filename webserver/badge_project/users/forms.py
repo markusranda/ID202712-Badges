@@ -36,6 +36,10 @@ class ChangeProfilePageForm(ModelForm):
                     'badge_id',
                     template='users/widgets/multipleCheckboxes.html'
                 ),
+                MultiField(
+                    'color_value',
+                    template='users/widgets/colorPicker.html'
+                ),
                 Submit(
                     'submit', 'Update'
                 ),
@@ -56,7 +60,9 @@ class ChangeProfilePageForm(ModelForm):
     def clean(self):
         cd = super().clean()
         userbadge_list = self.data.getlist('badge_id')
+        color_value = "#" + self.data.get('color_value')
         cd['userbadge_list'] = userbadge_list
+        cd['color_value'] = color_value
         if len(self.cleaned_data['userbadge_list']) > 4: # Make sure the user does not select more than 4 badges.
             raise forms.ValidationError('Select no more than 4.')
 

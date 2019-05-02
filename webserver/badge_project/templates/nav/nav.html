@@ -26,10 +26,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
-<body id="bgColour">
+<body id="bgColour" style="background-color: {{ user.color_value }}">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top m-0" style="box-shadow: 0 5px 10px -5px rgba(50, 50, 50, 0.5);">
-    <a class="navbar-brand" href="/"><img class="mr-4" src="{% static 'badges/badger.png' %}" style="max-width: 50px;">The HoneyBadgers</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top m-0 navStyling" style="box-shadow: 0 5px 10px -5px rgba(50, 50, 50, 0.5);">
+    <a class="navbar-brand" href="/">The HoneyBadgers</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
