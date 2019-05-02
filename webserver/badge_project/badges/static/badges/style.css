@@ -266,3 +266,7 @@ nav {
 .colorBtn {
     box-shadow: 5px 5px gray;
 }
+
+.navStyling {
+    min-height: 75px;
+}
