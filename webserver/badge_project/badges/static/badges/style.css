@@ -270,3 +270,9 @@ nav {
 .navStyling {
     min-height: 75px;
 }
+
+.showcaseTable {
+    border-collapse: separate;
+    border-spacing: 0.5em 0;
+    text-align: center;
+}

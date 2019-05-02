@@ -21,18 +21,19 @@
 
         <div class="row mt-4">
             <div class="col-md-9 ">
-                <div class="bg-white text-dark p-4">
+                <div class="bg-white text-dark pt-4 pr-4 pl-4">
                     <h2 class="text-left">Showcase</h2>
                     <div>
                         {% if showcase_list %}
                             <div class="table-responsive">
-                                <table class="table table-borderless">
+                                <table class="table table-borderless showcaseTable">
                                     <tr>
                                         {% for userbadge in showcase_list %}
                                             <td style="border-top-width: 0;"><img
                                                     src="{{ userbadge.event_badge.badge.image.url }}"
                                                     width="150"
                                                     alt="Picture is missing, did the developer assign the wrong path?">
+                                            <p class="pt-2">{{ userbadge.event_badge.badge.description }}</p>
                                             </td>
                                         {% endfor %}
                                     </tr>
