@@ -7,73 +7,80 @@
         <div class="row mt-4 p-0">
             <div class="col">
                 <div class="row m-0">
-                    <img class="mt-2 " height="85px" src="/images/avatars/avatar.png" id="avatar">
-                    <h2 class="text-right text-info mt-4 ml-4">{{ profile_owner }}</h2>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 ml-auto">
+            <div class="col-lg-9">
+                <img width="85px" src="/images/avatars/avatar.png" id="avatar" alt="Avatar picture"
+                     style="border-radius: 5px; border-color: #0069d982; border-width: 3px; border-style: solid;">
+                <h2 class="text-right text-info mt-4 ml-4" style="display: inline;">{{ profile_owner }}</h2>
+            </div>
+            <div class="col-lg-3">
                 <a class="btn btn-primary btn-md btn-block" href="{% url 'edit_profile' user.username %}" role="button">Edit
                     profile</a>
             </div>
         </div>
 
+
         <div class="row mt-4">
             <div class="col-lg-9">
-                <div class="bg-white text-dark pt-4 pr-4 pl-4 profileBoxes">
-                    <h2 class="text-left">Showcase</h2>
-                    <div>
-                        {% if showcase_list %}
-                            <div class="table-responsive">
-                                <table class="table table-borderless showcaseTable">
-                                    <tr>
-                                        {% for userbadge in showcase_list %}
-                                            <td style="border-top-width: 0;"><img
-                                                    src="{{ userbadge.event_badge.badge.image.url }}"
-                                                    width="150"
-                                                    alt="Picture is missing, did the developer assign the wrong path?">
-                                                <p class="pt-2">{{ userbadge.event_badge.badge.description }}</p>
-                                            </td>
-                                        {% endfor %}
-                                    </tr>
-                                </table>
-                            </div>
-                        {% else %}
-                            <p class="pb-4">No badges are available.</p>
-                        {% endif %}
-                    </div>
-                </div>
 
-                <div class="row mt-4">
-                    <div class="col">
-                        <div class="bg-white text-dark p-4 profileBoxes">
-                            <h2>About me</h2>
-                            <p>
-                                {{ about_me }}
-                            </p>
+                <div>
+                    <div class="bg-white text-dark pt-4 pr-4 pl-4 profileBoxes">
+                        <h2 class="text-left">Showcase</h2>
+                        <div>
+                            {% if showcase_list %}
+                                <div class="table-responsive">
+                                    <table class="table table-borderless showcaseTable">
+                                        <tr>
+                                            {% for userbadge in showcase_list %}
+                                                <td style="border-top-width: 0;"><img
+                                                        src="{{ userbadge.event_badge.badge.image.url }}"
+                                                        width="150"
+                                                        alt="Picture is missing, did the developer assign the wrong path?">
+                                                    <p class="pt-2">{{ userbadge.event_badge.badge.description }}</p>
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                    </table>
+                                </div>
+                            {% else %}
+                                <p class="pb-4">No badges are available.</p>
+                            {% endif %}
                         </div>
                     </div>
-                </div>
 
-                <div class="row mt-4">
-                    <div class="col">
-                        <div class="bg-white text-dark p-4 profileBoxes mb-4">
-                            <h2>Recently earned badges</h2>
-                            <div class="table-responsive">
-                                {% if badges_list %}
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="bg-white text-dark p-4 profileBoxes">
+                                <h2>About me</h2>
+                                <p>
+                                    {{ about_me }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
 
-                                    <table class="table table-borderless">
-                                        {% for user_badge in badges_list %}
-                                            <tr>
-                                                <td style="border-top-width: 0; vertical-align: baseline;">
-                                                    <img src="{{ user_badge.event_badge.badge.image.url }}" width="100"
-                                                         alt="Picture is missing, did the developer assign the wrong path?">
-                                                </td>
-                                                <td style="border-top-width: 0; vertical-align: baseline;">{{ user_badge.event_badge.badge.name }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                        <div class="pagination">
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="bg-white text-dark p-4 profileBoxes mb-4">
+                                <h2>Recently earned badges</h2>
+                                <div class="table-responsive">
+                                    {% if badges_list %}
+
+                                        <table class="table table-borderless">
+                                            {% for user_badge in badges_list %}
+                                                <tr>
+                                                    <td style="border-top-width: 0; vertical-align: baseline;">
+                                                        <img src="{{ user_badge.event_badge.badge.image.url }}"
+                                                             width="100"
+                                                             alt="Picture is missing, did the developer assign the wrong path?">
+                                                    </td>
+                                                    <td style="border-top-width: 0; vertical-align: baseline;">{{ user_badge.event_badge.badge.name }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            <div class="pagination">
                                         <span class="step-links">
                                             {% if badges_list.has_previous %}
                                                 <a href="?page=1">&laquo; first</a>
@@ -89,12 +96,13 @@
                                                 <a href="?page={{ badges_list.paginator.num_pages }}">last &raquo;</a>
                                             {% endif %}
                                         </span>
-                                        </div>
-                                    </table>
+                                            </div>
+                                        </table>
 
-                                {% else %}
-                                    <p>No badges are available.</p>
-                                {% endif %}
+                                    {% else %}
+                                        <p>No badges are available.</p>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -152,35 +160,11 @@
                                    href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F192.168.50.50%3A8080%2Fusers%2F<username>%2Fprofile_page%2F&amp;src=sdkpreparse"
                                    class="fb-xfbml-parse-ignore">Share</a>
                             </div>
-                            <!-- share button -->
                         </div>
+                        <!-- share button -->
                     </div>
-
                 </div>
             </div>
-
-            <!-- Modal -->
-            <form method="post">
-                <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog"
-                     aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-
-                                {% csrf_token %}
-                                {{ form }}
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
 
