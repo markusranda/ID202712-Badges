@@ -161,6 +161,9 @@ function createNewJoinedEventRow(username, color, timestamp) {
 
                         for (let i = joinedCount; i < joinedNewCount; i++) {
                             // Retrieves a specific activity
+                            if (debugging) {
+                                console.log("Retrieves a specific activity");
+                            }
                             let object = result.objects[i];
 
                             // Get the URI to the user
@@ -170,9 +173,15 @@ function createNewJoinedEventRow(username, color, timestamp) {
 
                             // Get the username and personal color
                             $.getJSON(user_uri, function (result) {
+                                if (debugging) {
+                                console.log("Get the username and personal color");
+                            }
                                 let username = result.username;
                                 let color = result.color_value;
 
+                                if (debugging) {
+                                console.log("Create new element");
+                            }
                                 createNewJoinedEventRow(username, color, timestamp);
                             });
 
