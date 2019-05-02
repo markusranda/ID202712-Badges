@@ -276,3 +276,8 @@ nav {
     border-spacing: 0.5em 0;
     text-align: center;
 }
+
+.profileBoxes {
+    border-radius: 4px;
+    box-shadow: 0 5px 8px -5px rgba(50, 50, 50, 0.5);
+}
