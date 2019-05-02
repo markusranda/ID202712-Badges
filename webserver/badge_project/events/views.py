@@ -19,7 +19,7 @@ from badges.models import Badges
 from .multiforms import MultiFormsView
 from .forms import EventPinForm, CreateEventForm, BadgeRequestForm, BadgeApprovalForm, DeleteBadgeRequestForm, \
     BadgeApprovalModeratorForm, RemoveBadgeFromUserForm, EndEventForm
-from .models import Events, BadgeRequests, EventBadges
+from .models import Events, BadgeRequests, EventBadges, EarnedBadgeActivity, JoinedEventActivity
 from .models import random
 
 from django.db import models
@@ -56,7 +56,7 @@ class EventPin(LoginRequiredMixin, View):
             current_user = request.user.id
             attendee = Attendees(event_id=current_event_id, user_id=current_user)
             attendee.save()
-
+            JoinedEventActivity.objects.create(event_id=current_event_id, user_id=current_user)
             return HttpResponseRedirect(self.get_success_url(current_event_id))
         return render(request, self.template_name, context)
 
@@ -198,7 +198,8 @@ class EventProfile(MultiFormsView):
         user_id = form.cleaned_data.get('user_id')
         event_badge = EventBadges.objects.get(badge_id=badge_id, event_id=event_id)
         UserBadges.objects.create(event_badge=event_badge, user_id=user_id)
-        b = BadgeRequests.objects.filter(badge_id=badge_id, event_id=event_id, user_id=user_id).get()
-        b.delete()
+        badgeRequest = BadgeRequests.objects.filter(badge_id=badge_id, event_id=event_id, user_id=user_id).get()
+        EarnedBadgeActivity.objects.create(badge_id=badge_id, event_id=event_id, user_id=user_id)
+        badgeRequest.delete()
 
         return HttpResponseRedirect(self.get_success_url())

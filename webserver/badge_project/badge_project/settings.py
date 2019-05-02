@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'users.apps.UsersConfig',
+    'tastypie',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

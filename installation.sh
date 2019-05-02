@@ -57,6 +57,9 @@ echo "Installing Requirements"
 		echo "Installing Django Crispy-Forms"
 		pip install --upgrade django-crispy-forms >> $LOGFILE 2>&1
 
+		echo "Installing TastyPie"
+		pip install django-tastypie >> $LOGFILE 2>&1
+
 
 # Configuring the server
 echo "Configure server"
