@@ -56,20 +56,9 @@
                     <script type="text/javascript" src="{% static 'badges/activityFeed.js' %}"></script>
                 </div>
                 <div class="col-md-4 scroll veryNiceBox" style="background-image: linear-gradient(141deg, #8e44adb8 0%, rgba(142,68,173,0.91) 51%, #8E44AD 75%);">
-                    {% if people_joined %}
-                        <div class="table-responsive">
-                            <div style="overflow-y: auto; overflow-x: hidden;">
-                                    {% for users in attendees %}
-                                        <div class="row">
-                                            <h2 class="col-md-8" style="color: {{ users.user.color_value }}">{{ users.user.username }}</h2>
-                                            <h2 class="col-md-2" style="color: #ffffff;">{{ earned }}</h2>
-                                        </div>
-                                    {% endfor %}
-                            </div>
-                        </div>
-                    {% else %}
-                        <p class="text-center mt-4 p-5 pb-0">No attendees at the moment...</p>
-                    {% endif %}
+                    <div id="attendeeContainer">
+                        <script type="text/javascript" src="{% static 'badges/attendingUsers.js' %}"></script>
+                    </div>
                 </div>
             </div>
         </div>

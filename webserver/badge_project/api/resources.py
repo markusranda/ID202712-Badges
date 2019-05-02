@@ -4,10 +4,10 @@ from tastypie.constants import ALL
 from tastypie.resources import ModelResource, Resource
 from datetime import datetime
 
-from users.models import CustomUser
+from users.models import CustomUser, Attendees
 from events.models import JoinedEventActivity, EarnedBadgeActivity
 from badges.models import Badges
-from events.models import Events
+from events.models import Events, EventBadges
 from badges.models import Images
 
 
@@ -15,8 +15,16 @@ class UserResource(ModelResource):
     class Meta:
         queryset = CustomUser.objects.all()
         resource_name = 'user'
-        fields = ['username', 'color_value']
+        fields = ['username', 'color_value', 'id']
         allowed_methods = ['get']
+
+    def dehydrate(self, bundle):
+        if bundle.request.GET.get('get_badgecount'):
+            event_id = bundle.request.GET.get('event_id')
+            user_id = bundle.request.GET.get('user_id')
+            user_object = CustomUser.objects.get(id=user_id)
+            bundle.data['user_badgecount'] = user_object.event_badge_count_of(event_id)
+        return bundle
 
 
 class EventResource(ModelResource):
@@ -42,6 +50,34 @@ class BadgeResource(ModelResource):
         resource_name = 'badge'
         fields = ['name', 'description', "image_url"]
         allowed_methods = ['get']
+
+
+class AttendeesResource(ModelResource):
+    user = fields.ForeignKey(UserResource, 'user')
+    event_id = fields.ForeignKey(EventResource, 'event')
+
+    class Meta:
+        queryset = Attendees.objects.all()
+        resource_name = 'attendee_list'
+        allowed_methods = ['get']
+        filtering = {
+            'id': ALL,
+            'event_id': ALL,
+        }
+
+    def dehydrate(self, bundle):
+        if bundle.request.GET.get('attach_dynamic_fields') == 'get_user_badgecount':
+            event_id = bundle.request.GET.get('event_id')
+            user_id = bundle.request.GET.get('user_id')
+            user_object = CustomUser.objects.get(id=user_id)
+            bundle.data['user_badgecount'] = user_object.event_badge.filter(event_id=event_id).count()
+
+        if bundle.request.GET.get('attach_dynamic_fields') == 'get_total_badgecount':
+            event_id = bundle.request.GET.get('event_id')
+            bundle.data['total_badgecount'] = EventBadges.objects.filter(event_id=event_id).count()
+
+        return bundle
+
 
 
 class JoinedEventActivityResource(ModelResource):

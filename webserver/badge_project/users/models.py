@@ -11,6 +11,9 @@ class CustomUser(AbstractUser):
     badge_request = models.ManyToManyField('badges.Badges', through='events.BadgeRequests', related_name='badge_request')
     color_value = models.CharField(max_length=7, default='#d76565')
 
+    def event_badge_count_of(self, event_id):
+        return self.event_badge.filter(event_id=event_id).count()
+
     def __str__(self):
         return self.email
 
