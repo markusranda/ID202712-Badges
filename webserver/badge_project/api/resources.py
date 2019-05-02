@@ -19,9 +19,9 @@ class UserResource(ModelResource):
         allowed_methods = ['get']
 
     def dehydrate(self, bundle):
-        if bundle.request.GET.get('get_badgecount'):
+        if bundle.request.GET.get('get_badgecount') == "1":
             event_id = bundle.request.GET.get('event_id')
-            user_id = bundle.request.GET.get('user_id')
+            user_id = bundle.data.get('id')
             user_object = CustomUser.objects.get(id=user_id)
             bundle.data['user_badgecount'] = user_object.event_badge_count_of(event_id)
         return bundle
