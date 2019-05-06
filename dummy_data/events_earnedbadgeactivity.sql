@@ -9,4 +9,3 @@ INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, 
 INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (27, '2019-05-02 16:04:22.356000', 3, 1, 2);
 INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (28, '2019-05-02 16:04:24.023000', 1, 2, 2);
 INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (29, '2019-05-02 16:04:23.461000', 2, 2, 2);
-INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (30, '2019-05-02 16:04:22.356000', 3, 2, 2);

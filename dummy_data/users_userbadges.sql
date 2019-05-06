@@ -6,7 +6,5 @@ INSERT INTO badgesdb.users_userbadges (id, event_badge_id, user_id, is_showcase,
 INSERT INTO badgesdb.users_userbadges (id, event_badge_id, user_id, is_showcase, date_earned) VALUES (6, 6, 1, 0, NOW());
 INSERT INTO badgesdb.users_userbadges (id, event_badge_id, user_id, is_showcase, date_earned) VALUES (7, 1, 2, 0, NOW());
 INSERT INTO badgesdb.users_userbadges (id, event_badge_id, user_id, is_showcase, date_earned) VALUES (8, 2, 2, 0, NOW());
-INSERT INTO badgesdb.users_userbadges (id, event_badge_id, user_id, is_showcase, date_earned) VALUES (9, 3, 2, 0, NOW());
-INSERT INTO badgesdb.users_userbadges (id, event_badge_id, user_id, is_showcase, date_earned) VALUES (10, 4, 2, 0, NOW());
-INSERT INTO badgesdb.users_userbadges (id, event_badge_id, user_id, is_showcase, date_earned) VALUES (11, 5, 2, 0, NOW());
-INSERT INTO badgesdb.users_userbadges (id, event_badge_id, user_id, is_showcase, date_earned) VALUES (12, 6, 2, 0, NOW());
+INSERT INTO badgesdb.users_userbadges (id, event_badge_id, user_id, is_showcase, date_earned) VALUES (9, 4, 2, 0, NOW());
+INSERT INTO badgesdb.users_userbadges (id, event_badge_id, user_id, is_showcase, date_earned) VALUES (10, 5, 2, 0, NOW());
