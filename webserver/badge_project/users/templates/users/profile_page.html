@@ -3,8 +3,11 @@
 {% block content %}
     {% load static %}
 
-    <div class="container">
-        <div class="row mt-4 p-0">
+
+    <div style="background-color: {{ user.color_value }}" class="container-fluid p-0">
+    <div class="container pt-4" style="height: 100%;">
+
+        <div class="row p-0">
             <div class="col">
                 <div class="row m-0">
                 </div>
@@ -17,7 +20,8 @@
                 <h2 class="text-right text-info mt-4 ml-4" style="display: inline;">{{ profile_owner }}</h2>
             </div>
             <div class="col-lg-3">
-                <a class="btn btn-primary btn-md btn-block" href="{% url 'edit_profile' user.username %}" role="button">Edit
+                <a class="btn btn-primary btn-md btn-block" href="{% url 'edit_profile' user.username %}"
+                   role="button">Edit
                     profile</a>
             </div>
         </div>
@@ -137,7 +141,8 @@
                                     <thead>
                                     {% for event in event_active_list %}
                                         <tr>
-                                            <th><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a>
+                                            <th>
+                                                <a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a>
                                             </th>
                                         </tr>
                                     {% endfor %}
@@ -167,5 +172,8 @@
             </div>
         </div>
     </div>
+</div>
+
+
 
 {% endblock %}
