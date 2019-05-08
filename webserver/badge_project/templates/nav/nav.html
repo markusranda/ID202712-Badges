@@ -1,49 +1,73 @@
-
 {% load static %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="{% static 'badges/style.css' %}">
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2"></script>
+<script type="text/javascript" src="{% static 'badges/switchEventProfileContent.js' %}"></script>
 
 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Badges för töffa killar</title>
     <link rel="shortcut icon" href="">
+    <title>The Honey Badgers</title>
+    <meta property="og:url"         content="http://192.168.50.50:8080/"/>
+    <meta property="og:title"       content="The Honey Badgers"/>
+    <meta property="og:type"        content="Website"/>
+    <meta property="og:description" content="description" content="School Project for class ID202712 NTNU Aalesund Bachelor of Computer Engineering.
+                Badge collection similar to achievements in games."/>
+    <meta property="og:authors"     content="Espen Vad, Pernille Skytterholm, Jahn-Willy Nøstdahl and Markus Randa.">
+    <meta property="og:image"       content="https://i.imgur.com/Jn9nD1U.jpg"/>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <title>Badges</title>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Badges</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top m-0 navStyling" style="box-shadow: 0 5px 10px -5px rgba(50, 50, 50, 0.5);">
+    <a class="navbar-brand" href="/">The HoneyBadgers</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  {% if user.is_authenticated %}
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav" style="width: 100%">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Events</a>
-      </li>
-      <li class="nav-item"style="margin-left: auto;">
-        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-      </li>
-      <li class="nav-link">
-        <p style="float: left; margin: 0;">Logged in as: </p><a class="nav-link" href="#" style="float: left">{{user.username}}</a>
-      </li>
+    {% if user.is_authenticated %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'events:events' %}">Events <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'badges:create_new_badge' %}">Create New Badge</a>
+            </li>
+        </ul>
 
-    </ul>
-  </div>
-  {% else %}
+        <ul class="navbar-nav my-2 my-lg-0">
+            <li class="nav-item">
+                <a class="nav-link mr-4" href="{% url 'logout' %}">Logout</a>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-outline-primary my-2 my-sm-0" onclick="location.href='{% url 'profile_page' user.username %}'">{{user.username}}</button>
+            </li>
+        </ul>
+    </div>
+    {% else %}
 
-  {% endif %}
-
+    {% endif %}
 </nav>
+
+<div style="height:100%;">
+
+    {% block content %}
+
+    {% endblock %}
+
+</div>
+
+
 </body>
 </html>
-
-
-{% block content %}
-
-{% endblock %}
-
-

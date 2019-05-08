@@ -1,0 +1,11 @@
+INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (19, '2019-05-02 16:04:24.023000', 1, 1, 1);
+INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (20, '2019-05-02 16:04:23.461000', 2, 1, 1);
+INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (21, '2019-05-02 16:04:22.356000', 3, 1, 1);
+INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (22, '2019-05-02 16:04:24.023000', 1, 2, 1);
+INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (23, '2019-05-02 16:04:23.461000', 2, 2, 1);
+INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (24, '2019-05-02 16:04:22.356000', 3, 2, 1);
+INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (25, '2019-05-02 16:04:24.023000', 1, 1, 2);
+INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (26, '2019-05-02 16:04:23.461000', 2, 1, 2);
+INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (27, '2019-05-02 16:04:22.356000', 3, 1, 2);
+INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (28, '2019-05-02 16:04:24.023000', 1, 2, 2);
+INSERT INTO badgesdb.events_earnedbadgeactivity (id, datetime_earned, badge_id, event_id, user_id) VALUES (29, '2019-05-02 16:04:23.461000', 2, 2, 2);

@@ -1,16 +1,26 @@
 <!-- templates/registration/login.html -->
 {% extends 'nav/nav.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}Login{% endblock %}
 
 {% block content %}
 
-<h2>Login</h2>
+{% load static %}
 
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Login</button>
-</form>
+<div class="container">
+    <div class="row mt-5 mx-auto">
+        <div class="col-md-2">
+        </div>
+        <div class="col">
+                {% crispy form %}
+                <a class="" href="{% url 'password_reset' %}"><strong>Forgot your password?</strong></a>
+                <button class="btn btn-secondary btn-md btn-block mt-2" onclick="location.href='{% url 'signup' %}'">Create new account</button>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>
 
 {% endblock %}

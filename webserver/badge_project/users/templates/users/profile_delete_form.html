@@ -1,0 +1,40 @@
+{% extends "nav/nav.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+    <div class="container">
+        <div class="row mt-4 mx-auto ">
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+                <div class="row mt-4">
+                    <h2>Delete account</h2>
+                    <p>Are you sure you want to delete "{{ object.username }}"?</p>
+                </div>
+                <div class="row mt-2">
+                    <form  class="form-control border-0 mb-3 p-0" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-lg btn-block">Confirm</button>
+                    </form>
+                    <button type="button" class="btn btn-success btn-lg btn-block" onclick="goBack()">Go back</button>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+            </div>
+            </div>
+        </div>
+
+{% endblock %}
+

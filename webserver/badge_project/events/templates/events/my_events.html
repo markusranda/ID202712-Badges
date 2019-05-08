@@ -1,0 +1,70 @@
+{% extends "nav/nav.html" %}
+
+{% block content %}
+
+    <div class="container-fluid fill bg-white h-100">
+        <div class="row mx-auto mb-4 mt-0 mr-5 ml-5 pt-4">
+            <div class="col text-center">
+                <h1>Events</h1>
+            </div>
+        </div>
+        <div class="row mx-auto mb-4 mt-0 mr-5 ml-5 p-4">
+            <div class="col text-center">
+                <button class="btn btn-outline-info my-2 my-sm-0 mb-3 mt-4"
+                        onclick="location.href='{% url 'events:create_event' %}'">CREATE NEW EVENT
+                </button>
+            </div>
+        </div>
+        <div class="row mx-auto pl-5 pr-5">
+            <div class="col-md-6">
+                <h2 class="mb-4">Event History</h2>
+                {% if events_historic_list %}
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <tr>
+                                <th scope="col">Event Name</th>
+                            </tr>
+
+                            {% for event in events_historic_list %}
+                                <tr>
+                                    <td><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% else %}
+
+                    <p>No events are available.</p>
+
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <h2 class="mb-4">Events Created</h2>
+                {% if events_created_list %}
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <tr>
+                                <th scope="col">Event Name</th>
+                            </tr>
+
+                            {% for event in events_created_list %}
+                                <tr>
+                                    <td><a href="{% url 'events:event_profile' event.id %}">{{ event.name }}</a></td>
+                                </tr>
+                            {% endfor %}
+
+                        </table>
+                    </div>
+
+                {% else %}
+
+                    <p>No events are available.</p>
+
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,17 +1,318 @@
+@import url('https://fonts.googleapis.com/css?family=Karla');
+
 li {
     color: saddlebrown;
 }
 
-.bg-light {
-    background-color: #204c77!important;
+body, html {
+    height: 100%;
+    overflow-x: hidden;
 }
 
-.navbar-light .navbar-brand {
-    color: rgba(0, 0, 0, 0.9);
+.full-width {
+    width: 100%;
+}
+.nav-barlink :hover {
+    background-color: #abecf4;
+    opacity: 1;
+    font-weight: bolder;
+    color: #000000;
+}
+
+.loginBtn {
+    background-color: #23bdd1;
+    font-size: 20px;
+    width: 100%;
+}
+
+.signUp {
+    background-color: #A0a0a0;
+    font-size: 20px;
+    width: 100%;
+}
+
+.resetPswBtn {
+    background-color: #98FB98;
+    font-size: 20px;
+    width: 100%;
+}
+
+#deleteBtn {
+    background-color: #FF0000;
+    font-size: 20px;
+    width: 50%;
+    color: white;
+}
+
+#confirmBtn {
+    background-color: #FF0000;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+}
+
+#goBackBtn {
+    background-color: #00FF00;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    margin-left: 2%;
+}
+
+.c-badge-form {
+    width: 50%;
+}
+
+.signUpBtn {
+    background-color: #23bdd1;
+    font-size: 20px;
+    width: 100%;
+    height: 5%;
+}
+
+.loginBtn:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+#signUpContent {
+    margin-top: 2%;
+}
+
+#signUpTitle {
+    margin-top: 5%;
+}
+
+#loginContent {
+    margin-top: 2%;
+}
+
+#underLoginContent {
+    margin-top: 3%;
+}
+
+#underLoginContent1 {
+    margin-top: 3%;
+}
+
+#goToProfilePageBtn {
+    margin-top: 3%;
+}
+
+#badgerWave {
+    float: right;
+    margin-top: 250px;
+    margin-right: 350px;
+
+}
+
+#badgerWave1 {
+    float: left;
+    margin-top: 250px;
+    margin-left: 350px;
+
+}
+
+#loginTitle {
+    margin-top: 10%;
+}
+
+#welcomeMsg {
+    margin-top: 10%;
+}
+
+#center {
+    text-align: center;
+}
+
+#center1 {
+    text-align: center;
+}
+
+#test {
+    margin-top: 50px;
+}
+
+#mod {
+    margin-top: 40px;
+    color: #FF0000;
+}
+
+#event {
+    margin-top: 40px;
+}
+
+#badge_showcase {
+    border-color: black;
+    border-style: solid;
+    margin: 25px;
+    min-width: 50px;
+    max-width: 760px;
+    max-height: 300px;
+    min-height: 50px;
+    width: 100%;
+}
+
+/* These are currently for user statistics and badge showcase, should work for recently earned badges as well :) */
+thead, tbody {
+    display: block;
+}
+
+tbody {
+    overflow-y: hidden; /* Do not allow vertical scolling */
+    overflow-x: auto; /* Allows for horisontal scolling */
+}
+
+
+body {
+    background-color: #f7f7f7;
+}
+
+.asteriskField {
+    display: none;
+}
+
+th {
+    width: 900px;
+}
+
+.modal-backdrop {
+    display: none;
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.formTextStyling {
+    color: #000;
     font-size: 25px;
+    font-family: "Karla", sans-serif;
+    font-weight: bold;
+    text-align: center;
 }
 
-.navbar-light .navbar-nav .nav-link {
-    color: rgb(0, 0, 0);
+nav {
+    z-index: 0;
 }
 
+.verticalCentered {
+    margin-top: -2vh;
+    height: 100%;
+}
+
+.eventName {
+    text-shadow: 2px 2px rgba(50, 50, 50, 0.8);
+}
+
+.moderatorStyle {
+    text-shadow: 2px 2px rgba(71, 71, 71, 0.84);
+    color: #f37755;
+}
+
+.centerThis {
+    padding-top: 1px;
+    padding-bottom: 15vh;
+}
+
+@media screen and (max-width: 400px) {
+    .centerThis {
+        padding-top: 5vh;
+        padding-bottom: 10vh;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .eventDescription {
+        font-size: 1em;
+    }
+}
+
+.colorBtn {
+    box-shadow: 5px 5px gray;
+}
+
+.activityFeedNameStyle {
+    font-weight: bold;
+}
+
+/* width */
+.scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.scroll::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+.scroll::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.veryNiceBox {
+    border-radius: 2px;
+    box-shadow: 0 5px 10px -5px rgba(50, 50, 50, 0.5);
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 280px;
+    max-height: 280px;
+    width: 80%;
+}
+
+.navStyling {
+    min-height: 75px;
+}
+
+.showcaseTable {
+    border-collapse: separate;
+    border-spacing: 0.5em 0;
+    text-align: center;
+}
+
+.profileBoxes {
+    border-radius: 4px;
+    box-shadow: 0 5px 8px -5px rgba(50, 50, 50, 0.5);
+}

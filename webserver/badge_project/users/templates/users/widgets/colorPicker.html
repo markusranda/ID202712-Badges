@@ -1,0 +1,13 @@
+{% load static %}
+
+<div class="mt-4 mb-4">
+
+    <div>
+        <p class="font-weight-bold">Choose a color for your profile!</p>
+    </div>
+    <div class="d-flex justify-content-center mb-2">
+
+        <script src="{% static 'badges/jscolor.js' %}"></script>
+        <label><input class="jscolor inputStyling form-control" name="color_value" value="{{ user.color_value }}"></label>
+    </div>
+</div>

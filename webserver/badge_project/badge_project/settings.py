@@ -36,16 +36,19 @@ DEFAULT_FROM_EMAIL = ['randamarkus.95@gmail.com']
 
 INSTALLED_APPS = [
     'badges.apps.BadgesConfig',
-    'accounts.apps.AccountsConfig',
+    'events.apps.EventsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-
+    'crispy_forms',
+    'users.apps.UsersConfig',
+    'tastypie',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -137,5 +140,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
+#
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images/')
+
+# Redirect location
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+# Email configuration
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+
+
+AUTH_USER_MODEL = 'users.CustomUser'

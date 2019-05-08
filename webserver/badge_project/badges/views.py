@@ -1,62 +1,44 @@
-from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
-from django.views import generic
-from django.contrib.auth.models import User
+# Generic class based view
+import os
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse_lazy, reverse
+from django.views.generic import FormView
+
+from .forms import CreateBadgeForm
+from .models import Badges
 
 
-def index(request):
-    all_users_list = User.objects.all()
-    context = {'all_users_list': all_users_list}
-    return render(request, 'badges/index.html', context)
+class BadgeCreate(LoginRequiredMixin, FormView):
+    form_class = CreateBadgeForm
+    success_url = reverse_lazy('home')
+    template_name = 'badges/create_badge.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        return context
 
-class DetailView(generic.DetailView):
-    template_name = 'badges/detail.html'
-    context_object_name = 'user'
+    def form_valid(self, form):
+        return super().form_valid(form)
 
-    def get_queryset(self):
-        """
-        Excludes any questions that aren't published yet.
-        """
-        return User.objects.filter()
+    def get(self, request,*args, **kwargs):
+        form = CreateBadgeForm()
+        context = {"form": form}
+        return render(request, self.template_name, context)
 
+    def post(self, request,*args, **kwargs):
+        form = CreateBadgeForm(request.POST)
+        context = {"form": form}
+        if form.is_valid():
+            cd = form.cleaned_data
+            name = cd.pop('name')
+            description = cd.pop('description')
+            image_id = cd.pop('image_id')
+            Badges.objects.create(name=name, description=description, image_id=image_id)
+            return HttpResponseRedirect(self.get_success_url())
+        return render(request, self.template_name, context)
 
-def detail(request, user_id):
-    user = get_object_or_404(User, pk=user_id)
-    return render(request, 'polls/detail.html', {'user': user})
-
-
-class IndexView(generic.ListView):
-    template_name = 'badges/index.html'
-    context_object_name = 'all_users_list'
-
-    def get_queryset(self):
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
-        return User.objects.all()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def get_success_url(self):
+        return reverse('home')
