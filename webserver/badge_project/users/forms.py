@@ -1,10 +1,9 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Column, Layout, Submit, HTML, Field, MultiField
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
-from django.forms import ModelForm, Textarea, CheckboxSelectMultiple, EmailField, BooleanField, \
-    ModelMultipleChoiceField, CharField, forms
+from django.forms import ModelForm, Textarea, EmailField, BooleanField, CharField, forms
 
-from .models import CustomUser, UserBadges
+from .models import CustomUser
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -129,6 +128,5 @@ class LoginForm(AuthenticationForm):
                 'username',
                 'password',
                 Submit('login', 'Login', css_class="btn btn-primary btn-block"),
-                #css_class='col-lg-5 mx-auto mb-4 mt-4',
             )
         )
