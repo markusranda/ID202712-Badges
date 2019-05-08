@@ -1,13 +1,7 @@
-import os
-
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Column, Submit, Div, Field, HTML
-from django import forms
-from django.conf import settings
+from crispy_forms.layout import Layout, Column, Submit, Field, HTML
 from django.core.exceptions import ObjectDoesNotExist
-from django.forms import ModelForm, Textarea, Form, CheckboxSelectMultiple, Select, RadioSelect
-from django.shortcuts import render
-from django.urls import reverse_lazy, reverse
+from django.forms import ModelForm, Textarea, RadioSelect
 import subprocess
 
 from badges.models import Images

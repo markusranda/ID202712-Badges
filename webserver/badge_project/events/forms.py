@@ -1,13 +1,10 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, ButtonHolder, Submit, Row, Column, HTML, MultiField, Div
+from crispy_forms.layout import Layout, Field, Submit, Column, HTML, Div
 from django.core.exceptions import ObjectDoesNotExist
-from django.forms import ModelForm, NumberInput, Form, Textarea, ModelChoiceField, CheckboxSelectMultiple
+from django.forms import ModelForm, Form, Textarea
 from django import forms
 
 from events.models import Events
-# from badges.models import Images
-
-from badges.models import Badges
 
 
 class CreateEventForm(ModelForm):

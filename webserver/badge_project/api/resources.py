@@ -1,8 +1,7 @@
 # api/resources.py
 from tastypie import fields
 from tastypie.constants import ALL
-from tastypie.resources import ModelResource, Resource
-from datetime import datetime
+from tastypie.resources import ModelResource
 
 from users.models import CustomUser, Attendees
 from events.models import JoinedEventActivity, EarnedBadgeActivity
