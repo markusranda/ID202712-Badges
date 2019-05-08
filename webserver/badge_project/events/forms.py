@@ -56,7 +56,7 @@ class EventPinForm(Form):
             Column(
                 'event_field',
                 Submit('submit', 'Enter'),
-                css_class='col-lg-4 mx-auto formTextStyling',
+                css_class='col-lg-4 mx-auto font-weight-bold text-center display-4',
             )
         )
 
