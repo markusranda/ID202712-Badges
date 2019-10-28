@@ -16,4 +16,5 @@ To run this project:
   7. Go to "/var/webserver/badge_project/badge_project/" and run "python3 manage.py runserver 192.168.50.50:8080".
   8. When the webserver has started you can then try to open it on your own computer's browser with the address 192.168.50.50:8080.
 
-glhf elr kompis
+
+![login](https://i.imgur.com/EniC1Nm.png)
