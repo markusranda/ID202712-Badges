@@ -17,4 +17,10 @@ To run this project:
   8. When the webserver has started you can then try to open it on your own computer's browser with the address 192.168.50.50:8080.
 
 
-![login](https://i.imgur.com/GOeIEw1b.png)
+![](https://i.imgur.com/EniC1Nm.png)
+![](https://i.imgur.com/ortX0V6.png)
+![](https://i.imgur.com/JknMNvt.png)
+![](https://i.imgur.com/GOeIEw1.png)
+![](https://i.imgur.com/Qj5ofl8.png)
+![](https://i.imgur.com/2NBXq3a.png)
+![](https://i.imgur.com/kyONOoY.png)
